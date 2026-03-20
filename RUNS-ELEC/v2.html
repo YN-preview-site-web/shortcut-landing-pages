@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#1C1952" />
+  <title>Runs Elec | Électricien Toulouse centre-ville</title>
+  <meta name="description" content="Runs Elec, électricien à Toulouse. Dépannage, installation, mise en service. Intervention rapide en centre-ville. Devis gratuit." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js" defer></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            nunito: ['Nunito', 'sans-serif'],
+            outfit: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50:  '#FFFDF0',
+              100: '#FEF9C3',
+              200: '#FFE082',
+              300: '#FFD54F',
+              400: '#F5C518',
+              500: '#D4A017',
+              600: '#B8860B',
+              700: '#8B6914',
+              800: '#1C1952',
+              900: '#0F0D3A',
+            },
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Outfit', sans-serif; background-color: #1C1952; color: #ffffff; overflow-x: hidden; }
+    h1, h2, h3, h4, h5 { font-family: 'Nunito', sans-serif; }
+
+    .aurora-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 0%, rgba(245,197,24,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 10%, rgba(245,197,24,0.05) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 70% at 50% 100%, rgba(245,197,24,0.06) 0%, transparent 60%),
+        linear-gradient(160deg, #1C1952 0%, #222060 50%, #1C1952 100%);
+      background-size: 200% 200%;
+      animation: auroraShift 12s ease-in-out infinite alternate;
+      z-index: 0;
+    }
+    @keyframes auroraShift { 0% { background-position: 0% 0%; } 50% { background-position: 100% 50%; } 100% { background-position: 30% 100%; } }
+
+    .glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.08); }
+    .glass-strong { background: rgba(255,255,255,0.07); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.10); }
+
+    .text-gradient { background: linear-gradient(135deg, #F5C518 0%, #D4A017 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .text-gradient-yellow { background: linear-gradient(135deg, #F5C518 0%, #FFD54F 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    .btn-primary {
+      background: #F5C518; color: #1C1952; box-shadow: 0 2px 8px rgba(0,0,0,0.20); transition: all 0.3s ease;
+      position: relative; overflow: hidden;
+    }
+    .btn-primary::after {
+      content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+      animation: shimmer 3s ease-in-out infinite;
+    }
+    @keyframes shimmer { 0% { left: -100%; } 50%, 100% { left: 150%; } }
+    .btn-primary:hover { background: #FFD54F; box-shadow: 0 4px 16px rgba(245,197,24,0.25); transform: translateY(-2px); }
+    .btn-secondary { border: 1px solid rgba(245,197,24,0.40); color: #F5C518; transition: all 0.3s ease; }
+    .btn-secondary:hover { background: rgba(245,197,24,0.08); border-color: rgba(245,197,24,0.70); transform: translateY(-2px); }
+
+    .card-hover { transition: all 0.35s ease; }
+    .card-hover:hover { border-color: rgba(245,197,24,0.25) !important; box-shadow: 0 0 40px rgba(245,197,24,0.08), 0 16px 40px rgba(0,0,0,0.3); transform: translateY(-6px); }
+
+    .glow-divider { height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(245,197,24,0.25) 30%, rgba(245,197,24,0.40) 50%, rgba(245,197,24,0.25) 70%, transparent 100%); }
+    .step-number { background: linear-gradient(135deg, rgba(245,197,24,0.10) 0%, rgba(245,197,24,0.03) 100%); border: 1px solid rgba(245,197,24,0.18); }
+    .icon-circle { background: linear-gradient(135deg, rgba(245,197,24,0.10) 0%, rgba(245,197,24,0.03) 100%); border: 1px solid rgba(245,197,24,0.18); }
+    .stars { color: #F5C518; letter-spacing: 2px; }
+    .hero-badge { background: rgba(245,197,24,0.08); border: 1px solid rgba(245,197,24,0.20); }
+
+    @keyframes floatGentle { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
+    .float { animation: floatGentle 4s ease-in-out infinite; }
+    @keyframes slideUpFade { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-slide-up { animation: slideUpFade 0.7s ease forwards; }
+    .delay-1 { animation-delay: 0.15s; opacity: 0; }
+    .delay-2 { animation-delay: 0.30s; opacity: 0; }
+    .delay-3 { animation-delay: 0.45s; opacity: 0; }
+    .delay-4 { animation-delay: 0.60s; opacity: 0; }
+
+    .nav-glass { background: rgba(28,25,82,0.80); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.06); }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #1C1952; }
+    ::-webkit-scrollbar-thumb { background: rgba(245,197,24,0.30); border-radius: 3px; }
+
+    .stats-bar { display: grid; grid-template-columns: 1fr 1fr; width: 100%; border-radius: 0.75rem; }
+    @media (min-width: 640px) { .stats-bar { display: inline-flex; width: auto; } }
+    .stats-bar > div { border: none; border-right: 1px solid rgba(255,255,255,0.08); border-bottom: 1px solid rgba(255,255,255,0.08); }
+    @media (max-width: 639px) { .stats-bar > div:nth-child(2n) { border-right: none; } .stats-bar > div:nth-child(n+3) { border-bottom: none; } }
+    @media (min-width: 640px) { .stats-bar > div { border-bottom: none; border-right: 1px solid rgba(255,255,255,0.10); } .stats-bar > div:last-child { border-right: none; } }
+
+    button, a, [role="button"], input, select, textarea { touch-action: manipulation; }
+    .btn-primary, .btn-secondary { min-height: 44px; }
+    input, select, textarea { font-size: 16px !important; -webkit-appearance: none; appearance: none; }
+    select { -webkit-appearance: auto; appearance: auto; }
+    nav { padding-top: env(safe-area-inset-top); }
+    .mobile-bottom-bar { padding-bottom: max(1rem, env(safe-area-inset-bottom)); }
+    footer { padding-bottom: max(3rem, calc(1.5rem + env(safe-area-inset-bottom))); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .aurora-bg, .float { animation: none !important; }
+      .animate-slide-up { animation: none !important; opacity: 1 !important; transform: none !important; }
+      .card-hover { transition: none !important; }
+      * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+    }
+    @media (hover: none) { .card-hover:hover { transform: none !important; box-shadow: none !important; } .btn-primary:hover, .btn-secondary:hover { transform: none !important; } }
+
+    #mobileMenu {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 40;
+      padding-top: calc(4.5rem + env(safe-area-inset-top));
+      background: rgba(28,25,82,0.97); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(245,197,24,0.10);
+      transform: translateY(-110%); transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none;
+    }
+    #mobileMenu.open { transform: translateY(0); pointer-events: auto; }
+
+    .mobile-bottom-bar {
+      display: flex; position: fixed; bottom: 0; left: 0; right: 0; z-index: 49;
+      background: rgba(28,25,82,0.95); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(245,197,24,0.12);
+    }
+    @media (min-width: 768px) { .mobile-bottom-bar { display: none !important; } }
+    @media (max-width: 767px) { body { padding-bottom: 80px; } }
+
+    @media (max-width: 639px) {
+      #callModal { align-items: flex-end !important; padding: 0 !important; }
+      #callModalBox { width: 100% !important; max-width: 100% !important; border-radius: 1rem 1rem 0 0 !important; padding: 2rem 1.5rem !important; padding-bottom: max(2rem, env(safe-area-inset-bottom)) !important; transform: translateY(100%) !important; transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important; }
+      #callModalBox.modal-open { transform: translateY(0) !important; }
+    }
+    @media (max-width: 767px) { [data-aos][data-aos-delay] { transition-delay: 0s !important; } }
+  </style>
+</head>
+
+<body class="bg-brand-800">
+
+  <!-- NAV -->
+  <nav class="nav-glass fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3 shrink-0">
+        <img src="logo-brand.png" alt="Runs Elec" class="h-10 w-auto" />
+      </a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#services" class="text-sm font-medium text-white/50 hover:text-white transition-colors">Services</a>
+        <a href="#comment" class="text-sm font-medium text-white/50 hover:text-white transition-colors">Comment ça marche</a>
+        <a href="#zones" class="text-sm font-medium text-white/50 hover:text-white transition-colors">Zones</a>
+        <a href="#contact" class="text-sm font-medium text-white/50 hover:text-white transition-colors">Contact</a>
+      </div>
+      <button onclick="openCallModal()" class="btn-primary hidden md:flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm font-nunito cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 7V5z" /></svg>
+        Appeler Runs Elec
+      </button>
+      <button id="burgerBtn" onclick="toggleMobileMenu()" class="md:hidden flex items-center justify-center w-11 h-11 rounded-xl glass" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
+        <svg id="burgerIcon" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+        <svg id="closeIcon" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MENU MOBILE -->
+  <div id="mobileMenu" role="dialog" aria-label="Menu">
+    <div class="max-w-6xl mx-auto px-4 pb-6 flex flex-col gap-1">
+      <a href="#services" onclick="closeMobileMenu()" class="text-white/70 font-nunito font-medium text-lg py-3 px-4 rounded-xl">Services</a>
+      <a href="#comment" onclick="closeMobileMenu()" class="text-white/70 font-nunito font-medium text-lg py-3 px-4 rounded-xl">Comment ça marche</a>
+      <a href="#zones" onclick="closeMobileMenu()" class="text-white/70 font-nunito font-medium text-lg py-3 px-4 rounded-xl">Zones d'intervention</a>
+      <a href="#contact" onclick="closeMobileMenu()" class="text-white/70 font-nunito font-medium text-lg py-3 px-4 rounded-xl">Contact</a>
+      <div class="mt-2 pt-4" style="border-top: 1px solid rgba(255,255,255,0.08)">
+        <button onclick="closeMobileMenu(); openCallModal();" class="btn-primary w-full flex items-center justify-center gap-2 py-4 rounded-xl font-nunito font-bold text-base cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 7V5z" /></svg>
+          Appeler Runs Elec
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="relative min-h-screen flex items-center pt-24 pb-20 overflow-hidden">
+    <div class="aurora-bg"></div>
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 rounded-full opacity-[0.04] pointer-events-none" style="width: min(600px, 100vw); height: min(600px, 100vw); background: radial-gradient(circle, #F5C518 0%, transparent 70%);"></div>
+
+    <div class="relative z-10 max-w-6xl mx-auto px-6 text-center">
+      <div class="animate-slide-up inline-flex items-center gap-2 hero-badge px-4 py-2 rounded-lg mb-8">
+        <span class="w-1.5 h-1.5 rounded-full bg-brand-400 animate-pulse"></span>
+        <span class="text-brand-400 text-sm font-medium font-outfit">Intervention rapide · Toulouse centre</span>
+      </div>
+
+      <h1 class="animate-slide-up delay-1 font-nunito font-bold leading-[1.1] mb-6" style="font-size: clamp(2.8rem, 7vw, 5.5rem);">
+        <span class="text-white">Votre électricien</span><br />
+        <span class="text-gradient">à Toulouse.</span><br />
+        <span class="text-white">Rapide, soigné, disponible.</span>
+      </h1>
+
+      <p class="animate-slide-up delay-2 text-white/50 font-outfit text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed" style="text-wrap: balance;">
+        Dépannage, installation, mise aux normes. Intervention en 30 minutes en centre-ville de Toulouse. Devis gratuit.
+      </p>
+
+      <div class="animate-slide-up delay-3 flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+        <button onclick="openCallModal()" class="btn-primary flex items-center gap-2.5 px-8 py-4 rounded-lg font-bold text-base font-nunito cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 7V5z" /></svg>
+          Appeler Runs Elec
+        </button>
+        <a href="#contact" class="btn-secondary flex items-center gap-2 px-8 py-4 rounded-lg font-semibold text-base font-nunito">Demander un devis</a>
+      </div>
+
+      <div class="animate-slide-up delay-4 stats-bar glass rounded-xl px-2 py-2 w-full sm:w-auto">
+        <div class="flex flex-col items-center px-4 sm:px-6 py-3">
+          <span class="font-nunito font-bold text-2xl text-gradient-yellow">14</span>
+          <span class="text-white/40 text-xs mt-0.5 font-outfit">Avis Google</span>
+        </div>
+        <div class="flex flex-col items-center px-4 sm:px-6 py-3">
+          <span class="font-nunito font-bold text-2xl text-gradient-yellow"><span style="-webkit-text-fill-color: #F5C518;">&#9733;</span> 5.0</span>
+          <span class="text-white/40 text-xs mt-0.5 font-outfit">Note Google</span>
+        </div>
+        <div class="flex flex-col items-center px-4 sm:px-6 py-3">
+          <span class="font-nunito font-bold text-2xl text-gradient-yellow">0 &euro;</span>
+          <span class="text-white/40 text-xs mt-0.5 font-outfit">Devis gratuit</span>
+        </div>
+        <div class="flex flex-col items-center justify-center text-center px-4 sm:px-6 py-3">
+          <span class="font-nunito font-bold text-2xl text-gradient-yellow">30 min</span>
+          <span class="text-white/40 text-xs mt-0.5 font-outfit">Délai moyen</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="scroll-mt-20 py-10 md:py-14 px-4 sm:px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-10" data-aos="fade-up">
+        <span class="text-brand-400 text-sm font-nunito font-semibold uppercase tracking-widest mb-3 block">Nos prestations</span>
+        <h2 class="font-nunito font-bold text-4xl md:text-5xl text-white mb-4">On s'occupe de tout,<br /><span class="text-gradient">vous allumez.</span></h2>
+        <p class="text-white/45 font-outfit text-lg max-w-xl mx-auto" style="text-wrap: balance;">Du dépannage urgent à l'installation complète. Un seul interlocuteur, du devis à la mise en service.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="glass card-hover rounded-xl p-5 md:p-8" data-aos="fade-up" data-aos-delay="0">
+          <div class="icon-circle w-14 h-14 rounded-xl flex items-center justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+          </div>
+          <h3 class="font-nunito font-bold text-xl text-white mb-3">Dépannage électrique</h3>
+          <p class="text-white/50 font-outfit leading-relaxed mb-6">Panne de courant, disjoncteur qui saute, court-circuit. On arrive vite, on règle le problème.</p>
+          <a href="#contact" class="inline-flex items-center gap-2 text-brand-400 font-nunito font-semibold text-sm hover:gap-3 transition-all">Nous appeler <span>&#8594;</span></a>
+        </div>
+        <div class="glass card-hover rounded-xl p-5 md:p-8" data-aos="fade-up" data-aos-delay="100">
+          <div class="icon-circle w-14 h-14 rounded-xl flex items-center justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+          </div>
+          <h3 class="font-nunito font-bold text-xl text-white mb-3">Installation & mise en service</h3>
+          <p class="text-white/50 font-outfit leading-relaxed mb-6">Prises, éclairage, tableau électrique, raccordements. Du neuf comme de l'ancien.</p>
+          <a href="#contact" class="inline-flex items-center gap-2 text-brand-400 font-nunito font-semibold text-sm hover:gap-3 transition-all">Demander un devis <span>&#8594;</span></a>
+        </div>
+        <div class="glass card-hover rounded-xl p-5 md:p-8" data-aos="fade-up" data-aos-delay="200">
+          <div class="icon-circle w-14 h-14 rounded-xl flex items-center justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.5a2 2 0 00-1 .268V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+          </div>
+          <h3 class="font-nunito font-bold text-xl text-white mb-3">Modification d'installation</h3>
+          <p class="text-white/50 font-outfit leading-relaxed mb-6">Vous réaménagez ? On adapte votre installation électrique à vos nouveaux besoins.</p>
+          <a href="#contact" class="inline-flex items-center gap-2 text-brand-400 font-nunito font-semibold text-sm hover:gap-3 transition-all">Prendre rendez-vous <span>&#8594;</span></a>
+        </div>
+        <div class="glass card-hover rounded-xl p-5 md:p-8" data-aos="fade-up" data-aos-delay="300">
+          <div class="icon-circle w-14 h-14 rounded-xl flex items-center justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          </div>
+          <h3 class="font-nunito font-bold text-xl text-white mb-3">Mise aux normes</h3>
+          <p class="text-white/50 font-outfit leading-relaxed mb-6">Diagnostic, remise en conformité, certificat Consuel. Votre installation passe les contrôles.</p>
+          <a href="#contact" class="inline-flex items-center gap-2 text-brand-400 font-nunito font-semibold text-sm hover:gap-3 transition-all">Appeler maintenant <span>&#8594;</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMENT ÇA MARCHE -->
+  <section id="comment" class="scroll-mt-20 py-10 md:py-14 px-4 sm:px-6">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-10" data-aos="fade-up">
+        <span class="text-brand-400 text-sm font-nunito font-semibold uppercase tracking-widest mb-3 block">Comment ça marche</span>
+        <h2 class="font-nunito font-bold text-4xl md:text-5xl text-white mb-4">En 3 étapes,<br /><span class="text-gradient">pas plus.</span></h2>
+        <p class="text-white/45 font-outfit text-lg max-w-lg mx-auto" style="text-wrap: balance;">Un coup de fil, un diagnostic, une réparation. Rien de compliqué.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="flex flex-col items-center text-center p-8" data-aos="fade-up">
+          <div class="step-number w-20 h-20 rounded-xl flex items-center justify-center mb-6 float"><span class="font-nunito font-bold text-2xl text-gradient-yellow">01</span></div>
+          <h3 class="font-nunito font-bold text-xl text-white mb-3">Un coup de fil suffit</h3>
+          <p class="text-white/45 font-outfit leading-relaxed">Décrivez le souci, on est là dans la demi-heure en centre-ville.</p>
+        </div>
+        <div class="flex flex-col items-center text-center p-8" data-aos="fade-up" data-aos-delay="150">
+          <div class="step-number w-20 h-20 rounded-xl flex items-center justify-center mb-6 float" style="animation-delay: 0.5s;"><span class="font-nunito font-bold text-2xl text-gradient-yellow">02</span></div>
+          <h3 class="font-nunito font-bold text-xl text-white mb-3">On diagnostique, on vous dit</h3>
+          <p class="text-white/45 font-outfit leading-relaxed">On identifie le problème et on vous explique clairement.</p>
+        </div>
+        <div class="flex flex-col items-center text-center p-8" data-aos="fade-up" data-aos-delay="300">
+          <div class="step-number w-20 h-20 rounded-xl flex items-center justify-center mb-6 float" style="animation-delay: 1s;"><span class="font-nunito font-bold text-2xl text-gradient-yellow">03</span></div>
+          <h3 class="font-nunito font-bold text-xl text-white mb-3">C'est réglé</h3>
+          <p class="text-white/45 font-outfit leading-relaxed">Intervention terminée, chantier nickel. Votre installation est sécurisée.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CE QUI NOUS DISTINGUE (horizontal) -->
+  <section class="scroll-mt-20 py-10 md:py-14 px-4 sm:px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-10" data-aos="fade-up">
+        <span class="text-brand-400 text-sm font-nunito font-semibold uppercase tracking-widest mb-3 block">Ce qui nous distingue</span>
+        <h2 class="font-nunito font-bold text-4xl md:text-5xl text-white">Un électricien<br /><span class="text-gradient">qui se déplace à vélo.</span></h2>
+      </div>
+      <div class="flex flex-col gap-5 max-w-3xl mx-auto">
+        <div class="flex items-start gap-5 p-5 md:p-6 glass card-hover rounded-xl" data-aos="fade-up">
+          <div class="icon-circle w-12 h-12 rounded-xl flex items-center justify-center shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+          </div>
+          <div>
+            <h3 class="font-nunito font-bold text-lg text-white mb-1">À vélo, plus rapide qu'en camion</h3>
+            <p class="text-white/45 font-outfit text-sm leading-relaxed">En centre-ville de Toulouse, on arrive souvent avant les autres. Zéro problème de parking.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-5 p-5 md:p-6 glass card-hover rounded-xl" data-aos="fade-up" data-aos-delay="100">
+          <div class="icon-circle w-12 h-12 rounded-xl flex items-center justify-center shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          </div>
+          <div>
+            <h3 class="font-nunito font-bold text-lg text-white mb-1">Prix clairs, zéro surprise</h3>
+            <p class="text-white/45 font-outfit text-sm leading-relaxed">On vous dit combien ça coûte avant de commencer. Devis gratuit.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-5 p-5 md:p-6 glass card-hover rounded-xl" data-aos="fade-up" data-aos-delay="200">
+          <div class="icon-circle w-12 h-12 rounded-xl flex items-center justify-center shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+          </div>
+          <div>
+            <h3 class="font-nunito font-bold text-lg text-white mb-1">Chantier nickel, garanti</h3>
+            <p class="text-white/45 font-outfit text-sm leading-relaxed">On protège votre intérieur, on range et on nettoie derrière nous. Vous ne voyez que le résultat.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ZONES -->
+  <section id="zones" class="scroll-mt-20 py-10 md:py-14 px-4 sm:px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="glass rounded-2xl p-6 sm:p-12 md:p-16 relative overflow-hidden" data-aos="fade-up">
+        <div class="grid md:grid-cols-2 gap-12 items-center relative z-10">
+          <div>
+            <span class="text-brand-400 text-sm font-nunito font-semibold uppercase tracking-widest mb-3 block">Où nous trouver</span>
+            <h2 class="font-nunito font-bold text-4xl text-white mb-4">Toulouse centre<br /><span class="text-gradient">et alentours</span></h2>
+            <p class="text-white/50 font-outfit leading-relaxed mb-4" style="text-wrap: balance;">Basé au cœur de Toulouse. On couvre le centre-ville, Saint-Cyprien, les Carmes, Compans et les quartiers alentour.</p>
+            <p class="text-white/35 font-outfit text-sm mb-8">Lun–Ven 8h–18h</p>
+            <a href="tel:+33781972595" class="btn-primary inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold font-nunito text-sm">Appeler Runs Elec &#8594;</a>
+          </div>
+          <div id="runs-map" class="rounded-xl overflow-hidden" style="height: 380px; min-height: 300px; border: 1px solid rgba(255,255,255,0.08);"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TÉMOIGNAGES -->
+  <section class="scroll-mt-20 py-10 md:py-14 px-4 sm:px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-10" data-aos="fade-up">
+        <span class="text-brand-400 text-sm font-nunito font-semibold uppercase tracking-widest mb-3 block">Ce que disent nos clients</span>
+        <h2 class="font-nunito font-bold text-4xl md:text-5xl text-white">Leur avis,<br /><span class="text-gradient">sans filtre.</span></h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="glass card-hover rounded-xl p-8 flex flex-col" data-aos="fade-up">
+          <div class="stars text-base mb-4">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="text-white/60 font-outfit leading-relaxed flex-1 mb-6 italic">"Un immense merci pour votre intervention ! Arthur est très professionnel, soigneux et très réactif. Chantier mené dans la bonne humeur. Je recommande les yeux fermés."</p>
+          <div class="flex items-center gap-3 pt-4" style="border-top: 1px solid rgba(255,255,255,0.08)">
+            <div class="w-10 h-10 rounded-lg icon-circle flex items-center justify-center font-nunito font-bold text-brand-400">R</div>
+            <div><p class="font-nunito font-semibold text-white text-sm">Robert</p><p class="text-white/35 text-xs font-outfit">Avis Google</p></div>
+          </div>
+        </div>
+        <div class="glass card-hover rounded-xl p-8 flex flex-col" data-aos="fade-up" data-aos-delay="100">
+          <div class="stars text-base mb-4">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="text-white/60 font-outfit leading-relaxed flex-1 mb-6 italic">"Arthur et son équipe sont très professionnels. Nous sommes ravis de faire appel régulièrement à eux. Travail de qualité et devis respectés. Bravo !"</p>
+          <div class="flex items-center gap-3 pt-4" style="border-top: 1px solid rgba(255,255,255,0.08)">
+            <div class="w-10 h-10 rounded-lg icon-circle flex items-center justify-center font-nunito font-bold text-brand-400">I</div>
+            <div><p class="font-nunito font-semibold text-white text-sm">Isabelle</p><p class="text-white/35 text-xs font-outfit">Avis Google</p></div>
+          </div>
+        </div>
+        <div class="glass card-hover rounded-xl p-8 flex flex-col" data-aos="fade-up" data-aos-delay="200">
+          <div class="stars text-base mb-4">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="text-white/60 font-outfit leading-relaxed flex-1 mb-6 italic">"Je recommande vivement Runs Elec. Arthur est très pro, arrangeant et accorde une attention particulière aux finitions."</p>
+          <div class="flex items-center gap-3 pt-4" style="border-top: 1px solid rgba(255,255,255,0.08)">
+            <div class="w-10 h-10 rounded-lg icon-circle flex items-center justify-center font-nunito font-bold text-brand-400">V</div>
+            <div><p class="font-nunito font-semibold text-white text-sm">Vincent</p><p class="text-white/35 text-xs font-outfit">Avis Google</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center justify-center gap-3 mt-10 text-white/35 font-outfit text-sm" data-aos="fade-up">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        <span>5.0/5 sur Google &middot; basé sur 14 avis</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section id="contact" class="scroll-mt-20 py-10 md:py-14 px-4 sm:px-6">
+    <div class="max-w-4xl mx-auto">
+      <div class="relative rounded-2xl p-7 sm:p-12 md:p-20 text-center overflow-hidden" data-aos="fade-up"
+           style="background: linear-gradient(135deg, rgba(245,197,24,0.10) 0%, rgba(245,197,24,0.04) 50%, rgba(28,25,82,0.6) 100%); border: 1px solid rgba(245,197,24,0.15);">
+        <div class="relative z-10">
+          <span class="text-brand-300 text-sm font-nunito font-semibold uppercase tracking-widest mb-4 block">Devis gratuit &middot; Lun–Ven 8h–18h</span>
+          <h2 class="font-nunito font-bold leading-tight text-white mb-4" style="font-size: clamp(2rem, 5vw, 3.5rem);">
+            Une panne, une installation,<br /><span class="text-gradient">une question ?</span>
+          </h2>
+          <p class="text-white/50 font-outfit text-lg mb-10 max-w-md mx-auto" style="text-wrap: balance;">Appelez ou laissez vos coordonnées. On vous rappelle dans l'heure.</p>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+            <button onclick="openCallModal()" class="btn-primary flex items-center gap-3 px-10 py-4 rounded-lg font-bold text-lg font-nunito cursor-pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 7V5z" /></svg>
+              Appeler Runs Elec
+            </button>
+            <a href="#formulaire" class="btn-secondary px-10 py-4 rounded-lg font-semibold text-base font-nunito">Formulaire de devis &#8594;</a>
+          </div>
+          <p class="text-white/25 text-sm font-outfit">Lun–Ven 8h–18h &middot; Devis gratuit, sans engagement</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMULAIRE -->
+  <section id="formulaire" class="scroll-mt-20 py-10 md:py-14 px-4 sm:px-6">
+    <div class="max-w-xl mx-auto" data-aos="fade-up">
+      <div class="glass rounded-xl p-5 sm:p-8">
+        <h3 class="font-nunito font-bold text-xl text-white mb-6 text-center">Décrivez votre besoin</h3>
+        <form class="flex flex-col gap-4">
+          <div>
+            <label class="text-white/50 text-sm font-outfit mb-1.5 block">Votre nom</label>
+            <input type="text" placeholder="Jean Dupont" class="w-full rounded-lg px-4 py-3 font-outfit text-white text-sm outline-none transition-all" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.10);" onfocus="this.style.borderColor='rgba(245,197,24,0.40)'" onblur="this.style.borderColor='rgba(255,255,255,0.10)'" />
+          </div>
+          <div>
+            <label class="text-white/50 text-sm font-outfit mb-1.5 block">Votre téléphone</label>
+            <input type="tel" placeholder="06 XX XX XX XX" class="w-full rounded-lg px-4 py-3 font-outfit text-white text-sm outline-none transition-all" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.10);" onfocus="this.style.borderColor='rgba(245,197,24,0.40)'" onblur="this.style.borderColor='rgba(255,255,255,0.10)'" />
+          </div>
+          <div>
+            <label class="text-white/50 text-sm font-outfit mb-1.5 block">Type de besoin</label>
+            <select class="w-full rounded-lg px-4 py-3 font-outfit text-white/60 text-sm outline-none transition-all cursor-pointer" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.10);">
+              <option value="" style="background:#222060">Choisir un service...</option>
+              <option value="depannage" style="background:#222060">Dépannage électrique</option>
+              <option value="installation" style="background:#222060">Installation / Mise en service</option>
+              <option value="modification" style="background:#222060">Modification d'installation</option>
+              <option value="normes" style="background:#222060">Mise aux normes</option>
+              <option value="autre" style="background:#222060">Autre</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-white/50 text-sm font-outfit mb-1.5 block">Message (optionnel)</label>
+            <textarea rows="3" placeholder="Description du souci..." class="w-full rounded-lg px-4 py-3 font-outfit text-white text-sm outline-none transition-all resize-none" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.10);" onfocus="this.style.borderColor='rgba(245,197,24,0.40)'" onblur="this.style.borderColor='rgba(255,255,255,0.10)'"></textarea>
+          </div>
+          <button type="submit" class="btn-primary w-full py-4 rounded-lg font-nunito font-bold text-base mt-2">Envoyer, on vous rappelle &#8594;</button>
+          <p class="text-white/25 text-xs font-outfit text-center">Devis gratuit et sans engagement</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- STICKY MOBILE -->
+  <div class="mobile-bottom-bar px-4 py-3 gap-3">
+    <button onclick="openCallModal()" class="btn-primary flex-1 flex items-center justify-center gap-2 py-3.5 rounded-lg font-nunito font-bold text-base cursor-pointer">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 7V5z" /></svg>
+      Appeler Runs Elec
+    </button>
+    <a href="#formulaire" class="btn-secondary flex items-center justify-center px-5 py-3.5 rounded-lg font-nunito font-semibold text-sm whitespace-nowrap">Devis &#8594;</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="py-10 md:py-12 px-4 sm:px-6" style="border-top: 1px solid rgba(255,255,255,0.06);">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+        <div>
+          <img src="logo-brand.png" alt="Runs Elec" class="h-10 w-auto mb-4" />
+          <p class="text-white/35 font-outfit text-sm leading-relaxed">Électricien à Toulouse centre-ville.<br />Dépannage, installation, mise en service. Devis gratuit.</p>
+        </div>
+        <div>
+          <h4 class="font-nunito font-semibold text-white text-sm mb-4 uppercase tracking-wider">Services</h4>
+          <ul class="flex flex-col gap-2">
+            <li><a href="#services" class="text-white/35 font-outfit text-sm hover:text-brand-400 transition-colors">Dépannage</a></li>
+            <li><a href="#services" class="text-white/35 font-outfit text-sm hover:text-brand-400 transition-colors">Installation</a></li>
+            <li><a href="#services" class="text-white/35 font-outfit text-sm hover:text-brand-400 transition-colors">Modification</a></li>
+            <li><a href="#services" class="text-white/35 font-outfit text-sm hover:text-brand-400 transition-colors">Mise aux normes</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-nunito font-semibold text-white text-sm mb-4 uppercase tracking-wider">Contact</h4>
+          <ul class="flex flex-col gap-2">
+            <li class="text-white/35 font-outfit text-sm">07 81 97 25 95</li>
+            <li class="text-white/35 font-outfit text-sm">31 Rue des Polinaires, 31000 Toulouse</li>
+            <li class="text-white/35 font-outfit text-sm">Lun–Ven 8h–18h</li>
+            <li class="text-white/35 font-outfit text-sm">Devis gratuit</li>
+          </ul>
+        </div>
+      </div>
+      <div class="glow-divider mb-6"></div>
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-white/20 font-outfit text-xs">&copy; 2026 Runs Elec. Tous droits réservés</p>
+        <div class="flex items-center gap-6">
+          <a href="#" class="text-white/20 font-outfit text-xs hover:text-white/40 transition-colors">Mentions légales</a>
+          <a href="#" class="text-white/20 font-outfit text-xs hover:text-white/40 transition-colors">Politique de confidentialité</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL APPEL -->
+  <div id="callModal" onclick="if(event.target===this) closeCallModal()" class="fixed inset-0 z-[100] flex items-center justify-center px-4" style="display:none !important; background: rgba(28,25,82,0.85); backdrop-filter: blur(12px);">
+    <div id="callModalBox" class="glass-strong rounded-2xl p-10 max-w-sm w-full text-center relative" style="box-shadow: 0 0 60px rgba(245,197,24,0.08), 0 24px 60px rgba(0,0,0,0.5); transform: scale(0.92); opacity: 0; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), opacity 0.25s ease;">
+      <button onclick="closeCallModal()" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-lg text-white/30 hover:text-white transition-colors" style="background: rgba(255,255,255,0.07);">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+      </button>
+      <div class="flex justify-center mb-6"><img src="logo-brand.png" alt="Runs Elec" class="h-14 w-auto" /></div>
+      <p class="text-white/45 font-outfit text-sm mb-2">Électricien · Toulouse centre</p>
+      <p class="text-white/70 font-outfit text-sm mb-6">Lun–Ven 8h–18h</p>
+      <div class="rounded-xl py-4 px-6 mb-6" style="background: rgba(245,197,24,0.06); border: 1px solid rgba(245,197,24,0.15);">
+        <p class="text-white/35 font-outfit text-xs mb-1 uppercase tracking-widest">Téléphone</p>
+        <p class="font-nunito font-bold text-2xl text-white tracking-wide">07 81 97 25 95</p>
+      </div>
+      <a href="tel:+33781972595" class="btn-primary flex items-center justify-center gap-2.5 w-full py-4 rounded-lg font-nunito font-bold text-base mb-3">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 7V5z" /></svg>
+        Appeler directement
+      </a>
+      <button onclick="closeCallModal()" class="text-white/25 font-outfit text-xs hover:text-white/50 transition-colors">Fermer</button>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script>
+    (function () {
+      const map = L.map('runs-map', { center: [43.6047, 1.4442], zoom: 13, zoomControl: true, attributionControl: false, scrollWheelZoom: false });
+      setTimeout(function() { map.invalidateSize(); }, 500);
+      setTimeout(function() { map.invalidateSize(); }, 1500);
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', { maxZoom: 20 }).addTo(map);
+      L.circle([43.6047, 1.4442], { color: '#F5C518', fillColor: '#F5C518', fillOpacity: 0.08, weight: 1.5, dashArray: '6, 5', radius: 8000 }).addTo(map);
+      const icon = L.divIcon({ className: '', html: '<div style="width:14px;height:14px;background:#F5C518;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 4px rgba(245,197,24,0.25),0 0 12px rgba(245,197,24,0.6);"></div>', iconSize: [14, 14], iconAnchor: [7, 7] });
+      L.marker([43.6047, 1.4442], { icon }).addTo(map).bindPopup('<strong style="color:#fff;font-family:sans-serif">Runs Elec</strong><br><span style="color:#aaa;font-size:12px">31 Rue des Polinaires, Toulouse</span>');
+      map.addControl(L.control.attribution({ prefix: '<span style="color:rgba(255,255,255,0.25);font-size:10px">&copy; OpenStreetMap &middot; CARTO</span>' }));
+    })();
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const isMobile = window.innerWidth < 768;
+      AOS.init({ duration: isMobile ? 400 : 700, easing: 'ease-out-cubic', once: true, offset: isMobile ? 30 : 60 });
+    });
+
+    const burgerBtn = document.getElementById('burgerBtn'), mobileMenu = document.getElementById('mobileMenu'), burgerIcon = document.getElementById('burgerIcon'), closeIcon = document.getElementById('closeIcon');
+    let menuOpen = false;
+    function toggleMobileMenu() { menuOpen ? closeMobileMenu() : openMobileMenu(); }
+    function openMobileMenu() { menuOpen = true; mobileMenu.classList.add('open'); burgerBtn.setAttribute('aria-expanded', 'true'); burgerIcon.classList.add('hidden'); closeIcon.classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
+    function closeMobileMenu() { menuOpen = false; mobileMenu.classList.remove('open'); burgerBtn.setAttribute('aria-expanded', 'false'); burgerIcon.classList.remove('hidden'); closeIcon.classList.add('hidden'); document.body.style.overflow = ''; }
+    document.querySelectorAll('#mobileMenu a').forEach(link => { link.addEventListener('click', closeMobileMenu); });
+
+    const modal = document.getElementById('callModal'), modalBox = document.getElementById('callModalBox');
+    const isMobileDevice = () => window.innerWidth < 640;
+    function openCallModal() { modal.style.display = 'flex'; requestAnimationFrame(() => { requestAnimationFrame(() => { if (isMobileDevice()) { modalBox.classList.add('modal-open'); } else { modalBox.style.transform = 'scale(1)'; modalBox.style.opacity = '1'; } }); }); document.body.style.overflow = 'hidden'; }
+    function closeCallModal() { if (isMobileDevice()) { modalBox.classList.remove('modal-open'); } else { modalBox.style.transform = 'scale(0.92)'; modalBox.style.opacity = '0'; } setTimeout(() => { modal.style.display = 'none'; document.body.style.overflow = ''; }, 350); }
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeCallModal(); });
+  </script>
+
+</body>
+</html>
