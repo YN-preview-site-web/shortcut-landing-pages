@@ -457,7 +457,7 @@ const STEPS_DIRIGEANT = [
     placeholder:"Ex : bilans financiers mensuels, rapports d'activité par site, synthèses commerciales, presse sectorielle…" },
 
   { section:1, key:"dg_docs_produits",
-    q:"Quels documents produisez-vous vous-même ? Listez-les avec leur fréquence si possible.",
+    q:"Quels documents produisez-vous vous-même ?",
     placeholder:"Ex : compte-rendu de comité (hebdomadaire), note de synthèse mensuelle, rapport d'activité trimestriel…" },
 
   { section:1, key:"dg_info_remontee",
@@ -480,7 +480,7 @@ const STEPS_DIRIGEANT = [
 const SECTIONS_DIRIGEANT = ["Introduction","Votre activité","Votre assistant","Clôture"];
 const TRANSITIONS_DIRIGEANT = {
   1:"Très bien.\n\nParlons maintenant de votre quotidien.",
-  2:"Très bien.\n\nUne dernière question, la plus importante.",
+  2:"Très bien.\n\nUne dernière question.",
 };
 
 /* ·· IT / DSI ·· */
@@ -543,8 +543,8 @@ const STEPS_DEPARTEMENT = [
     q:"Quels documents ou rapports recevez-vous et analysez-vous régulièrement ?",
     placeholder:"Ex : relevés bancaires, tableaux de bord reçus, rapports fournisseurs, synthèses de direction, contrats entrants…" },
   { section:1, key:"docs_produits_upload",
-    q:"Quels documents produisez-vous vous-même ? Listez-les avec leur fréquence si possible.",
-    placeholder:"Ex : tableau de bord mensuel, compte-rendu de réunion (hebdomadaire), synthèse de ventes (mensuelle)…" },
+    q:"Quels documents produisez-vous vous-même ?",
+    placeholder:"Ex : tableau de bord mensuel, compte-rendu de réunion, synthèse de ventes…" },
   { section:1, key:"docs_produits_destinataires",
     q:"À qui ces documents sont-ils généralement destinés ?",
     placeholder:"Ex : rapport mensuel → Direction générale · relevé de charges → locataires · synthèse hebdo → mon équipe…" },
@@ -571,7 +571,7 @@ const SECTIONS_DEPARTEMENT = ["Introduction","Vos documents","Sources & Charge",
 const TRANSITIONS_DEPARTEMENT = {
   1:"Très bien.\n\nParlons maintenant de vos documents.",
   2:"Noté.\n\nVoyons maintenant d'où vient votre information.",
-  3:"Très bien.\n\nUne dernière question, la plus importante.",
+  3:"Très bien.\n\nUne dernière question.",
 };
 
 /* ── STATE GLOBAL ────────────────────────────────────────────────── */
@@ -886,7 +886,13 @@ function showSummary(){
     showTyping(); await sleep(1200); hideTyping();
 
     // Invitation Drive avant le récapitulatif
-    await bubbleStreaming("agent","Avant de valider vos réponses, une dernière étape.\n\nPour configurer vos agents au plus près de votre réalité, nous avons besoin d'exemples concrets de vos documents de travail : rapports, tableaux de bord, modèles, exports, comptes-rendus… tout ce que vous produisez ou utilisez régulièrement.\n\nDéposez-les dans ce dossier Drive personnel :\nhttps://drive.google.com/drive/folders/1AL4iHjnXxErpbe3-QnKHG7vWAq5zVx2J\n\nPas besoin de tout avoir maintenant — vous pouvez y revenir après l'interview. Ce que vous partagez reste confidentiel et sert uniquement à la configuration de vos agents.");
+    const driveBubble=await bubbleStreaming("agent","Avant de valider vos réponses, une dernière étape.\n\nPour configurer vos agents au plus près de votre réalité, nous avons besoin d'exemples concrets de vos documents de travail : rapports, tableaux de bord, modèles, exports, comptes-rendus… tout ce que vous produisez ou utilisez régulièrement.\n\nPas besoin de tout avoir maintenant — vous pouvez y revenir après l'interview. Ce que vous partagez reste confidentiel et sert uniquement à la configuration de vos agents.");
+    const driveBtn=document.createElement("a");
+    driveBtn.href="https://drive.google.com/drive/folders/1AL4iHjnXxErpbe3-QnKHG7vWAq5zVx2J";
+    driveBtn.target="_blank"; driveBtn.rel="noopener noreferrer";
+    driveBtn.style.cssText="display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:10px 18px;background:#1a56db;color:#fff;border-radius:8px;font-family:var(--font-ui);font-size:var(--t-label);font-weight:600;text-decoration:none;";
+    driveBtn.textContent="Déposer mes documents →";
+    driveBubble.appendChild(driveBtn); scrollToBottom();
     await sleep(600);
 
     showTyping(); await sleep(900); hideTyping();
