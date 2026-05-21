@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#FAFBFD">
+  <title>Shortcut ‚Äî Diagnostic agent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1E6FEB; --primary-soft: rgba(30,111,235,.08); --primary-deep: #1558C7; --accent: #F5A623; --accent-soft: rgba(245,166,35,.12);
+      --navy: #0F1F3F; --text: #1A1A2E; --text-secondary: #4A4A68; --text-muted: #8A8AAA;
+      --bg: #FAFBFD; --bg-soft: #F0F7FF; --bg-softer: #EBF3FF;
+      --border: #DDE8F5; --border-strong: #C8D4E5;
+      --green: #1FAB58; --green-soft: #E6F7EE;
+      --orange: #F57C00; --orange-soft: #FFF3E0;
+      --red: #C62828; --red-soft: #FFEBEE;
+      --white: #FFFFFF;
+      --font-heading: 'Onest','Inter',-apple-system,sans-serif;
+      --font-body: 'DM Sans',-apple-system,sans-serif;
+      --font-ui: 'Instrument Sans',-apple-system,sans-serif;
+      --t-caption:10px; --t-label:13px; --t-body:16px; --t-question:20px; --t-subtitle:26px;
+      --lh-body:1.625; --lh-question:1.6; --lh-title:1.2;
+      --s-4:4px; --s-8:8px; --s-13:13px; --s-21:21px; --s-34:34px;
+      --r-sm:8px; --r-md:12px; --r-lg:16px;
+      --shadow-sm:0 1px 2px rgba(15,31,63,.04),0 1px 3px rgba(15,31,63,.06);
+      --shadow-md:0 4px 6px rgba(15,31,63,.05),0 1px 3px rgba(15,31,63,.08);
+      --shadow-glow:0 0 0 3px rgba(30,111,235,.12);
+      --t-fast:150ms cubic-bezier(.2,.8,.2,1); --t-slow:280ms cubic-bezier(.2,.8,.2,1);
+      --max-col:780px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{-webkit-font-smoothing:antialiased;}
+    body{font-family:var(--font-body);font-size:var(--t-body);line-height:var(--lh-body);color:var(--text);background:var(--bg);min-height:100vh;display:flex;flex-direction:column;}
+
+    /* ‚îÄ‚îÄ Header ‚îÄ‚îÄ */
+    .header{padding:var(--s-13) var(--s-34);background:var(--white);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:var(--s-21);position:sticky;top:0;z-index:10;}
+    .header-brand{display:flex;align-items:center;gap:var(--s-13);}
+    .logo{font-family:var(--font-heading);font-weight:600;font-size:18px;color:var(--navy);letter-spacing:-.02em;}
+    .logo-accent{color:var(--primary);}
+    .header-divider{width:1px;height:18px;background:var(--border);}
+    .tenant-name{font-family:var(--font-ui);font-size:var(--t-label);color:var(--text-secondary);font-weight:500;}
+    .role-badge{font-family:var(--font-ui);font-size:var(--t-caption);font-weight:700;padding:3px 8px;border-radius:100px;letter-spacing:.05em;}
+    .role-badge-dirigeant{background:#EEF4FF;color:var(--primary);}
+    .role-badge-it{background:var(--green-soft);color:var(--green);}
+    .role-badge-departement{background:var(--orange-soft);color:var(--orange);}
+    .docs-counter{display:inline-flex;align-items:center;gap:var(--s-8);padding:var(--s-8) var(--s-13);background:var(--bg-soft);border:none;border-radius:var(--r-sm);font-family:var(--font-ui);font-size:var(--t-label);font-weight:500;color:var(--primary);cursor:pointer;transition:background var(--t-fast);}
+    .docs-counter:hover{background:var(--bg-softer);}
+    .docs-counter.hidden{display:none;}
+
+    /* ‚îÄ‚îÄ Layout ‚îÄ‚îÄ */
+    .main{flex:1;width:100%;max-width:var(--max-col);margin:0 auto;padding:var(--s-34) var(--s-21);display:flex;flex-direction:column;}
+
+    /* ‚îÄ‚îÄ S√âLECTEUR DE R√îLE ‚îÄ‚îÄ */
+    .role-screen{animation:fade-up var(--t-slow) ease-out;}
+    .role-screen-eyebrow{font-family:var(--font-ui);font-size:var(--t-caption);font-weight:700;color:var(--primary);letter-spacing:.18em;text-transform:uppercase;margin-bottom:var(--s-8);}
+    .role-screen-title{font-family:var(--font-heading);font-size:var(--t-subtitle);font-weight:600;color:var(--navy);letter-spacing:-.02em;line-height:var(--lh-title);margin-bottom:var(--s-8);}
+    .role-screen-sub{font-size:var(--t-body);color:var(--text-secondary);margin-bottom:var(--s-34);}
+    .role-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-21);}
+    .role-card{appearance:none;background:var(--white);border:1.5px solid var(--border);border-radius:var(--r-lg);padding:var(--s-21);cursor:pointer;text-align:left;transition:all var(--t-slow);display:flex;flex-direction:column;gap:var(--s-13);}
+    .role-card:hover{border-color:var(--primary);box-shadow:0 8px 24px rgba(15,31,63,.08);transform:translateY(-2px);}
+    .role-card-icon{width:44px;height:44px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;background:var(--primary-soft);}
+    .role-card-label{font-family:var(--font-ui);font-size:var(--t-caption);font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);}
+    .role-card-title{font-family:var(--font-heading);font-size:18px;font-weight:600;color:var(--navy);line-height:1.3;}
+    .role-card-sub{font-family:var(--font-ui);font-size:var(--t-label);color:var(--text-secondary);line-height:1.5;}
+    .role-card-footer{display:flex;align-items:center;gap:var(--s-8);margin-top:auto;padding-top:var(--s-13);border-top:1px solid var(--border);}
+    .role-card-duration{font-family:var(--font-ui);font-size:var(--t-caption);color:var(--text-muted);}
+    .role-card-arrow{margin-left:auto;color:var(--border-strong);font-size:16px;transition:all var(--t-fast);}
+    .role-card:hover .role-card-arrow{color:var(--primary);transform:translateX(3px);}
+    .role-screen.hidden{display:none;}
+
+    /* ‚îÄ‚îÄ Champs nom / pr√©nom sur l'√©cran r√¥le ‚îÄ‚îÄ */
+    .role-civility-wrap{margin-bottom:var(--s-21);}
+    .role-civility-toggle{display:flex;gap:var(--s-8);margin-top:var(--s-4);}
+    .civility-btn{appearance:none;border:1.5px solid var(--border);background:var(--white);color:var(--text-secondary);font-family:var(--font-ui);font-size:var(--t-label);font-weight:500;padding:var(--s-8) var(--s-21);border-radius:50px;cursor:pointer;transition:all var(--t-fast);}
+    .civility-btn:hover{border-color:var(--primary);color:var(--primary);}
+    .civility-btn.civility-selected{background:var(--primary);border-color:var(--primary);color:var(--white);font-weight:600;}
+    .civility-btn.input-error{border-color:var(--red)!important;box-shadow:0 0 0 3px rgba(198,40,40,.12)!important;animation:shake 320ms ease;}
+    .role-name-wrap{display:flex;gap:var(--s-13);margin-bottom:var(--s-34);}
+    .role-name-group{display:flex;flex-direction:column;gap:var(--s-4);flex:1;}
+    .role-name-label{font-family:var(--font-ui);font-size:var(--t-caption);font-weight:700;color:var(--text-secondary);letter-spacing:.06em;text-transform:uppercase;}
+    .role-name-input{font-family:var(--font-body);font-size:var(--t-body);color:var(--text);border:1.5px solid var(--border);border-radius:var(--r-sm);padding:var(--s-8) var(--s-13);outline:none;background:var(--white);transition:border-color var(--t-fast),box-shadow var(--t-fast);}
+    .role-name-input:focus{border-color:var(--primary);box-shadow:var(--shadow-glow);}
+    .role-name-input.input-error{border-color:var(--red)!important;box-shadow:0 0 0 3px rgba(198,40,40,.12)!important;animation:shake 320ms ease;}
+    @keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-5px);}40%,80%{transform:translateX(5px);}}
+
+    /* ‚îÄ‚îÄ Greeting ‚îÄ‚îÄ */
+    .greeting{margin-bottom:var(--s-34);animation:fade-up var(--t-slow) ease-out;}
+    .greeting.hidden{display:none;}
+    .greeting-title{font-family:var(--font-heading);font-size:var(--t-subtitle);font-weight:600;letter-spacing:-.02em;color:var(--navy);line-height:var(--lh-title);}
+    .greeting-sub{font-size:var(--t-body);color:var(--text-secondary);margin-top:var(--s-4);}
+
+    /* ‚îÄ‚îÄ Progress ‚îÄ‚îÄ */
+    .progress-rail{position:fixed;right:var(--s-34);top:50%;transform:translateY(-50%);z-index:5;pointer-events:none;animation:fade-up var(--t-slow) ease-out 200ms both;}
+    .progress-steps{list-style:none;display:flex;flex-direction:column;gap:var(--s-21);}
+    .progress-step{display:flex;align-items:center;gap:var(--s-13);}
+    .step-dot{width:8px;height:8px;border-radius:100px;background:var(--border-strong);flex-shrink:0;transition:all var(--t-slow);}
+    .step-label{font-family:var(--font-ui);font-size:var(--t-label);color:var(--text-muted);white-space:nowrap;opacity:.55;}
+    .progress-step.is-past .step-dot{background:var(--primary-soft);}
+    .progress-step.is-past .step-label{color:var(--text-secondary);opacity:.85;}
+    .progress-step.is-current .step-dot{background:var(--primary);width:10px;height:10px;box-shadow:0 0 0 4px rgba(30,111,235,.15);}
+    .progress-step.is-current .step-label{color:var(--navy);font-weight:600;opacity:1;}
+    .progress-rail-mobile{display:none;position:sticky;top:56px;z-index:5;background:var(--bg);padding:var(--s-8) var(--s-21);align-items:center;gap:var(--s-13);border-bottom:1px solid var(--border);}
+    .progress-rail-mobile-bar{flex:1;height:3px;background:var(--border);border-radius:100px;overflow:hidden;}
+    .progress-rail-mobile-fill{height:100%;background:var(--primary);border-radius:100px;transition:width var(--t-slow);}
+    .progress-rail-mobile-label{font-family:var(--font-ui);font-size:var(--t-caption);color:var(--text-muted);white-space:nowrap;}
+
+    /* ‚îÄ‚îÄ Conversation ‚îÄ‚îÄ */
+    .conversation{display:flex;flex-direction:column;gap:var(--s-21);}
+    .bubble{padding:var(--s-13) var(--s-21);border-radius:var(--r-md);line-height:var(--lh-body);font-size:var(--t-body);word-wrap:break-word;animation:fade-up 280ms ease-out;white-space:pre-line;}
+    .bubble-agent{background:var(--white);box-shadow:var(--shadow-sm);align-self:flex-start;color:var(--text);border:1px solid rgba(221,232,245,.5);max-width:92%;}
+    .bubble-user{background:var(--primary-soft);align-self:flex-end;color:var(--text);max-width:72%;}
+    .bubble-question{font-size:var(--t-body);line-height:var(--lh-body);font-weight:600;color:var(--navy);}
+    .choices-wrap{display:flex;flex-wrap:wrap;gap:var(--s-8);align-self:flex-start;max-width:90%;animation:fade-up 280ms ease-out 80ms both;}
+    .upload-cta-wrap{display:flex;flex-wrap:wrap;gap:var(--s-8);align-self:flex-start;animation:fade-up 280ms ease-out 80ms both;}
+    .upload-cta-btn{background:var(--primary);border-color:var(--primary);color:var(--white);font-weight:600;}
+    .upload-cta-btn:hover{background:var(--primary-dark,#1347c8);border-color:var(--primary-dark,#1347c8);color:var(--white);transform:translateY(-1px);}
+    .upload-cta-skip{color:var(--text-secondary);}
+    .choice-btn{appearance:none;border:1px solid var(--border);background:var(--white);color:var(--text);font-family:var(--font-ui);font-size:var(--t-label);font-weight:500;padding:var(--s-8) var(--s-13);border-radius:var(--r-sm);cursor:pointer;transition:all var(--t-fast);}
+    .choice-btn:hover{background:var(--bg-soft);border-color:var(--primary);color:var(--primary);transform:translateY(-1px);}
+    .choice-btn-freq{border-color:var(--border-strong);}
+
+    /* ‚îÄ‚îÄ Multi-s√©lection ‚îÄ‚îÄ */
+    .ms-wrap{display:flex;flex-direction:column;align-self:flex-start;max-width:92%;gap:var(--s-13);animation:fade-up 280ms ease-out 80ms both;}
+    .ms-hint{font-family:var(--font-ui);font-size:var(--t-caption);color:var(--text-muted);font-style:italic;}
+    .ms-btns{display:flex;flex-wrap:wrap;gap:var(--s-8);}
+    .ms-btn{appearance:none;border:1.5px solid var(--border);background:var(--white);color:var(--text);font-family:var(--font-ui);font-size:var(--t-label);font-weight:500;padding:var(--s-8) var(--s-13);border-radius:var(--r-sm);cursor:pointer;transition:all var(--t-fast);display:flex;align-items:center;gap:6px;}
+    .ms-btn::before{content:'';width:14px;height:14px;border:1.5px solid var(--border-strong);border-radius:4px;flex-shrink:0;transition:all var(--t-fast);background:var(--white);}
+    .ms-btn:hover{border-color:var(--primary);color:var(--primary);transform:translateY(-1px);}
+    .ms-btn:hover::before{border-color:var(--primary);}
+    .ms-btn.ms-selected{background:var(--primary-soft);border-color:var(--primary);color:var(--primary);font-weight:600;}
+    .ms-btn.ms-selected::before{background:var(--primary);border-color:var(--primary);background-image:url("data:image/svg+xml,%3Csvg width='10' height='8' viewBox='0 0 10 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4L3.5 6.5L9 1' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:center;}
+    .ms-btn.ms-exclusive.ms-selected{background:var(--bg-softer);border-color:var(--border-strong);color:var(--text-secondary);}
+    .ms-btn.ms-exclusive.ms-selected::before{background:var(--text-muted);border-color:var(--text-muted);}
+    .ms-autre-wrap{display:none;}.ms-autre-wrap.visible{display:block;}
+    .ms-autre-input{width:100%;font-family:var(--font-body);font-size:var(--t-body);color:var(--text);border:1px solid var(--border);border-radius:var(--r-sm);padding:var(--s-8) var(--s-13);outline:none;background:var(--white);transition:border-color var(--t-fast),box-shadow var(--t-fast);}
+    .ms-autre-input:focus{border-color:var(--primary);box-shadow:var(--shadow-glow);}
+    .ms-autre-input::placeholder{color:var(--text-muted);font-size:var(--t-label);}
+    .ms-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:var(--s-8);}
+    .ms-count{font-family:var(--font-ui);font-size:var(--t-caption);color:var(--text-muted);}
+    .ms-confirm{appearance:none;border:none;cursor:pointer;background:var(--primary);color:var(--white);font-family:var(--font-ui);font-size:var(--t-label);font-weight:500;padding:var(--s-8) var(--s-21);border-radius:50px;transition:all var(--t-fast);}
+    .ms-confirm:hover:not(:disabled){background:var(--primary-deep);transform:translateY(-1px);}
+    .ms-confirm:disabled{background:var(--border-strong);cursor:not-allowed;}
+
+    /* ‚îÄ‚îÄ Upload ‚îÄ‚îÄ */
+    .file-card-block{display:flex;flex-direction:column;gap:var(--s-13);padding:var(--s-13) var(--s-21);background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);align-self:flex-end;max-width:80%;box-shadow:var(--shadow-sm);animation:fade-up 280ms ease-out;}
+    .file-card-row{display:flex;align-items:center;gap:var(--s-13);}
+    .file-check{flex-shrink:0;width:22px;height:22px;background:var(--green);border-radius:100px;display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:700;font-size:13px;}
+    .file-name{font-family:var(--font-ui);font-size:var(--t-label);color:var(--text);word-break:break-all;}
+    .file-freq-prompt{font-family:var(--font-ui);font-size:var(--t-label);color:var(--text-secondary);}
+    .file-card-locked .file-freq-prompt{color:var(--green);font-weight:600;}
+    .file-freq-options{display:flex;flex-wrap:wrap;gap:var(--s-8);}
+
+    /* ‚îÄ‚îÄ Typing ‚îÄ‚îÄ */
+    .typing{display:inline-flex;align-items:center;gap:5px;padding:var(--s-13) var(--s-21);background:var(--white);border-radius:var(--r-md);align-self:flex-start;box-shadow:var(--shadow-sm);border:1px solid rgba(221,232,245,.5);animation:fade-up 200ms ease-out;}
+    .typing-dot{width:6px;height:6px;background:var(--text-muted);border-radius:100px;animation:pulse 1.4s ease-in-out infinite;}
+    .typing-dot:nth-child(2){animation-delay:.2s;}.typing-dot:nth-child(3){animation-delay:.4s;}
+    .section-divider{align-self:center;font-family:var(--font-ui);font-size:var(--t-caption);color:var(--text-muted);padding:var(--s-4) var(--s-13);border:1px solid var(--border);border-radius:100px;letter-spacing:.06em;text-transform:uppercase;margin:var(--s-8) 0;animation:fade-up 280ms ease-out;}
+
+    /* ‚îÄ‚îÄ Summary ‚îÄ‚îÄ */
+    .summary-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);padding:var(--s-34);align-self:stretch;box-shadow:var(--shadow-md);animation:fade-up 280ms ease-out;}
+    .summary-title{font-family:var(--font-heading);font-size:var(--t-question);font-weight:600;color:var(--navy);margin-bottom:var(--s-21);}
+    .summary-section{margin-bottom:var(--s-21);}
+    .summary-section-title{font-family:var(--font-ui);font-size:var(--t-label);font-weight:600;color:var(--primary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:var(--s-8);display:flex;align-items:center;gap:var(--s-8);flex-wrap:wrap;}
+    .summary-row{display:flex;gap:var(--s-8);margin-bottom:var(--s-8);font-size:var(--t-label);}
+    .summary-key{color:var(--text-muted);flex-shrink:0;min-width:160px;}
+    .summary-val{color:var(--text);}
+    .summary-actions{display:flex;gap:var(--s-13);margin-top:var(--s-21);flex-wrap:wrap;align-items:center;}
+    .btn-primary{appearance:none;border:none;cursor:pointer;background:var(--primary);color:var(--white);font-family:var(--font-ui);font-size:var(--t-label);font-weight:500;padding:var(--s-13) var(--s-21);border-radius:50px;transition:all var(--t-fast);}
+    .btn-primary:hover{background:var(--primary-deep);transform:translateY(-1px);}
+    .btn-outline{appearance:none;cursor:pointer;background:var(--white);color:var(--primary);font-family:var(--font-ui);font-size:var(--t-label);font-weight:500;padding:var(--s-13) var(--s-21);border-radius:50px;border:1px solid var(--primary);transition:all var(--t-fast);}
+    .btn-outline:hover{background:var(--primary-soft);}
+    .copy-confirm{font-family:var(--font-ui);font-size:var(--t-label);color:var(--green);font-weight:500;opacity:0;transition:opacity var(--t-fast);}
+    .copy-confirm.visible{opacity:1;}
+    .btn-primary:disabled{opacity:.7;cursor:not-allowed;transform:none;}
+    .btn-primary.saving{background:var(--primary-deep);display:inline-flex;align-items:center;gap:var(--s-8);}
+    .btn-primary.saved{background:#059669;}
+    .btn-primary.save-err{background:#DC2626;}
+    .btn-spinner{width:14px;height:14px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0;}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .save-confirm{font-family:var(--font-ui);font-size:var(--t-label);color:#059669;font-weight:500;opacity:0;transition:opacity var(--t-fast);}
+    .save-confirm.visible{opacity:1;}
+    .save-error{font-family:var(--font-ui);font-size:var(--t-label);color:#DC2626;opacity:0;transition:opacity var(--t-fast);}
+    .save-error.visible{opacity:1;}
+    .erp-score{display:inline-flex;align-items:center;gap:4px;font-size:var(--t-caption);font-weight:700;padding:2px 8px;border-radius:100px;letter-spacing:.04em;}
+    .erp-score-high{background:var(--green-soft);color:var(--green);}
+    .erp-score-medium{background:var(--orange-soft);color:var(--orange);}
+    .erp-score-low{background:var(--red-soft);color:var(--red);}
+    .erp-score-absent{background:var(--bg-softer);color:var(--text-muted);}
+
+    /* ‚îÄ‚îÄ Composer ‚îÄ‚îÄ */
+    .composer{width:100%;max-width:var(--max-col);margin:0 auto;padding:var(--s-13) var(--s-21) var(--s-21);background:linear-gradient(to bottom,transparent,var(--bg) 28%);position:sticky;bottom:0;}
+    .composer-inner{display:flex;align-items:flex-end;gap:var(--s-8);background:var(--white);border:1px solid var(--border);border-radius:20px;padding:var(--s-8) var(--s-8) var(--s-8) var(--s-13);box-shadow:0 2px 12px rgba(15,31,63,.07),0 1px 3px rgba(15,31,63,.05);transition:box-shadow var(--t-fast),border-color var(--t-fast);}
+    .composer-inner:focus-within{box-shadow:0 4px 20px rgba(15,31,63,.10),0 1px 4px rgba(15,31,63,.07);border-color:var(--border-strong);}
+    .composer-attach{width:36px;height:36px;background:transparent;color:var(--text-muted);border:none;cursor:pointer;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background var(--t-fast),color var(--t-fast);flex-shrink:0;margin-bottom:4px;}
+    .composer-attach:hover{background:var(--bg-soft);color:var(--primary);}
+    .composer-input{flex:1;border:none;outline:none;font-family:var(--font-body);font-size:var(--t-body);line-height:var(--lh-body);color:var(--text);background:transparent;padding:var(--s-8) 0;resize:none;min-height:40px;max-height:200px;overflow-y:auto;}
+    .composer-input::placeholder{color:var(--text-muted);font-style:italic;font-size:calc(var(--t-body) - 0.5px);}
+    .composer-send{width:36px;height:36px;padding:0;background:var(--primary);color:var(--white);border:none;cursor:pointer;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background var(--t-fast),transform var(--t-fast),opacity var(--t-fast);flex-shrink:0;margin-bottom:4px;}
+    .composer-send::after{content:'‚Üë';font-size:16px;font-weight:600;line-height:1;}
+    .composer-send:hover:not(:disabled){background:var(--primary-deep);transform:scale(1.05);}
+    .composer-send:disabled{background:var(--border);opacity:.6;cursor:not-allowed;transform:none;}
+    .composer-send-label{display:none;}
+    .composer.hidden{display:none;}
+    .composer.attach-only .composer-input::placeholder{font-style:italic;color:var(--text-muted);}
+    .start-wrap{display:flex;justify-content:flex-start;margin-top:var(--s-8);animation:fade-up 320ms ease-out 100ms both;}
+    .start-btn{appearance:none;border:none;cursor:pointer;background:var(--primary);color:var(--white);font-family:var(--font-ui);font-size:var(--t-label);font-weight:500;padding:var(--s-13) var(--s-21);border-radius:50px;transition:all var(--t-fast);}
+    .start-btn:hover{background:var(--primary-deep);transform:translateY(-1px);}
+    .sticky-action{position:sticky;bottom:80px;width:100%;max-width:var(--max-col);margin:0 auto;padding:0 var(--s-21);z-index:5;display:flex;justify-content:center;pointer-events:none;animation:fade-up 280ms ease-out;}
+    .sticky-action[hidden]{display:none;}
+    .sticky-action-btn{pointer-events:auto;display:inline-flex;align-items:center;gap:var(--s-13);padding:var(--s-13) var(--s-21);background:var(--white);border:1px solid var(--primary);color:var(--primary);font-family:var(--font-ui);font-size:var(--t-label);font-weight:600;border-radius:100px;cursor:pointer;box-shadow:0 4px 16px rgba(30,111,235,.18);transition:all var(--t-fast);}
+    .sticky-action-btn:hover{background:var(--primary);color:var(--white);transform:translateY(-1px);}
+    .footer{width:100%;max-width:var(--max-col);margin:0 auto;padding:var(--s-13) var(--s-21) var(--s-21);text-align:center;font-family:var(--font-ui);font-size:var(--t-caption);color:var(--text-muted);}
+
+    /* ‚îÄ‚îÄ Drawer ‚îÄ‚îÄ */
+    .drawer{position:fixed;inset:0;z-index:100;pointer-events:none;opacity:0;transition:opacity var(--t-fast);}
+    .drawer[aria-hidden="false"]{pointer-events:auto;opacity:1;}
+    .drawer-overlay{position:absolute;inset:0;background:rgba(15,31,63,.3);backdrop-filter:blur(2px);}
+    .drawer-panel{position:absolute;right:0;top:0;height:100%;width:min(420px,90vw);background:var(--white);box-shadow:-4px 0 24px rgba(15,31,63,.08);display:flex;flex-direction:column;transform:translateX(100%);transition:transform var(--t-slow);}
+    .drawer[aria-hidden="false"] .drawer-panel{transform:translateX(0);}
+    .drawer-header{display:flex;align-items:center;justify-content:space-between;padding:var(--s-21);border-bottom:1px solid var(--border);}
+    .drawer-title{font-family:var(--font-heading);font-size:var(--t-question);font-weight:600;color:var(--navy);}
+    .drawer-close{width:36px;height:36px;border:none;background:transparent;color:var(--text-muted);font-size:24px;cursor:pointer;border-radius:var(--r-sm);}
+    .drawer-list{list-style:none;padding:var(--s-13) var(--s-21);flex:1;overflow-y:auto;}
+    .drawer-list-item{display:flex;align-items:center;gap:var(--s-13);padding:var(--s-13) 0;border-bottom:1px solid var(--border);}
+    .drawer-list-item:last-child{border-bottom:none;}
+    .drawer-list-item .file-name{flex:1;}
+    .drawer-list-item .file-freq-tag{font-size:var(--t-caption);color:var(--primary);background:var(--primary-soft);padding:2px 8px;border-radius:100px;font-weight:600;}
+    .drawer-remove{width:32px;height:32px;border:none;background:transparent;color:var(--text-muted);cursor:pointer;border-radius:var(--r-sm);font-size:20px;}
+    .drawer-empty{padding:var(--s-34) var(--s-21);text-align:center;color:var(--text-muted);font-size:var(--t-label);}
+    .drawer-empty.hidden{display:none;}
+
+    @keyframes pulse{0%,60%,100%{opacity:.3;transform:scale(1);}30%{opacity:1;transform:scale(1.3);}}
+    @keyframes fade-up{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+    .hidden{display:none!important;}
+
+    @media(max-width:1100px){.progress-rail{display:none;}.progress-rail-mobile{display:flex;}}
+    @media(max-width:768px){
+      .header{padding:var(--s-13) var(--s-21);}
+      .main{padding:var(--s-21) var(--s-13);}
+      .role-cards{grid-template-columns:1fr;}
+      .bubble-agent,.file-card-block{max-width:95%;}
+      .bubble-user{max-width:88%;}
+      .ms-wrap{max-width:100%;}
+      .composer{padding:var(--s-8) var(--s-13);}
+      .composer-send span{display:none;}
+      .composer-send{width:44px;padding:0;display:flex;align-items:center;justify-content:center;}
+      .composer-send::after{content:'‚Üí';font-size:18px;}
+      .summary-key{min-width:110px;}
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-brand">
+      <span class="logo">Short<span class="logo-accent">cut</span></span>
+      <span class="header-divider" aria-hidden="true"></span>
+      <span class="tenant-name" id="tenant-name">‚Äî</span>
+      <span class="role-badge hidden" id="role-badge"></span>
+    </div>
+    <button class="docs-counter hidden" id="docs-counter" type="button" aria-label="Voir les documents">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"></path></svg>
+      <span id="docs-counter-label">0 document</span>
+    </button>
+  </header>
+
+  <div class="progress-rail-mobile hidden" id="progress-rail-mobile">
+    <div class="progress-rail-mobile-bar"><div class="progress-rail-mobile-fill" id="progress-mobile-fill" style="width:0%"></div></div>
+    <span class="progress-rail-mobile-label" id="progress-mobile-label"></span>
+  </div>
+
+  <aside class="progress-rail" id="progress-rail" aria-label="Progression">
+    <ol class="progress-steps" id="progress-steps"></ol>
+  </aside>
+
+  <main class="main" id="main">
+
+    <!-- S√âLECTEUR DE R√îLE -->
+    <div class="role-screen" id="role-screen">
+      <div class="role-screen-eyebrow">Diagnostic agent ¬∑ Shortcut</div>
+      <h1 class="role-screen-title">Qui √™tes-vous ?</h1>
+      <p class="role-screen-sub">Faisons connaissance avant de commencer.<br>Indiquez votre nom et s√©lectionnez votre poste.</p>
+
+      <div class="role-civility-wrap">
+        <div class="role-name-label">Vous √™tes</div>
+        <div class="role-civility-toggle">
+          <button type="button" class="civility-btn" id="civ-homme" data-value="Monsieur">Homme</button>
+          <button type="button" class="civility-btn" id="civ-femme" data-value="Madame">Femme</button>
+        </div>
+      </div>
+
+      <div class="role-name-wrap">
+        <div class="role-name-group">
+          <label class="role-name-label" for="input-prenom">Pr√©nom</label>
+          <input class="role-name-input" id="input-prenom" type="text" placeholder="Ex : Karim" autocomplete="given-name">
+        </div>
+        <div class="role-name-group">
+          <label class="role-name-label" for="input-nom">Nom</label>
+          <input class="role-name-input" id="input-nom" type="text" placeholder="Ex : Benali" autocomplete="family-name">
+        </div>
+      </div>
+
+      <div class="role-cards">
+
+        <button class="role-card role-card-dg" id="card-dg" type="button">
+          <div class="role-card-icon role-card-icon-dg">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div class="role-card-label role-card-label-dg">Direction g√©n√©rale</div>
+          <div class="role-card-title">DG</div>
+          <div class="role-card-sub">Vision strat√©gique, priorit√©s de transformation et r√©sultats attendus.</div>
+          <div class="role-card-footer">
+            <span class="role-card-duration">‚è± ~5 min</span>
+            <span class="role-card-arrow">‚Üí</span>
+          </div>
+        </button>
+
+        <button class="role-card role-card-it" id="card-it" type="button">
+          <div class="role-card-icon role-card-icon-it">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <div class="role-card-label role-card-label-it">Informatique & Syst√®mes</div>
+          <div class="role-card-title">IT Manager</div>
+          <div class="role-card-sub">ERP, h√©bergement, API, modules actifs, int√©grations et contraintes techniques.</div>
+          <div class="role-card-footer">
+            <span class="role-card-duration">‚è± ~8 min</span>
+            <span class="role-card-arrow">‚Üí</span>
+          </div>
+        </button>
+
+        <button class="role-card role-card-finance" id="card-finance" type="button">
+          <div class="role-card-icon role-card-icon-finance">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <div class="role-card-label role-card-label-finance">Finance & Comptabilit√©</div>
+          <div class="role-card-title">Finance Manager</div>
+          <div class="role-card-sub">Documents financiers, outils de suivi, donn√©es g√©r√©es et assistant id√©al.</div>
+          <div class="role-card-footer">
+            <span class="role-card-duration">‚è± ~10 min</span>
+            <span class="role-card-arrow">‚Üí</span>
+          </div>
+        </button>
+
+        <button class="role-card role-card-location" id="card-location" type="button">
+          <div class="role-card-icon role-card-icon-location">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><rect x="9" y="12" width="6" height="9"/><circle cx="18" cy="5" r="3"/></svg>
+          </div>
+          <div class="role-card-label role-card-label-location">Gestion locative</div>
+          <div class="role-card-title">Location Manager</div>
+          <div class="role-card-sub">Contrats, biens, locataires, suivi des dossiers et assistant id√©al.</div>
+          <div class="role-card-footer">
+            <span class="role-card-duration">‚è± ~10 min</span>
+            <span class="role-card-arrow">‚Üí</span>
+          </div>
+        </button>
+
+        <button class="role-card role-card-marketing" id="card-marketing" type="button">
+          <div class="role-card-icon role-card-icon-marketing">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+          </div>
+          <div class="role-card-label role-card-label-marketing">Marketing & √âv√©nements</div>
+          <div class="role-card-title">Marketing Event Manager</div>
+          <div class="role-card-sub">Campagnes, √©v√©nements, contenus, outils utilis√©s et assistant id√©al.</div>
+          <div class="role-card-footer">
+            <span class="role-card-duration">‚è± ~10 min</span>
+            <span class="role-card-arrow">‚Üí</span>
+          </div>
+        </button>
+
+        <button class="role-card role-card-commercial" id="card-commercial" type="button">
+          <div class="role-card-icon role-card-icon-commercial">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <div class="role-card-label role-card-label-commercial">Commercial</div>
+          <div class="role-card-title">Responsable commercial</div>
+          <div class="role-card-sub">Clients, devis, commandes, suivi des ventes et assistant id√©al.</div>
+          <div class="role-card-footer">
+            <span class="role-card-duration">‚è± ~10 min</span>
+            <span class="role-card-arrow">‚Üí</span>
+          </div>
+        </button>
+
+      </div>
+    </div>
+
+    <section class="greeting hidden" id="greeting">
+      <h1 class="greeting-title" id="greeting-title">Bonjour.</h1>
+      <p class="greeting-sub" id="greeting-sub"></p>
+    </section>
+    <section class="conversation" id="conversation" aria-live="polite"></section>
+  </main>
+
+  <div class="sticky-action" id="sticky-action" hidden>
+    <button class="sticky-action-btn" type="button" id="sticky-action-btn">
+      <span id="sticky-action-label">J'ai d√©pos√© tous mes documents</span>
+      <span aria-hidden="true">‚Üí</span>
+    </button>
+  </div>
+
+  <div class="composer hidden" id="composer">
+    <div class="composer-inner">
+      <input type="file" id="file-input" multiple hidden>
+      <button class="composer-attach" id="composer-attach" type="button" aria-label="T√©l√©verser un fichier">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"></path></svg>
+      </button>
+      <textarea class="composer-input" id="composer-input" placeholder="√âcrivez votre r√©ponse‚Ä¶" rows="1"></textarea>
+      <button class="composer-send" id="composer-send" type="button" disabled></button>
+    </div>
+  </div>
+
+  <footer class="footer">Shortcut ‚Äî Diagnostic confidentiel ¬∑ Vos r√©ponses sont transmises directement √† votre r√©f√©rent.</footer>
+
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <aside class="drawer-panel" role="dialog" aria-labelledby="drawer-title">
+      <header class="drawer-header">
+        <h2 class="drawer-title" id="drawer-title">Vos documents</h2>
+        <button class="drawer-close" id="drawer-close" aria-label="Fermer">√ó</button>
+      </header>
+      <ul class="drawer-list" id="drawer-list"></ul>
+      <p class="drawer-empty" id="drawer-empty">Aucun document d√©pos√© pour le moment.</p>
+    </aside>
+  </div>
+
+<script>
+/* ‚îÄ‚îÄ URL params ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ
+   ?prenom=Lina&nom=Benhamou&civilite=Madame&poste=DG&societe=SIAD  */
+const params = new URLSearchParams(window.location.search);
+const USER = {
+  civility:  params.get("civilite") || "Madame",
+  firstName: params.get("prenom")   || "Lina",
+  lastName:  params.get("nom")      || "Benhamou",
+  role:      params.get("poste")    || "",
+  company:   params.get("societe")  || "World Trade Center",
+};
+let FORMAL    = USER.civility + " " + USER.lastName;
+let FULL_NAME = USER.civility + " " + USER.firstName + " " + USER.lastName;
+const FREQUENCIES = ["Quotidien","Hebdo","Mensuel","Trimestriel","Annuel","Ponctuel"];
+
+/* ‚îÄ‚îÄ D√âFINITION DES 3 PARCOURS ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ */
+
+/* ¬∑¬∑ DIRIGEANT ¬∑¬∑ */
+const STEPS_DIRIGEANT = [
+  { section:0, key:"identity_check",
+    q: "Avant de d√©marrer, juste pour confirmer : vous √™tes bien " + (USER.role || "Directeur G√©n√©ral") + " chez " + USER.company + (USER.firstName ? ", " + FULL_NAME : "") + " ?",
+    choices:["Oui, c'est correct","Il y a quelque chose √† corriger","Vous ne vous adressez pas √† la bonne personne"] },
+  { section:0, key:"profil_correction",
+    q:"Qu'est-ce que je devrais rectifier ?",
+    placeholder:"Ex : mon titre exact est PDG, je dirige 3 filiales dont deux hors Alger‚Ä¶",
+    skipIf:(a)=>a.identity_check!=="Il y a quelque chose √† corriger" },
+
+  { section:1, key:"dg_docs_analyses",
+    q:"Quels documents ou rapports analysez-vous r√©guli√®rement ?",
+    placeholder:"Ex : bilans financiers mensuels, rapports d'activit√© par site, synth√®ses commerciales, presse sectorielle‚Ä¶" },
+
+  { section:1, key:"dg_docs_produits",
+    q:"Quels documents produisez-vous vous-m√™me ? D√©posez un mod√®le si vous l'avez sous la main, ou d√©crivez simplement ce que vous produisez.",
+    isUploadPhase:true },
+
+  { section:1, key:"dg_info_remontee",
+    q:"Comment vos √©quipes vous remontent-elles l'information ?",
+    placeholder:"Ex : r√©unions hebdomadaires, rapports √©crits, tableaux partag√©s, messagerie directe, oralement en comit√©‚Ä¶" },
+
+  { section:1, key:"dg_decision_manque",
+    q:"Quelle information vous manque souvent au moment de trancher ?",
+    placeholder:"Ex : une vision consolid√©e en temps r√©el sur tous les sites ¬∑ l'√©tat exact du carnet de commandes ¬∑ la tr√©sorerie √† date‚Ä¶" },
+
+  { section:1, key:"dg_charge_mentale",
+    q:"Qu'est-ce qui vous prend le plus de temps et d'attention dans votre semaine, en dehors des r√©unions ?",
+    placeholder:"Ex : relire et synth√©tiser les rapports des directions ¬∑ pr√©parer les points de comit√© ¬∑ suivre des indicateurs √©parpill√©s‚Ä¶" },
+
+  { section:2, key:"dg_assistant_vision",
+    q:"Si vous aviez une baguette magique, qu'est-ce que votre assistant id√©al ferait pour vous ?",
+    placeholder:"Ex : qu'il me pr√©pare chaque matin une synth√®se des activit√©s de la veille ¬∑ qu'il m'alerte d√®s qu'un indicateur d√©croche ¬∑ qu'il r√©dige mes comptes rendus de comit√©‚Ä¶" },
+];
+
+const SECTIONS_DIRIGEANT = ["Introduction","Votre activit√©","Votre assistant","Cl√¥ture"];
+const TRANSITIONS_DIRIGEANT = {
+  1:"Tr√®s bien.\n\nParlons maintenant de votre quotidien.",
+  2:"Tr√®s bien.\n\nUne derni√®re question, la plus importante.",
+};
+
+/* ¬∑¬∑ IT / DSI ¬∑¬∑ */
+const STEPS_IT = [
+  { section:0, key:"identity_check",
+    q:"Avant de d√©marrer, juste pour confirmer : vous √™tes bien le responsable informatique ou technique chez " + USER.company + (USER.firstName ? ", " + FULL_NAME : "") + " ?",
+    choices:["Oui, c'est correct","Il y a quelque chose √† corriger","Vous ne vous adressez pas √† la bonne personne"] },
+  { section:0, key:"profil_correction",
+    q:"Qu'est-ce que je devrais rectifier ?",
+    placeholder:"Ex : je suis prestataire externe, pas salari√© / mon titre est Administrateur Syst√®me‚Ä¶",
+    skipIf:(a)=>a.identity_check!=="Il y a quelque chose √† corriger" },
+
+  { section:1, key:"it_data_sources",
+    q:"En dehors de votre logiciel comptable, o√π vivent les donn√©es de l'entreprise aujourd'hui ?",
+    placeholder:"Ex : fichiers Excel par d√©partement, Google Drive, logiciel de gestion locative, registres papier‚Ä¶" },
+
+  { section:1, key:"it_data_structure",
+    q:"Ces donn√©es sont-elles structur√©es ou plut√¥t libres ?",
+    choices:["Majoritairement structur√©es","Mixte","Majoritairement non structur√©es","Je ne sais pas"] },
+
+  { section:1, key:"it_data_history",
+    q:"Sur combien d'ann√©es avez-vous des donn√©es √† reprendre ? Y a-t-il des archives papier √† num√©riser ?",
+    placeholder:"Ex : 5 ans de donn√©es Excel ¬∑ des registres papier depuis 2015 ¬∑ uniquement les 2 derni√®res ann√©es‚Ä¶" },
+
+  { section:1, key:"it_servers",
+    q:"Avez-vous des serveurs sur site ?",
+    choices:["Oui, serveurs sur site","Non, tout est en cloud","Hybride","Je ne sais pas"] },
+
+  { section:1, key:"it_cross_dept",
+    q:"Y a-t-il des informations ou documents qui circulent entre plusieurs d√©partements aujourd'hui ? Comment √ßa se passe concr√®tement ?",
+    placeholder:"Ex : un contrat sign√© par le commercial est transmis √† la gestion locative puis √† la finance ¬∑ les bons de commande passent par achats avant validation direction‚Ä¶" },
+
+  { section:1, key:"it_double_saisie",
+    q:"Y a-t-il des informations saisies plusieurs fois dans des endroits diff√©rents ?",
+    placeholder:"Ex : les donn√©es client ressaisies √† la fois dans Excel et dans le logiciel comptable ¬∑ les relev√©s de charges saisis manuellement chaque mois‚Ä¶" },
+];
+
+const SECTIONS_IT = ["Introduction","Votre infrastructure","Cl√¥ture"];
+const TRANSITIONS_IT = {
+  1:"Tr√®s bien.\n\nPassons √† votre infrastructure.",
+};
+
+/* ¬∑¬∑ D√âPARTEMENT ¬∑¬∑ */
+const STEPS_DEPARTEMENT = [
+  // ‚îÄ‚îÄ Section 0 ‚Äî Introduction ‚îÄ‚îÄ
+  { section:0, key:"identity_check",
+    q:"Avant de d√©marrer, juste pour confirmer : vous √™tes bien responsable de d√©partement chez " + USER.company + (USER.firstName ? ", " + FULL_NAME : "") + " ?",
+    choices:["Oui, c'est correct","Il y a quelque chose √† corriger","Vous ne vous adressez pas √† la bonne personne"] },
+  { section:0, key:"profil_correction",
+    q:"Qu'est-ce que je devrais rectifier ?",
+    placeholder:"Ex : mon poste exact est Responsable Achats, je suis rattach√©e au site d'Oran‚Ä¶",
+    skipIf:(a)=>a.identity_check!=="Il y a quelque chose √† corriger" },
+  { section:0, key:"departement_nom",
+    q:"Quel est votre d√©partement ?",
+    choices:["RH / Paie","Finance / Comptabilit√©","Commercial / Ventes","Gestion locative","Marketing & √âv√©nements","Direction","Autre"],
+    skipIf:(a)=>!!a.departement_nom },
+
+  // ‚îÄ‚îÄ Section 1 ‚Äî Documents re√ßus & produits ‚îÄ‚îÄ
+  { section:1, key:"docs_analyses",
+    q:"Quels documents ou rapports recevez-vous et analysez-vous r√©guli√®rement ?",
+    placeholder:"Ex : relev√©s bancaires, tableaux de bord re√ßus, rapports fournisseurs, synth√®ses de direction, contrats entrants‚Ä¶" },
+  { section:1, key:"docs_produits_upload",
+    q:"Quels documents produisez-vous vous-m√™me ? D√©posez un mod√®le si vous l'avez sous la main, ou listez vos documents et leur fr√©quence.",
+    isUploadPhase:true },
+  { section:1, key:"docs_produits_destinataires",
+    q:"√Ä qui ces documents sont-ils g√©n√©ralement destin√©s ?",
+    placeholder:"Ex : rapport mensuel ‚Üí Direction g√©n√©rale ¬∑ relev√© de charges ‚Üí locataires ¬∑ synth√®se hebdo ‚Üí mon √©quipe‚Ä¶" },
+  { section:1, key:"outils_utilises",
+    q:"Quels outils utilisez-vous au quotidien ?",
+    multiSelect:true,
+    choices:["Microsoft Office (Word, Excel, PowerPoint)","Google Workspace (Docs, Sheets, Drive)","Outlook / Gmail","WhatsApp / Teams / Slack","Logiciel m√©tier sp√©cifique","Autre"] },
+
+  // ‚îÄ‚îÄ Section 2 ‚Äî Sources & Charge ‚îÄ‚îÄ
+  { section:2, key:"sources_info",
+    q:"O√π allez-vous chercher l'information au quotidien ?",
+    placeholder:"Ex : fichiers Excel partag√©s, emails, r√©unions d'√©quipe, documents re√ßus par courrier, appels clients, registres‚Ä¶" },
+  { section:2, key:"charge_mentale",
+    q:"Qu'est-ce qui vous prend le plus de temps et d'√©nergie dans votre semaine ?",
+    placeholder:"Ex : la consolidation mensuelle me prend deux jours entiers ¬∑ les relances locataires sont √©puisantes √† g√©rer manuellement‚Ä¶" },
+
+  // ‚îÄ‚îÄ Section 3 ‚Äî Votre assistant ‚îÄ‚îÄ
+  { section:3, key:"assistant_vision",
+    q:"Si vous aviez une baguette magique, qu'est-ce que votre assistant id√©al ferait pour vous ?",
+    placeholder:"Ex : qu'il pr√©pare mon rapport mensuel √† partir des donn√©es existantes ¬∑ qu'il r√©dige les relances ¬∑ qu'il synth√©tise les contrats entrants‚Ä¶" },
+];
+
+const SECTIONS_DEPARTEMENT = ["Introduction","Vos documents","Sources & Charge","Votre assistant","Cl√¥ture"];
+const TRANSITIONS_DEPARTEMENT = {
+  1:"Tr√®s bien.\n\nParlons maintenant de vos documents.",
+  2:"Not√©.\n\nVoyons maintenant d'o√π vient votre information.",
+  3:"Tr√®s bien.\n\nUne derni√®re question, la plus importante.",
+};
+
+/* ‚îÄ‚îÄ STATE GLOBAL ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ */
+let selectedRole  = null;
+let STEPS         = [];
+let SECTION_NAMES = [];
+let TRANSITIONS   = {};
+const answers = {};
+const state   = { files: [], firstFileMsgShown: false };
+let stepIndex   = -1;
+let fileCounter = 0;
+
+/* ‚îÄ‚îÄ GOOGLE APPS SCRIPT ‚Äî URL de sauvegarde Drive ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ */
+// Remplacer par l'URL de d√©ploiement Google Apps Script apr√®s setup
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzv7lTkUL9cZsR7b1SMRpVYGNhK054SOt1rITPEfWeXk2DbFvELsJfL-vk61JnorooUjw/exec";
+
+/* ‚îÄ‚îÄ DOM ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ */
+const $ = id => document.getElementById(id);
+const conv = $("conversation");
+function scrollToBottom(){ requestAnimationFrame(()=>window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"})); }
+function sleep(ms){ return new Promise(r=>setTimeout(r,ms)); }
+
+function bubble(role,text,isQ){
+  const d=document.createElement("div");
+  d.className="bubble bubble-"+role+(isQ?" bubble-question":"");
+  d.textContent=text; conv.appendChild(d); scrollToBottom(); return d;
+}
+async function bubbleStreaming(role,text,isQ){
+  const d=document.createElement("div");
+  d.className="bubble bubble-"+role+(isQ?" bubble-question":"");
+  d.textContent=""; conv.appendChild(d); scrollToBottom();
+  for(let i=0;i<text.length;i+=3){ d.textContent+=text.slice(i,i+3); if(i%60===0)scrollToBottom(); await sleep(12); }
+  scrollToBottom(); return d;
+}
+function showTyping(){ const d=document.createElement("div"); d.className="typing"; d.id="typing"; d.innerHTML='<span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>'; conv.appendChild(d); scrollToBottom(); }
+function hideTyping(){ const t=$("typing"); if(t)t.remove(); }
+
+function showChoices(choices){
+  removeChoices();
+  const wrap=document.createElement("div"); wrap.className="choices-wrap"; wrap.id="choices";
+  choices.forEach(opt=>{ const btn=document.createElement("button"); btn.type="button"; btn.className="choice-btn"; btn.textContent=opt; btn.addEventListener("click",()=>handleAnswer(opt)); wrap.appendChild(btn); });
+  conv.appendChild(wrap); scrollToBottom();
+}
+function removeChoices(){ const c=$("choices"); if(c)c.remove(); }
+
+function showMultiSelect(step){
+  removeMultiSelect();
+  const exclusives=step.exclusiveOptions||[];
+  const selected=new Set(); let autreText="";
+  const wrap=document.createElement("div"); wrap.className="ms-wrap"; wrap.id="multiselect";
+  const hint=document.createElement("div"); hint.className="ms-hint"; hint.textContent="Vous pouvez s√©lectionner plusieurs r√©ponses."; wrap.appendChild(hint);
+  const btnsWrap=document.createElement("div"); btnsWrap.className="ms-btns";
+  const autreWrap=document.createElement("div"); autreWrap.className="ms-autre-wrap";
+  const autreInput=document.createElement("input"); autreInput.type="text"; autreInput.className="ms-autre-input"; autreInput.placeholder="Pr√©cisez‚Ä¶";
+  autreInput.addEventListener("input",()=>{ autreText=autreInput.value; updateConfirm(); }); autreWrap.appendChild(autreInput);
+  const footer=document.createElement("div"); footer.className="ms-footer";
+  const countEl=document.createElement("span"); countEl.className="ms-count";
+  const confirmBtn=document.createElement("button"); confirmBtn.type="button"; confirmBtn.className="ms-confirm"; confirmBtn.textContent="Continuer ‚Üí"; confirmBtn.disabled=true;
+  footer.appendChild(countEl); footer.appendChild(confirmBtn);
+
+  function updateConfirm(){ const n=selected.size+(autreText.trim()?1:0); countEl.textContent=n>0?n+" s√©lectionn√©"+(n>1?"s":""):""; confirmBtn.disabled=n===0; }
+
+  function setBtn(opt,btn,on){ if(on){selected.add(opt);btn.classList.add("ms-selected");}else{selected.delete(opt);btn.classList.remove("ms-selected");} }
+  function deselectAll(){ selected.clear(); btnsWrap.querySelectorAll(".ms-btn").forEach(b=>b.classList.remove("ms-selected")); autreWrap.classList.remove("visible"); autreInput.value=""; autreText=""; }
+
+  step.choices.forEach(opt=>{
+    const btn=document.createElement("button"); btn.type="button"; btn.className="choice-btn ms-btn";
+    if(exclusives.includes(opt))btn.classList.add("ms-exclusive");
+    btn.textContent=opt; btn.dataset.opt=opt;
+    btn.addEventListener("click",()=>{
+      const isExcl=exclusives.includes(opt), isSel=selected.has(opt);
+      if(isExcl){ if(isSel)setBtn(opt,btn,false); else{deselectAll();setBtn(opt,btn,true);} }
+      else{
+        exclusives.forEach(eo=>{ if(selected.has(eo)){const eb=btnsWrap.querySelector('[data-opt="'+CSS.escape(eo)+'"]'); if(eb)setBtn(eo,eb,false);} });
+        if(opt==="Autre"){ if(isSel){setBtn(opt,btn,false);autreWrap.classList.remove("visible");autreInput.value="";autreText="";}else{setBtn(opt,btn,true);autreWrap.classList.add("visible");autreInput.focus();} }
+        else setBtn(opt,btn,!isSel);
+      }
+      updateConfirm();
+    });
+    btnsWrap.appendChild(btn);
+  });
+
+  confirmBtn.addEventListener("click",()=>{ const parts=[...selected].filter(s=>s!=="Autre"); if(autreText.trim())parts.push(autreText.trim()); if(parts.length>0)handleAnswer(parts.join(", ")); });
+  wrap.appendChild(btnsWrap); wrap.appendChild(autreWrap); wrap.appendChild(footer);
+  conv.appendChild(wrap); scrollToBottom();
+}
+function removeMultiSelect(){ const m=$("multiselect"); if(m)m.remove(); }
+
+function sectionDivider(name){ const d=document.createElement("div"); d.className="section-divider"; d.textContent=name; conv.appendChild(d); }
+
+/* ‚îÄ‚îÄ PROGRESS ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ */
+function renderProgressSteps(){
+  const ol=$("progress-steps"); ol.innerHTML="";
+  SECTION_NAMES.forEach(name=>{ const li=document.createElement("li"); li.className="progress-step"; li.innerHTML='<span class="step-dot"></span><span class="step-label">'+name+'</span>'; ol.appendChild(li); });
+}
+function setProgress(si){
+  document.querySelectorAll(".progress-step").forEach((el,i)=>{ el.classList.remove("is-current","is-past"); if(i<si)el.classList.add("is-past"); else if(i===si)el.classList.add("is-current"); });
+  const pct=Math.max(0,Math.min(100,(si/(SECTION_NAMES.length-1))*100));
+  $("progress-mobile-fill").style.width=pct+"%";
+  $("progress-mobile-label").textContent=(si+1)+" / "+SECTION_NAMES.length+" ‚Äî "+SECTION_NAMES[si];
+}
+
+/* ‚îÄ‚îÄ ERP SCORE (IT + D√©partement) ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ */
+function computeErpScore(){
+  if(!answers.erp_logiciel)return null;
+  if(answers.erp_logiciel==="Aucun syst√®me de gestion central"||answers.erp_logiciel==="Aucun logiciel de gestion")return "absent";
+  let s=0;
+  if(answers.erp_hebergement==="En ligne / cloud (SaaS)"||answers.erp_hebergement==="Hybride (partiellement cloud)")s+=2;
+  else if(answers.erp_hebergement==="Je ne sais pas")s+=1;
+  if(answers.erp_api==="Oui, une API REST / SDK est disponible")s+=3;
+  else if(answers.erp_api==="Oui, mais uniquement en lecture (ODBC / SQL)")s+=2;
+  else if(answers.erp_api==="Je ne sais pas")s+=1;
+  if(answers.it_equipe==="Oui, une √©quipe interne d√©di√©e"||answers.it_equipe==="Oui, une personne en interne")s+=2;
+  else if(answers.it_equipe==="Non, on fait appel √† des prestataires")s+=1;
+  const connectables=["SAP","Odoo","Microsoft Dynamics"];
+  if(connectables.some(e=>(answers.erp_logiciel||"").startsWith(e)))s+=1;
+  if(s>=5)return "√©lev√©"; if(s>=3)return "moyen"; return "faible";
+}
+function erpScoreBadgeClass(s){ return s==="√©lev√©"?"erp-score-high":s==="moyen"?"erp-score-medium":s==="faible"?"erp-score-low":"erp-score-absent"; }
+function erpScoreLabel(s){ return s==="√©lev√©"?"Connectabilit√© √©lev√©e":s==="moyen"?"Connectabilit√© moyenne":s==="faible"?"Connectabilit√© faible":"Pas de syst√®me central"; }
+
+/* ‚îÄ‚îÄ UPLOAD ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ */
+function updateDocsCounter(){ const n=state.files.length; $("docs-counter-label").textContent=n===0?"0 document":n===1?"1 document":n+" documents"; }
+function refreshStickyAction(){
+  const step=stepIndex>=0?STEPS[stepIndex]:null;
+  if(!step||!step.isUploadPhase){$("sticky-action").hidden=true;return;}
+  const pending=state.files.filter(f=>!f.frequency).length;
+  const allReady=state.files.length>0&&pending===0;
+  if(step.uploadOptional){
+    if(state.files.length===0){
+      $("sticky-action").hidden=false;
+      $("sticky-action-label").textContent="Continuer sans document";
+    } else if(allReady){
+      $("sticky-action").hidden=false;
+      $("sticky-action-label").textContent="J'ai d√©pos√© tous mes documents";
+    } else {
+      $("sticky-action").hidden=true;
+    }
+  } else {
+    $("sticky-action").hidden=!allReady;
+    $("sticky-action-label").textContent="J'ai d√©pos√© tous mes documents";
+  }
+}
+function appendFileCard(file){
+  const wrap=document.createElement("div"); wrap.className="file-card-block"; wrap.dataset.fileId=file.id;
+  const row=document.createElement("div"); row.className="file-card-row";
+  row.innerHTML='<span class="file-check">‚úì</span><span class="file-name"></span>';
+  row.querySelector(".file-name").textContent=file.name; wrap.appendChild(row);
+  const prompt=document.createElement("div"); prompt.className="file-freq-prompt"; prompt.textContent="√Ä quelle fr√©quence produisez-vous ce document ?"; wrap.appendChild(prompt);
+  const opts=document.createElement("div"); opts.className="file-freq-options";
+  FREQUENCIES.forEach(f=>{
+    const btn=document.createElement("button"); btn.type="button"; btn.className="choice-btn choice-btn-freq"; btn.textContent=f;
+    btn.addEventListener("click",()=>{ const entry=state.files.find(x=>x.id===file.id); if(entry)entry.frequency=f; wrap.classList.add("file-card-locked"); prompt.textContent="Fr√©quence : "+f; opts.remove(); renderDrawerList(); refreshStickyAction(); });
+    opts.appendChild(btn);
+  });
+  wrap.appendChild(opts); conv.appendChild(wrap); scrollToBottom();
+}
+async function handleUpload(file){
+  const id=++fileCounter; const entry={id,name:file.name,blob:file,frequency:null};
+  state.files.push(entry); updateDocsCounter(); appendFileCard(entry); renderDrawerList(); refreshStickyAction();
+  if(state.files.length===1&&!state.firstFileMsgShown){
+    state.firstFileMsgShown=true;
+    const cta=document.getElementById("upload-cta"); if(cta)cta.remove();
+    await sleep(600);
+    await bubbleStreaming("agent","Parfait, vous avez compris le principe. Continuez √† d√©poser vos documents, puis cliquez sur le bouton quand vous avez termin√©.");
+  }
+}
+function handleDeleteFile(id){
+  state.files=state.files.filter(f=>f.id!==id);
+  const card=conv.querySelector('[data-file-id="'+id+'"]'); if(card)card.remove();
+  updateDocsCounter(); renderDrawerList(); refreshStickyAction();
+}
+
+/* ‚îÄ‚îÄ DRAWER ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ */
+function openDrawer(){$("drawer").setAttribute("aria-hidden","false");document.body.style.overflow="hidden";}
+function closeDrawer(){$("drawer").setAttribute("aria-hidden","true");document.body.style.overflow="";}
+function renderDrawerList(){
+  const list=$("drawer-list"),empty=$("drawer-empty"); list.innerHTML="";
+  if(state.files.length===0){empty.classList.remove("hidden");return;} empty.classList.add("hidden");
+  state.files.forEach(f=>{
+    const li=document.createElement("li"); li.className="drawer-list-item";
+    const tag=f.frequency?'<span class="file-freq-tag">'+f.frequency+'</span>':"";
+    li.innerHTML='<span class="file-check">‚úì</span><span class="file-name"></span>'+tag+'<button class="drawer-remove" aria-label="Retirer">√ó</button>';
+    li.querySelector(".file-name").textContent=f.name;
+    li.querySelector(".drawer-remove").addEventListener("click",()=>handleDeleteFile(f.id));
+    list.appendChild(li);
+  });
+}
+
+/* ‚îÄ‚îÄ FLOW ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ */
+async function goToStep(index){
+  stepIndex=index;
+  if(index>=STEPS.length){showSummary();return;}
+  const step=STEPS[index];
+  if(typeof step.skipIf==="function"&&step.skipIf(answers))return goToStep(index+1);
+
+  const prevSection=index>0?STEPS[index-1].section:-1;
+  if(step.section!==prevSection&&step.section>0){
+    await sleep(400); sectionDivider(SECTION_NAMES[step.section]);
+    const transition=TRANSITIONS[step.section]||null;
+    if(transition){ await sleep(300); showTyping(); await sleep(800); hideTyping(); await bubbleStreaming("agent",transition); }
+    setProgress(step.section);
+  }
+
+  await sleep(350); showTyping();
+  await sleep(600+Math.min(step.q.length*4,800));
+  hideTyping(); await bubbleStreaming("agent",step.q,true);
+
+  if(step.isUploadPhase){
+    $("composer").classList.remove("hidden"); $("composer").classList.add("attach-only"); refreshStickyAction();
+    const uploadInput=$("composer-input"); uploadInput.placeholder="Pas de fichier sous la main ? D√©crivez vos documents ici‚Ä¶"; uploadInput.value=""; uploadInput.style.height="auto"; autoSize();
+    const ctaWrap=document.createElement("div"); ctaWrap.className="upload-cta-wrap"; ctaWrap.id="upload-cta";
+    const btnDeposer=document.createElement("button"); btnDeposer.type="button"; btnDeposer.className="choice-btn upload-cta-btn"; btnDeposer.textContent="D√©poser un document";
+    const btnSkip=document.createElement("button"); btnSkip.type="button"; btnSkip.className="choice-btn upload-cta-skip"; btnSkip.textContent="Je n'ai pas de mod√®les";
+    btnDeposer.addEventListener("click",()=>$("composer-attach").click());
+    btnSkip.addEventListener("click",()=>{ ctaWrap.remove(); handleUploadPhaseComplete(); });
+    ctaWrap.appendChild(btnDeposer); ctaWrap.appendChild(btnSkip);
+    conv.appendChild(ctaWrap); scrollToBottom();
+    return;
+  }
+  if(step.multiSelect){ showMultiSelect(step); $("composer").classList.add("hidden"); $("composer").classList.remove("attach-only"); }
+  else if(step.choices){ showChoices(step.choices); $("composer").classList.add("hidden"); $("composer").classList.remove("attach-only"); }
+  else{
+    $("composer").classList.remove("hidden"); $("composer").classList.remove("attach-only");
+    const input=$("composer-input"); input.placeholder=step.placeholder||"Votre r√©ponse‚Ä¶"; input.value=""; input.style.height="auto";
+    $("composer-send").disabled=true; setTimeout(()=>input.focus(),100);
+  }
+}
+
+async function handleAnswer(text){
+  if(stepIndex<0||stepIndex>=STEPS.length)return;
+  const step=STEPS[stepIndex]; const value=(text||"").trim(); if(!value)return;
+  removeChoices(); removeMultiSelect();
+  const wasUpload=step.isUploadPhase;
+  $("composer").classList.add("hidden"); $("composer").classList.remove("attach-only"); $("sticky-action").hidden=true;
+  const ctaWrap=document.getElementById("upload-cta"); if(ctaWrap)ctaWrap.remove();
+  bubble("user",value);
+  if(wasUpload){
+    const fileNote=state.files.length>0?" ("+state.files.length+" fichier(s) d√©pos√©(s))":"";
+    answers[step.key]="Description : "+value+fileNote;
+  } else {
+    answers[step.key]=value;
+  }
+  if(step.key==="identity_check"&&value==="Vous ne vous adressez pas √† la bonne personne"){
+    await sleep(400); showTyping(); await sleep(900); hideTyping();
+    await bubbleStreaming("agent","Toutes mes excuses.\n\nMerci de pr√©venir votre r√©f√©rent Shortcut afin qu'on puisse renvoyer ce lien √† la bonne personne.\n\nBonne journ√©e.");
+    stepIndex=STEPS.length; return;
+  }
+  await sleep(200); await goToStep(stepIndex+1);
+}
+
+async function handleUploadPhaseComplete(){
+  if(stepIndex<0||!STEPS[stepIndex].isUploadPhase)return;
+  $("sticky-action").hidden=true; $("composer").classList.add("hidden"); $("composer").classList.remove("attach-only");
+  const hasFiles=state.files.length>0;
+  bubble("user",hasFiles?"J'ai d√©pos√© tous mes documents ("+state.files.length+").":"Je continue sans document.");
+  answers[STEPS[stepIndex].key]=hasFiles?state.files.length+" document(s) d√©pos√©(s)":"Aucun document d√©pos√©";
+  await sleep(300); showTyping(); await sleep(700); hideTyping();
+  await bubbleStreaming("agent",hasFiles?"Merci. Tous vos documents sont bien enregistr√©s sur votre appareil.":"Pas de probl√®me, on continue.");
+  await sleep(300); await goToStep(stepIndex+1);
+}
+
+/* ‚îÄ‚îÄ EXPORT ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ */
+const ROLE_LABELS = { dirigeant:"Direction g√©n√©rale", it:"IT / DSI", departement:"Responsable d√©partement" };
+const SUMMARY_DEFS = {
+  dirigeant:{
+    sections:[
+      { title:"Votre activit√©",    keys:["dg_docs_analyses","dg_docs_produits","dg_info_remontee","dg_decision_manque","dg_charge_mentale"] },
+      { title:"Votre assistant",   keys:["dg_assistant_vision"] },
+    ],
+    labels:{ dg_docs_analyses:"Documents analys√©s", dg_docs_produits:"Documents produits", dg_info_remontee:"Remont√©e d'information", dg_decision_manque:"Information manquante", dg_charge_mentale:"Charge mentale", dg_assistant_vision:"Assistant id√©al" },
+  },
+  it:{
+    sections:[
+      { title:"√âcosyst√®me actuel", keys:["it_data_sources","it_data_structure","it_data_history","it_servers","it_cross_dept","it_double_saisie"] },
+    ],
+    labels:{ it_data_sources:"Sources de donn√©es", it_data_structure:"Structure des donn√©es", it_data_history:"Historique & archives", it_servers:"Serveurs", it_cross_dept:"Flux inter-d√©partements", it_double_saisie:"Double saisie" },
+  },
+  departement:{
+    sections:[
+      { title:"Vos documents",   keys:["departement_nom","docs_analyses","docs_produits_upload","docs_produits_destinataires","outils_utilises"] },
+      { title:"Sources & Charge",keys:["sources_info","charge_mentale"] },
+      { title:"Votre assistant", keys:["assistant_vision"] },
+    ],
+    labels:{ departement_nom:"D√©partement", docs_analyses:"Documents analys√©s", docs_produits_upload:"Documents produits", docs_produits_destinataires:"Destinataires", outils_utilises:"Outils", sources_info:"Sources d'information", charge_mentale:"Charge mentale", assistant_vision:"Assistant id√©al" },
+  },
+};
+
+function formatSummaryJSON(){
+  const erpScore=computeErpScore();
+  return JSON.stringify({ meta:{date:new Date().toISOString(),source:"agent-diagnostic-shortcut-v3",role:selectedRole,erp_connectability_score:erpScore}, interviewee:{civility:USER.civility,firstName:USER.firstName,lastName:USER.lastName,role:answers.profil_correction||USER.role,company:USER.company}, answers, files:state.files.map(f=>({name:f.name,frequency:f.frequency||null})) },null,2);
+}
+function formatSummaryText(){
+  const d=new Date(); const def=SUMMARY_DEFS[ROLE_CONFIG[selectedRole]?.flow||selectedRole]; const erpScore=computeErpScore();
+  let txt="DIAGNOSTIC AGENT SHORTCUT\n";
+  txt+="Profil : "+(ROLE_CONFIG[selectedRole]?.label||ROLE_LABELS[selectedRole]||selectedRole)+"\n";
+  txt+="Date : "+d.toLocaleDateString("fr-FR",{day:"2-digit",month:"long",year:"numeric"})+"\n";
+  txt+="Personne : "+FULL_NAME+(USER.role?" ¬∑ "+USER.role:"")+"\n";
+  txt+="Entreprise : "+USER.company+"\n";
+  if(erpScore)txt+="Score connectabilit√© ERP : "+erpScoreLabel(erpScore)+"\n";
+  txt+="‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ\n\n";
+  def.sections.forEach(sec=>{ let block=""; sec.keys.forEach(k=>{if(answers[k])block+="  "+(def.labels[k]||k)+" : "+answers[k]+"\n";}); if(block)txt+=sec.title+"\n"+block+"\n"; });
+  if(state.files.length>0){ txt+="DOCUMENTS ("+state.files.length+")\n"; state.files.forEach(f=>{txt+="  ‚Ä¢ "+f.name+" ‚Äî "+(f.frequency||"non pr√©cis√©e")+"\n";}); }
+  return txt;
+}
+
+/* ‚îÄ‚îÄ SUMMARY ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ */
+function showSummary(){
+  $("composer").classList.add("hidden"); $("sticky-action").hidden=true;
+  const lastIdx=SECTION_NAMES.length-1; setProgress(lastIdx); sectionDivider("Cl√¥ture");
+  setTimeout(async()=>{
+    showTyping(); await sleep(1200); hideTyping();
+    const erpScore=computeErpScore();
+    let closing;
+    if(ROLE_CONFIG[selectedRole]?.flow==="it"){
+      closing="Merci "+FORMAL+".\n\nC'est parfait ‚Äî votre r√©f√©rent Shortcut dispose maintenant de toutes les informations n√©cessaires pour pr√©parer les prochaines √©tapes. Enregistrez vos r√©ponses ci-dessous, il y aura acc√®s imm√©diatement et reviendra vers vous tr√®s prochainement.";
+    } else {
+      closing="Merci "+FORMAL+".\n\nVotre diagnostic est complet. Enregistrez-le ci-dessous : votre r√©f√©rent Shortcut y aura acc√®s imm√©diatement et reviendra vers vous pour planifier la configuration de votre assistant.";
+      if(erpScore==="faible")closing+="\n\nIl regardera aussi avec vous comment connecter votre syst√®me de gestion ‚Äî il existe une option qui s'int√®gre nativement d√®s le d√©part.";
+      else if(erpScore==="absent")closing+="\n\nIl pourra aussi vous pr√©senter une solution de gestion con√ßue pour fonctionner nativement avec vos agents.";
+    }
+    await bubbleStreaming("agent",closing);
+    await sleep(500);
+
+    const def=SUMMARY_DEFS[ROLE_CONFIG[selectedRole]?.flow||selectedRole]; const card=document.createElement("div"); card.className="summary-card";
+    const erpScore2=computeErpScore();
+    const scoreBadge=erpScore2?'<span class="erp-score '+erpScoreBadgeClass(erpScore2)+'">'+erpScoreLabel(erpScore2)+"</span>":"";
+    let html='<div class="summary-title">R√©capitulatif ‚Äî '+(ROLE_CONFIG[selectedRole]?.label||ROLE_LABELS[selectedRole]||selectedRole)+'</div>';
+    def.sections.forEach((sec,si)=>{
+      const rows=sec.keys.map(k=>answers[k]?'<div class="summary-row"><span class="summary-key">'+(def.labels[k]||k)+'</span><span class="summary-val"></span></div>':"").join("");
+      if(!rows)return;
+      const badge=(si===0&&erpScore2)?scoreBadge:"";
+      html+='<div class="summary-section"><div class="summary-section-title">'+sec.title+badge+"</div>"+rows+"</div>";
+    });
+    if(state.files.length>0){
+      html+='<div class="summary-section"><div class="summary-section-title">Documents ('+state.files.length+')</div>'+state.files.map(()=>'<div class="summary-row"><span class="summary-key"></span><span class="summary-val"></span></div>').join("")+"</div>";
+    }
+    html+='<div class="summary-actions"><button class="btn-primary" id="btn-save" type="button">Envoyer mes r√©ponses</button><span class="save-error" id="save-error">Une erreur est survenue. R√©essayez ou contactez contact@shortcut-formation.com</span></div>';
+    card.innerHTML=html; conv.appendChild(card);
+
+    let ri=0; const rows=card.querySelectorAll(".summary-row");
+    def.sections.forEach(sec=>{sec.keys.forEach(k=>{if(answers[k]){rows[ri].querySelector(".summary-val").textContent=answers[k];ri++;}});});
+    state.files.forEach(f=>{ if(rows[ri]){rows[ri].querySelector(".summary-key").textContent=f.name;rows[ri].querySelector(".summary-val").textContent=f.frequency||"Non pr√©cis√©e";ri++;} });
+    scrollToBottom();
+
+    $("btn-save").addEventListener("click",async()=>{
+      const btn=$("btn-save");
+      if(btn.disabled) return;
+      btn.disabled=true; btn.classList.add("saving");
+      btn.innerHTML='<span class="btn-spinner"></span>Enregistrement‚Ä¶';
+      try{
+        // Encoder les fichiers en base64
+        const filesData=await Promise.all(state.files.map(async f=>{
+          const ab=await f.blob.arrayBuffer();
+          const bytes=new Uint8Array(ab); let bin="";
+          bytes.forEach(b=>bin+=String.fromCharCode(b));
+          return{name:f.name,mimeType:f.blob.type||"application/octet-stream",content:btoa(bin),frequency:f.frequency||null};
+        }));
+        const payload={
+          meta:{date:new Date().toISOString(),role:ROLE_CONFIG[selectedRole]?.label||selectedRole,lastName:USER.lastName,firstName:USER.firstName,company:USER.company},
+          answers,
+          files:filesData
+        };
+        const resp=await fetch(APPS_SCRIPT_URL,{method:"POST",body:JSON.stringify(payload),redirect:"follow"});
+        const result=await resp.json();
+        if(result.status==="ok"){
+          btn.classList.remove("saving"); btn.classList.add("saved");
+          btn.innerHTML="‚úì Enregistr√©";
+          scrollToBottom();
+          await sleep(600);
+          showTyping(); await sleep(900); hideTyping();
+          await bubbleStreaming("agent","Tout est bien re√ßu ‚Äî merci "+FORMAL+".\n\nVotre r√©f√©rent Shortcut reviendra vers vous tr√®s prochainement. √Ä bient√¥t !");
+          scrollToBottom();
+        } else { throw new Error(result.message||"Erreur serveur"); }
+      } catch(err){
+        btn.disabled=false; btn.classList.remove("saving"); btn.classList.add("save-err");
+        btn.innerHTML="Envoyer mes r√©ponses";
+        const se=$("save-error"); if(se)se.classList.add("visible");
+        setTimeout(()=>{ btn.classList.remove("save-err"); if(se)se.classList.remove("visible"); },4000);
+      }
+    });
+  },400);
+}
+
+/* ‚îÄ‚îÄ S√âLECTION DU R√îLE ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ */
+
+// Mapping poste ‚Üí flow d'interview + d√©partement pr√©-rempli
+const ROLE_CONFIG = {
+  dg:         { flow:"dirigeant",   dept:null,                    label:"DG",                     badge:"role-badge-dirigeant", badgeColor:"#1a56db" },
+  it:         { flow:"it",          dept:null,                    label:"IT Manager",              badge:"role-badge-it",        badgeColor:"#1fab58" },
+  finance:    { flow:"departement", dept:"Finance / Comptabilit√©",label:"Finance Manager",         badge:"role-badge-finance",   badgeColor:"#5B21B6" },
+  location:   { flow:"departement", dept:"Gestion locative",      label:"Location Manager",        badge:"role-badge-location",  badgeColor:"#F57C00" },
+  marketing:  { flow:"departement", dept:"Marketing & √âv√©nements",label:"Marketing Event Manager", badge:"role-badge-marketing", badgeColor:"#BE185D" },
+  commercial: { flow:"departement", dept:"Commercial / Ventes",   label:"Responsable commercial",  badge:"role-badge-commercial",badgeColor:"#0D9488" },
+};
+
+async function selectRole(role){
+  const prenomInput=$("input-prenom"), nomInput=$("input-nom");
+  const prenom=prenomInput.value.trim(), nom=nomInput.value.trim();
+  let hasError=false;
+  [prenomInput,nomInput].forEach(el=>el.classList.remove("input-error"));
+  if(!prenom){prenomInput.classList.add("input-error");prenomInput.addEventListener("animationend",()=>prenomInput.classList.remove("input-error"),{once:true});hasError=true;}
+  if(!nom){nomInput.classList.add("input-error");nomInput.addEventListener("animationend",()=>nomInput.classList.remove("input-error"),{once:true});hasError=true;}
+  if(hasError){if(!prenom)prenomInput.focus();else nomInput.focus();return;}
+
+  // Lire la civilit√© s√©lectionn√©e
+  const civSelected=document.querySelector('.civility-btn.civility-selected');
+  if(!civSelected){
+    document.querySelectorAll('.civility-btn').forEach(b=>{b.classList.add('input-error');b.addEventListener('animationend',()=>b.classList.remove('input-error'),{once:true});});
+    document.querySelector('.role-civility-wrap').scrollIntoView({behavior:'smooth',block:'center'});
+    return;
+  }
+  USER.civility=civSelected.dataset.value;
+  USER.firstName=prenom; USER.lastName=nom;
+  FORMAL=USER.civility+" "+USER.lastName;
+  FULL_NAME=USER.civility+" "+USER.firstName+" "+USER.lastName;
+
+  const cfg=ROLE_CONFIG[role];
+  selectedRole=role;
+
+  // Pr√©-remplir le d√©partement si applicable (√©vite la question)
+  if(cfg.dept) answers.departement_nom=cfg.dept;
+
+  // Choisir le flow d'interview
+  if(cfg.flow==="dirigeant"){   STEPS=STEPS_DIRIGEANT;   SECTION_NAMES=SECTIONS_DIRIGEANT;   TRANSITIONS=TRANSITIONS_DIRIGEANT; }
+  else if(cfg.flow==="it"){     STEPS=STEPS_IT;           SECTION_NAMES=SECTIONS_IT;           TRANSITIONS=TRANSITIONS_IT; }
+  else{                         STEPS=STEPS_DEPARTEMENT;  SECTION_NAMES=SECTIONS_DEPARTEMENT;  TRANSITIONS=TRANSITIONS_DEPARTEMENT; }
+
+  // Personnaliser la question d'identit√© avec le titre exact du poste
+  const idStep=STEPS.find(s=>s.key==="identity_check");
+  if(idStep){
+    idStep.q="Permettez-moi de m'assurer avant de commencer : vous √™tes bien "+cfg.label+" chez "+USER.company+", "+FULL_NAME+" ?";
+  }
+
+  const greetings={
+    dirigeant:  ["Bonjour "+FORMAL+".","Votre assistant se configure."],
+    it:         ["Bonjour "+FORMAL+".","Votre infrastructure se pr√©pare."],
+    departement:["Bonjour "+FORMAL+".","Votre assistant se configure."],
+  };
+  const introMsgs={
+    dirigeant:   "Nous allons d√©finir ensemble quels agents vous seront les plus utiles. Je vais vous poser quelques questions sur votre vision et vos priorit√©s. Comptez cinq minutes, √† votre rythme. Vos r√©ponses seront transmises directement √† votre r√©f√©rent Shortcut.",
+    it:          "Nous allons faire le point sur votre infrastructure et vos donn√©es pour pr√©parer les prochaines √©tapes. Vos r√©ponses seront transmises directement √† votre r√©f√©rent Shortcut.",
+    departement: "Nous allons configurer votre assistant ensemble. Je vais vous poser quelques questions sur votre quotidien chez "+USER.company+". Vos documents, vos outils, ce qui vous prend du temps. Comptez une dizaine de minutes. Vos r√©ponses seront transmises directement √† votre r√©f√©rent Shortcut.",
+  };
+
+  $("role-screen").classList.add("hidden");
+
+  // Badge r√¥le dans le header avec la couleur du poste
+  const badge=$("role-badge");
+  badge.textContent=cfg.label;
+  badge.style.cssText="background:"+cfg.badgeColor+"18;color:"+cfg.badgeColor+";font-family:var(--font-ui);font-size:var(--t-caption);font-weight:700;padding:3px 8px;border-radius:100px;letter-spacing:.05em;";
+  badge.classList.remove("hidden");
+
+  if(cfg.flow!=="dirigeant") $("docs-counter").classList.remove("hidden");
+  $("progress-rail-mobile").classList.remove("hidden");
+  const greeting=$("greeting"); greeting.classList.remove("hidden");
+  $("greeting-title").textContent=greetings[cfg.flow][0];
+  $("greeting-sub").textContent=greetings[cfg.flow][1];
+  renderProgressSteps(); setProgress(0);
+
+  await sleep(300);
+  showTyping(); await sleep(900); hideTyping();
+  await bubbleStreaming("agent",introMsgs[cfg.flow]);
+
+  const wrap=document.createElement("div"); wrap.className="start-wrap";
+  wrap.innerHTML='<button class="start-btn" type="button" id="start-btn">Commencer</button>';
+  conv.appendChild(wrap); scrollToBottom();
+  $("start-btn").addEventListener("click",async()=>{ wrap.remove(); await goToStep(0); });
+}
+
+/* ‚îÄ‚îÄ COMPOSER EVENTS ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ */
+const composerInput=$("composer-input"),composerSend=$("composer-send");
+function autoSize(){ composerInput.style.height="auto"; composerInput.style.height=Math.min(200,composerInput.scrollHeight)+"px"; composerSend.disabled=!composerInput.value.trim(); }
+composerInput.addEventListener("input",autoSize);
+composerInput.addEventListener("keydown",e=>{ if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();if(!composerSend.disabled){const v=composerInput.value;composerInput.value="";autoSize();handleAnswer(v);}} });
+composerSend.addEventListener("click",()=>{const v=composerInput.value;composerInput.value="";autoSize();handleAnswer(v);});
+$("composer-attach").addEventListener("click",()=>$("file-input").click());
+$("file-input").addEventListener("change",async e=>{for(const f of Array.from(e.target.files||[]))await handleUpload(f);$("file-input").value="";});
+window.addEventListener("dragenter",e=>e.preventDefault());
+window.addEventListener("dragover",e=>e.preventDefault());
+window.addEventListener("drop",async e=>{e.preventDefault();for(const f of Array.from(e.dataTransfer.files||[]))await handleUpload(f);});
+$("docs-counter").addEventListener("click",openDrawer);
+$("drawer-overlay").addEventListener("click",closeDrawer);
+$("drawer-close").addEventListener("click",closeDrawer);
+$("sticky-action-btn").addEventListener("click",handleUploadPhaseComplete);
+
+/* ‚îÄ‚îÄ INIT ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ */
+function init(){
+  $("tenant-name").textContent=USER.company;
+  if(params.get("prenom"))$("input-prenom").value=params.get("prenom");
+  if(params.get("nom"))$("input-nom").value=params.get("nom");
+  // Civilit√© ‚Äî toggle
+  document.querySelectorAll('.civility-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.civility-btn').forEach(b=>b.classList.remove('civility-selected'));
+      btn.classList.add('civility-selected');
+    });
+  });
+  // Pr√©-s√©lection depuis URL param
+  if(params.get("civilite")){
+    const val=params.get("civilite");
+    document.querySelectorAll('.civility-btn').forEach(b=>{ if(b.dataset.value===val) b.classList.add('civility-selected'); });
+  }
+  $("input-prenom").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();$("input-nom").focus();}});
+  ["dg","it","finance","location","marketing","commercial"].forEach(r=>{
+    $("card-"+r).addEventListener("click",()=>selectRole(r));
+  });
+}
+
+init();
+</script>
+</body>
+</html>
