@@ -457,8 +457,8 @@ const STEPS_DIRIGEANT = [
     placeholder:"Ex : bilans financiers mensuels, rapports d'activité par site, synthèses commerciales, presse sectorielle…" },
 
   { section:1, key:"dg_docs_produits",
-    q:"Quels documents produisez-vous vous-même ? Déposez un modèle si vous l'avez sous la main, ou décrivez simplement ce que vous produisez.",
-    isUploadPhase:true },
+    q:"Quels documents produisez-vous vous-même ? Listez-les avec leur fréquence si possible.",
+    placeholder:"Ex : compte-rendu de comité (hebdomadaire), note de synthèse mensuelle, rapport d'activité trimestriel…" },
 
   { section:1, key:"dg_info_remontee",
     q:"Comment vos équipes vous remontent-elles l'information ?",
@@ -543,8 +543,8 @@ const STEPS_DEPARTEMENT = [
     q:"Quels documents ou rapports recevez-vous et analysez-vous régulièrement ?",
     placeholder:"Ex : relevés bancaires, tableaux de bord reçus, rapports fournisseurs, synthèses de direction, contrats entrants…" },
   { section:1, key:"docs_produits_upload",
-    q:"Quels documents produisez-vous vous-même ? Déposez un modèle si vous l'avez sous la main, ou listez vos documents et leur fréquence.",
-    isUploadPhase:true },
+    q:"Quels documents produisez-vous vous-même ? Listez-les avec leur fréquence si possible.",
+    placeholder:"Ex : tableau de bord mensuel, compte-rendu de réunion (hebdomadaire), synthèse de ventes (mensuelle)…" },
   { section:1, key:"docs_produits_destinataires",
     q:"À qui ces documents sont-ils généralement destinés ?",
     placeholder:"Ex : rapport mensuel → Direction générale · relevé de charges → locataires · synthèse hebdo → mon équipe…" },
@@ -884,6 +884,12 @@ function showSummary(){
   const lastIdx=SECTION_NAMES.length-1; setProgress(lastIdx); sectionDivider("Clôture");
   setTimeout(async()=>{
     showTyping(); await sleep(1200); hideTyping();
+
+    // Invitation Drive avant le récapitulatif
+    await bubbleStreaming("agent","Avant de valider vos réponses, une dernière étape.\n\nPour configurer vos agents au plus près de votre réalité, nous avons besoin d'exemples concrets de vos documents de travail : rapports, tableaux de bord, modèles, exports, comptes-rendus… tout ce que vous produisez ou utilisez régulièrement.\n\nDéposez-les dans ce dossier Drive personnel :\nhttps://drive.google.com/drive/folders/1AL4iHjnXxErpbe3-QnKHG7vWAq5zVx2J\n\nPas besoin de tout avoir maintenant — vous pouvez y revenir après l'interview. Ce que vous partagez reste confidentiel et sert uniquement à la configuration de vos agents.");
+    await sleep(600);
+
+    showTyping(); await sleep(900); hideTyping();
     const erpScore=computeErpScore();
     let closing;
     if(ROLE_CONFIG[selectedRole]?.flow==="it"){
@@ -906,47 +912,22 @@ function showSummary(){
       const badge=(si===0&&erpScore2)?scoreBadge:"";
       html+='<div class="summary-section"><div class="summary-section-title">'+sec.title+badge+"</div>"+rows+"</div>";
     });
-    if(state.files.length>0){
-      html+='<div class="summary-section"><div class="summary-section-title">Documents ('+state.files.length+')</div>'+state.files.map(()=>'<div class="summary-row"><span class="summary-key"></span><span class="summary-val"></span></div>').join("")+"</div>";
-    }
     html+='<div class="summary-actions"><button class="btn-primary" id="btn-save" type="button">Envoyer mes réponses</button><span class="save-error" id="save-error">Une erreur est survenue. Réessayez ou contactez contact@shortcut-formation.com</span></div>';
     card.innerHTML=html; conv.appendChild(card);
 
     let ri=0; const rows=card.querySelectorAll(".summary-row");
     def.sections.forEach(sec=>{sec.keys.forEach(k=>{if(answers[k]){rows[ri].querySelector(".summary-val").textContent=answers[k];ri++;}});});
-    state.files.forEach(f=>{ if(rows[ri]){rows[ri].querySelector(".summary-key").textContent=f.name;rows[ri].querySelector(".summary-val").textContent=f.frequency||"Non précisée";ri++;} });
     scrollToBottom();
 
     $("btn-save").addEventListener("click",async()=>{
       const btn=$("btn-save");
       if(btn.disabled) return;
       btn.disabled=true; btn.classList.add("saving");
-      btn.innerHTML='<span class="btn-spinner"></span>Enregistrement…';
-
-      // Encodage base64 rapide via FileReader (natif navigateur, non bloquant)
-      function blobToBase64(blob){
-        return new Promise((res,rej)=>{
-          const r=new FileReader();
-          r.onload=()=>res(r.result.split(",")[1]);
-          r.onerror=rej;
-          r.readAsDataURL(blob);
-        });
-      }
-
-      let filesData=[];
-      try{
-        filesData=await Promise.all(state.files.map(async f=>({
-          name:f.name,
-          mimeType:f.blob.type||"application/octet-stream",
-          content:await blobToBase64(f.blob),
-          frequency:f.frequency||null
-        })));
-      }catch(_){}
+      btn.innerHTML='<span class="btn-spinner"></span>Envoi en cours… Merci de ne pas fermer cette page.';
 
       const payload={
         meta:{date:new Date().toISOString(),role:ROLE_CONFIG[selectedRole]?.label||selectedRole,lastName:USER.lastName,firstName:USER.firstName,company:USER.company},
-        answers,
-        files:filesData
+        answers
       };
 
       btn.innerHTML='<span class="btn-spinner"></span>Envoi en cours… Merci de ne pas fermer cette page.';
