@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#FAFBFD">
-  <title>Shortcut ‚Äî Diagnostic agent</title>
+  <title>Shortcut — Diagnostic agent</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -35,7 +35,7 @@
     html{-webkit-font-smoothing:antialiased;}
     body{font-family:var(--font-body);font-size:var(--t-body);line-height:var(--lh-body);color:var(--text);background:var(--bg);min-height:100vh;display:flex;flex-direction:column;}
 
-    /* ‚îÄ‚îÄ Header ‚îÄ‚îÄ */
+    /* ── Header ── */
     .header{padding:var(--s-13) var(--s-34);background:var(--white);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:var(--s-21);position:sticky;top:0;z-index:10;}
     .header-brand{display:flex;align-items:center;gap:var(--s-13);}
     .logo{font-family:var(--font-heading);font-weight:600;font-size:18px;color:var(--navy);letter-spacing:-.02em;}
@@ -50,10 +50,10 @@
     .docs-counter:hover{background:var(--bg-softer);}
     .docs-counter.hidden{display:none;}
 
-    /* ‚îÄ‚îÄ Layout ‚îÄ‚îÄ */
+    /* ── Layout ── */
     .main{flex:1;width:100%;max-width:var(--max-col);margin:0 auto;padding:var(--s-34) var(--s-21);display:flex;flex-direction:column;}
 
-    /* ‚îÄ‚îÄ S√âLECTEUR DE R√îLE ‚îÄ‚îÄ */
+    /* ── SÉLECTEUR DE RÔLE ── */
     .role-screen{animation:fade-up var(--t-slow) ease-out;}
     .role-screen-eyebrow{font-family:var(--font-ui);font-size:var(--t-caption);font-weight:700;color:var(--primary);letter-spacing:.18em;text-transform:uppercase;margin-bottom:var(--s-8);}
     .role-screen-title{font-family:var(--font-heading);font-size:var(--t-subtitle);font-weight:600;color:var(--navy);letter-spacing:-.02em;line-height:var(--lh-title);margin-bottom:var(--s-8);}
@@ -71,7 +71,7 @@
     .role-card:hover .role-card-arrow{color:var(--primary);transform:translateX(3px);}
     .role-screen.hidden{display:none;}
 
-    /* ‚îÄ‚îÄ Champs nom / pr√©nom sur l'√©cran r√¥le ‚îÄ‚îÄ */
+    /* ── Champs nom / prénom sur l'écran rôle ── */
     .role-civility-wrap{margin-bottom:var(--s-21);}
     .role-civility-toggle{display:flex;gap:var(--s-8);margin-top:var(--s-4);}
     .civility-btn{appearance:none;border:1.5px solid var(--border);background:var(--white);color:var(--text-secondary);font-family:var(--font-ui);font-size:var(--t-label);font-weight:500;padding:var(--s-8) var(--s-21);border-radius:50px;cursor:pointer;transition:all var(--t-fast);}
@@ -86,13 +86,13 @@
     .role-name-input.input-error{border-color:var(--red)!important;box-shadow:0 0 0 3px rgba(198,40,40,.12)!important;animation:shake 320ms ease;}
     @keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-5px);}40%,80%{transform:translateX(5px);}}
 
-    /* ‚îÄ‚îÄ Greeting ‚îÄ‚îÄ */
+    /* ── Greeting ── */
     .greeting{margin-bottom:var(--s-34);animation:fade-up var(--t-slow) ease-out;}
     .greeting.hidden{display:none;}
     .greeting-title{font-family:var(--font-heading);font-size:var(--t-subtitle);font-weight:600;letter-spacing:-.02em;color:var(--navy);line-height:var(--lh-title);}
     .greeting-sub{font-size:var(--t-body);color:var(--text-secondary);margin-top:var(--s-4);}
 
-    /* ‚îÄ‚îÄ Progress ‚îÄ‚îÄ */
+    /* ── Progress ── */
     .progress-rail{position:fixed;right:var(--s-34);top:50%;transform:translateY(-50%);z-index:5;pointer-events:none;animation:fade-up var(--t-slow) ease-out 200ms both;}
     .progress-steps{list-style:none;display:flex;flex-direction:column;gap:var(--s-21);}
     .progress-step{display:flex;align-items:center;gap:var(--s-13);}
@@ -107,7 +107,7 @@
     .progress-rail-mobile-fill{height:100%;background:var(--primary);border-radius:100px;transition:width var(--t-slow);}
     .progress-rail-mobile-label{font-family:var(--font-ui);font-size:var(--t-caption);color:var(--text-muted);white-space:nowrap;}
 
-    /* ‚îÄ‚îÄ Conversation ‚îÄ‚îÄ */
+    /* ── Conversation ── */
     .conversation{display:flex;flex-direction:column;gap:var(--s-21);}
     .bubble{padding:var(--s-13) var(--s-21);border-radius:var(--r-md);line-height:var(--lh-body);font-size:var(--t-body);word-wrap:break-word;animation:fade-up 280ms ease-out;white-space:pre-line;}
     .bubble-agent{background:var(--white);box-shadow:var(--shadow-sm);align-self:flex-start;color:var(--text);border:1px solid rgba(221,232,245,.5);max-width:92%;}
@@ -122,7 +122,7 @@
     .choice-btn:hover{background:var(--bg-soft);border-color:var(--primary);color:var(--primary);transform:translateY(-1px);}
     .choice-btn-freq{border-color:var(--border-strong);}
 
-    /* ‚îÄ‚îÄ Multi-s√©lection ‚îÄ‚îÄ */
+    /* ── Multi-sélection ── */
     .ms-wrap{display:flex;flex-direction:column;align-self:flex-start;max-width:92%;gap:var(--s-13);animation:fade-up 280ms ease-out 80ms both;}
     .ms-hint{font-family:var(--font-ui);font-size:var(--t-caption);color:var(--text-muted);font-style:italic;}
     .ms-btns{display:flex;flex-wrap:wrap;gap:var(--s-8);}
@@ -144,7 +144,7 @@
     .ms-confirm:hover:not(:disabled){background:var(--primary-deep);transform:translateY(-1px);}
     .ms-confirm:disabled{background:var(--border-strong);cursor:not-allowed;}
 
-    /* ‚îÄ‚îÄ Upload ‚îÄ‚îÄ */
+    /* ── Upload ── */
     .file-card-block{display:flex;flex-direction:column;gap:var(--s-13);padding:var(--s-13) var(--s-21);background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);align-self:flex-end;max-width:80%;box-shadow:var(--shadow-sm);animation:fade-up 280ms ease-out;}
     .file-card-row{display:flex;align-items:center;gap:var(--s-13);}
     .file-check{flex-shrink:0;width:22px;height:22px;background:var(--green);border-radius:100px;display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:700;font-size:13px;}
@@ -153,13 +153,13 @@
     .file-card-locked .file-freq-prompt{color:var(--green);font-weight:600;}
     .file-freq-options{display:flex;flex-wrap:wrap;gap:var(--s-8);}
 
-    /* ‚îÄ‚îÄ Typing ‚îÄ‚îÄ */
+    /* ── Typing ── */
     .typing{display:inline-flex;align-items:center;gap:5px;padding:var(--s-13) var(--s-21);background:var(--white);border-radius:var(--r-md);align-self:flex-start;box-shadow:var(--shadow-sm);border:1px solid rgba(221,232,245,.5);animation:fade-up 200ms ease-out;}
     .typing-dot{width:6px;height:6px;background:var(--text-muted);border-radius:100px;animation:pulse 1.4s ease-in-out infinite;}
     .typing-dot:nth-child(2){animation-delay:.2s;}.typing-dot:nth-child(3){animation-delay:.4s;}
     .section-divider{align-self:center;font-family:var(--font-ui);font-size:var(--t-caption);color:var(--text-muted);padding:var(--s-4) var(--s-13);border:1px solid var(--border);border-radius:100px;letter-spacing:.06em;text-transform:uppercase;margin:var(--s-8) 0;animation:fade-up 280ms ease-out;}
 
-    /* ‚îÄ‚îÄ Summary ‚îÄ‚îÄ */
+    /* ── Summary ── */
     .summary-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);padding:var(--s-34);align-self:stretch;box-shadow:var(--shadow-md);animation:fade-up 280ms ease-out;}
     .summary-title{font-family:var(--font-heading);font-size:var(--t-question);font-weight:600;color:var(--navy);margin-bottom:var(--s-21);}
     .summary-section{margin-bottom:var(--s-21);}
@@ -190,7 +190,7 @@
     .erp-score-low{background:var(--red-soft);color:var(--red);}
     .erp-score-absent{background:var(--bg-softer);color:var(--text-muted);}
 
-    /* ‚îÄ‚îÄ Composer ‚îÄ‚îÄ */
+    /* ── Composer ── */
     .composer{width:100%;max-width:var(--max-col);margin:0 auto;padding:var(--s-13) var(--s-21) var(--s-21);background:linear-gradient(to bottom,transparent,var(--bg) 28%);position:sticky;bottom:0;}
     .composer-inner{display:flex;align-items:flex-end;gap:var(--s-8);background:var(--white);border:1px solid var(--border);border-radius:20px;padding:var(--s-8) var(--s-8) var(--s-8) var(--s-13);box-shadow:0 2px 12px rgba(15,31,63,.07),0 1px 3px rgba(15,31,63,.05);transition:box-shadow var(--t-fast),border-color var(--t-fast);}
     .composer-inner:focus-within{box-shadow:0 4px 20px rgba(15,31,63,.10),0 1px 4px rgba(15,31,63,.07);border-color:var(--border-strong);}
@@ -199,7 +199,7 @@
     .composer-input{flex:1;border:none;outline:none;font-family:var(--font-body);font-size:var(--t-body);line-height:var(--lh-body);color:var(--text);background:transparent;padding:var(--s-8) 0;resize:none;min-height:40px;max-height:200px;overflow-y:auto;}
     .composer-input::placeholder{color:var(--text-muted);font-style:italic;font-size:calc(var(--t-body) - 0.5px);}
     .composer-send{width:36px;height:36px;padding:0;background:var(--primary);color:var(--white);border:none;cursor:pointer;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background var(--t-fast),transform var(--t-fast),opacity var(--t-fast);flex-shrink:0;margin-bottom:4px;}
-    .composer-send::after{content:'‚Üë';font-size:16px;font-weight:600;line-height:1;}
+    .composer-send::after{content:'↑';font-size:16px;font-weight:600;line-height:1;}
     .composer-send:hover:not(:disabled){background:var(--primary-deep);transform:scale(1.05);}
     .composer-send:disabled{background:var(--border);opacity:.6;cursor:not-allowed;transform:none;}
     .composer-send-label{display:none;}
@@ -214,7 +214,7 @@
     .sticky-action-btn:hover{background:var(--primary);color:var(--white);transform:translateY(-1px);}
     .footer{width:100%;max-width:var(--max-col);margin:0 auto;padding:var(--s-13) var(--s-21) var(--s-21);text-align:center;font-family:var(--font-ui);font-size:var(--t-caption);color:var(--text-muted);}
 
-    /* ‚îÄ‚îÄ Drawer ‚îÄ‚îÄ */
+    /* ── Drawer ── */
     .drawer{position:fixed;inset:0;z-index:100;pointer-events:none;opacity:0;transition:opacity var(--t-fast);}
     .drawer[aria-hidden="false"]{pointer-events:auto;opacity:1;}
     .drawer-overlay{position:absolute;inset:0;background:rgba(15,31,63,.3);backdrop-filter:blur(2px);}
@@ -247,7 +247,7 @@
       .composer{padding:var(--s-8) var(--s-13);}
       .composer-send span{display:none;}
       .composer-send{width:44px;padding:0;display:flex;align-items:center;justify-content:center;}
-      .composer-send::after{content:'‚Üí';font-size:18px;}
+      .composer-send::after{content:'→';font-size:18px;}
       .summary-key{min-width:110px;}
     }
   </style>
@@ -258,7 +258,7 @@
     <div class="header-brand">
       <span class="logo">Short<span class="logo-accent">cut</span></span>
       <span class="header-divider" aria-hidden="true"></span>
-      <span class="tenant-name" id="tenant-name">‚Äî</span>
+      <span class="tenant-name" id="tenant-name">—</span>
       <span class="role-badge hidden" id="role-badge"></span>
     </div>
     <button class="docs-counter hidden" id="docs-counter" type="button" aria-label="Voir les documents">
@@ -278,14 +278,14 @@
 
   <main class="main" id="main">
 
-    <!-- S√âLECTEUR DE R√îLE -->
+    <!-- SÉLECTEUR DE RÔLE -->
     <div class="role-screen" id="role-screen">
-      <div class="role-screen-eyebrow">Diagnostic agent ¬∑ Shortcut</div>
-      <h1 class="role-screen-title">Qui √™tes-vous ?</h1>
-      <p class="role-screen-sub">Faisons connaissance avant de commencer.<br>Indiquez votre nom et s√©lectionnez votre poste.</p>
+      <div class="role-screen-eyebrow">Diagnostic agent · Shortcut</div>
+      <h1 class="role-screen-title">Qui êtes-vous ?</h1>
+      <p class="role-screen-sub">Faisons connaissance avant de commencer.<br>Indiquez votre nom et sélectionnez votre poste.</p>
 
       <div class="role-civility-wrap">
-        <div class="role-name-label">Vous √™tes</div>
+        <div class="role-name-label">Vous êtes</div>
         <div class="role-civility-toggle">
           <button type="button" class="civility-btn" id="civ-homme" data-value="Monsieur">Homme</button>
           <button type="button" class="civility-btn" id="civ-femme" data-value="Madame">Femme</button>
@@ -294,7 +294,7 @@
 
       <div class="role-name-wrap">
         <div class="role-name-group">
-          <label class="role-name-label" for="input-prenom">Pr√©nom</label>
+          <label class="role-name-label" for="input-prenom">Prénom</label>
           <input class="role-name-input" id="input-prenom" type="text" placeholder="Ex : Karim" autocomplete="given-name">
         </div>
         <div class="role-name-group">
@@ -309,12 +309,12 @@
           <div class="role-card-icon role-card-icon-dg">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
           </div>
-          <div class="role-card-label role-card-label-dg">Direction g√©n√©rale</div>
+          <div class="role-card-label role-card-label-dg">Direction générale</div>
           <div class="role-card-title">DG</div>
-          <div class="role-card-sub">Vision strat√©gique, priorit√©s de transformation et r√©sultats attendus.</div>
+          <div class="role-card-sub">Vision stratégique, priorités de transformation et résultats attendus.</div>
           <div class="role-card-footer">
-            <span class="role-card-duration">‚è± ~5 min</span>
-            <span class="role-card-arrow">‚Üí</span>
+            <span class="role-card-duration">⏱ ~5 min</span>
+            <span class="role-card-arrow">→</span>
           </div>
         </button>
 
@@ -322,12 +322,12 @@
           <div class="role-card-icon role-card-icon-it">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
           </div>
-          <div class="role-card-label role-card-label-it">Informatique & Syst√®mes</div>
+          <div class="role-card-label role-card-label-it">Informatique & Systèmes</div>
           <div class="role-card-title">IT Manager</div>
-          <div class="role-card-sub">ERP, h√©bergement, API, modules actifs, int√©grations et contraintes techniques.</div>
+          <div class="role-card-sub">ERP, hébergement, API, modules actifs, intégrations et contraintes techniques.</div>
           <div class="role-card-footer">
-            <span class="role-card-duration">‚è± ~8 min</span>
-            <span class="role-card-arrow">‚Üí</span>
+            <span class="role-card-duration">⏱ ~8 min</span>
+            <span class="role-card-arrow">→</span>
           </div>
         </button>
 
@@ -335,12 +335,12 @@
           <div class="role-card-icon role-card-icon-finance">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
           </div>
-          <div class="role-card-label role-card-label-finance">Finance & Comptabilit√©</div>
+          <div class="role-card-label role-card-label-finance">Finance & Comptabilité</div>
           <div class="role-card-title">Finance Manager</div>
-          <div class="role-card-sub">Documents financiers, outils de suivi, donn√©es g√©r√©es et assistant id√©al.</div>
+          <div class="role-card-sub">Documents financiers, outils de suivi, données gérées et assistant idéal.</div>
           <div class="role-card-footer">
-            <span class="role-card-duration">‚è± ~10 min</span>
-            <span class="role-card-arrow">‚Üí</span>
+            <span class="role-card-duration">⏱ ~10 min</span>
+            <span class="role-card-arrow">→</span>
           </div>
         </button>
 
@@ -350,10 +350,10 @@
           </div>
           <div class="role-card-label role-card-label-location">Gestion locative</div>
           <div class="role-card-title">Location Manager</div>
-          <div class="role-card-sub">Contrats, biens, locataires, suivi des dossiers et assistant id√©al.</div>
+          <div class="role-card-sub">Contrats, biens, locataires, suivi des dossiers et assistant idéal.</div>
           <div class="role-card-footer">
-            <span class="role-card-duration">‚è± ~10 min</span>
-            <span class="role-card-arrow">‚Üí</span>
+            <span class="role-card-duration">⏱ ~10 min</span>
+            <span class="role-card-arrow">→</span>
           </div>
         </button>
 
@@ -361,12 +361,12 @@
           <div class="role-card-icon role-card-icon-marketing">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
           </div>
-          <div class="role-card-label role-card-label-marketing">Marketing & √âv√©nements</div>
+          <div class="role-card-label role-card-label-marketing">Marketing & Événements</div>
           <div class="role-card-title">Marketing Event Manager</div>
-          <div class="role-card-sub">Campagnes, √©v√©nements, contenus, outils utilis√©s et assistant id√©al.</div>
+          <div class="role-card-sub">Campagnes, événements, contenus, outils utilisés et assistant idéal.</div>
           <div class="role-card-footer">
-            <span class="role-card-duration">‚è± ~10 min</span>
-            <span class="role-card-arrow">‚Üí</span>
+            <span class="role-card-duration">⏱ ~10 min</span>
+            <span class="role-card-arrow">→</span>
           </div>
         </button>
 
@@ -376,10 +376,10 @@
           </div>
           <div class="role-card-label role-card-label-commercial">Commercial</div>
           <div class="role-card-title">Responsable commercial</div>
-          <div class="role-card-sub">Clients, devis, commandes, suivi des ventes et assistant id√©al.</div>
+          <div class="role-card-sub">Clients, devis, commandes, suivi des ventes et assistant idéal.</div>
           <div class="role-card-footer">
-            <span class="role-card-duration">‚è± ~10 min</span>
-            <span class="role-card-arrow">‚Üí</span>
+            <span class="role-card-duration">⏱ ~10 min</span>
+            <span class="role-card-arrow">→</span>
           </div>
         </button>
 
@@ -395,38 +395,38 @@
 
   <div class="sticky-action" id="sticky-action" hidden>
     <button class="sticky-action-btn" type="button" id="sticky-action-btn">
-      <span id="sticky-action-label">J'ai d√©pos√© tous mes documents</span>
-      <span aria-hidden="true">‚Üí</span>
+      <span id="sticky-action-label">J'ai déposé tous mes documents</span>
+      <span aria-hidden="true">→</span>
     </button>
   </div>
 
   <div class="composer hidden" id="composer">
     <div class="composer-inner">
       <input type="file" id="file-input" multiple hidden>
-      <button class="composer-attach" id="composer-attach" type="button" aria-label="T√©l√©verser un fichier">
+      <button class="composer-attach" id="composer-attach" type="button" aria-label="Téléverser un fichier">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"></path></svg>
       </button>
-      <textarea class="composer-input" id="composer-input" placeholder="√âcrivez votre r√©ponse‚Ä¶" rows="1"></textarea>
+      <textarea class="composer-input" id="composer-input" placeholder="Écrivez votre réponse…" rows="1"></textarea>
       <button class="composer-send" id="composer-send" type="button" disabled></button>
     </div>
   </div>
 
-  <footer class="footer">Shortcut ‚Äî Diagnostic confidentiel ¬∑ Vos r√©ponses sont transmises directement √† votre r√©f√©rent.</footer>
+  <footer class="footer">Shortcut — Diagnostic confidentiel · Vos réponses sont transmises directement à votre référent.</footer>
 
   <div class="drawer" id="drawer" aria-hidden="true">
     <div class="drawer-overlay" id="drawer-overlay"></div>
     <aside class="drawer-panel" role="dialog" aria-labelledby="drawer-title">
       <header class="drawer-header">
         <h2 class="drawer-title" id="drawer-title">Vos documents</h2>
-        <button class="drawer-close" id="drawer-close" aria-label="Fermer">√ó</button>
+        <button class="drawer-close" id="drawer-close" aria-label="Fermer">×</button>
       </header>
       <ul class="drawer-list" id="drawer-list"></ul>
-      <p class="drawer-empty" id="drawer-empty">Aucun document d√©pos√© pour le moment.</p>
+      <p class="drawer-empty" id="drawer-empty">Aucun document déposé pour le moment.</p>
     </aside>
   </div>
 
 <script>
-/* ‚îÄ‚îÄ URL params ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ
+/* ── URL params ─────────────────────────────────────────────────
    ?prenom=Lina&nom=Benhamou&civilite=Madame&poste=DG&societe=SIAD  */
 const params = new URLSearchParams(window.location.search);
 const USER = {
@@ -440,141 +440,141 @@ let FORMAL    = USER.civility + " " + USER.lastName;
 let FULL_NAME = USER.civility + " " + USER.firstName + " " + USER.lastName;
 const FREQUENCIES = ["Quotidien","Hebdo","Mensuel","Trimestriel","Annuel","Ponctuel"];
 
-/* ‚îÄ‚îÄ D√âFINITION DES 3 PARCOURS ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ */
+/* ── DÉFINITION DES 3 PARCOURS ──────────────────────────────────── */
 
-/* ¬∑¬∑ DIRIGEANT ¬∑¬∑ */
+/* ·· DIRIGEANT ·· */
 const STEPS_DIRIGEANT = [
   { section:0, key:"identity_check",
-    q: "Avant de d√©marrer, juste pour confirmer : vous √™tes bien " + (USER.role || "Directeur G√©n√©ral") + " chez " + USER.company + (USER.firstName ? ", " + FULL_NAME : "") + " ?",
-    choices:["Oui, c'est correct","Il y a quelque chose √† corriger","Vous ne vous adressez pas √† la bonne personne"] },
+    q: "Avant de démarrer, juste pour confirmer : vous êtes bien " + (USER.role || "Directeur Général") + " chez " + USER.company + (USER.firstName ? ", " + FULL_NAME : "") + " ?",
+    choices:["Oui, c'est correct","Il y a quelque chose à corriger","Vous ne vous adressez pas à la bonne personne"] },
   { section:0, key:"profil_correction",
     q:"Qu'est-ce que je devrais rectifier ?",
-    placeholder:"Ex : mon titre exact est PDG, je dirige 3 filiales dont deux hors Alger‚Ä¶",
-    skipIf:(a)=>a.identity_check!=="Il y a quelque chose √† corriger" },
+    placeholder:"Ex : mon titre exact est PDG, je dirige 3 filiales dont deux hors Alger…",
+    skipIf:(a)=>a.identity_check!=="Il y a quelque chose à corriger" },
 
   { section:1, key:"dg_docs_analyses",
-    q:"Quels documents ou rapports analysez-vous r√©guli√®rement ?",
-    placeholder:"Ex : bilans financiers mensuels, rapports d'activit√© par site, synth√®ses commerciales, presse sectorielle‚Ä¶" },
+    q:"Quels documents ou rapports analysez-vous régulièrement ?",
+    placeholder:"Ex : bilans financiers mensuels, rapports d'activité par site, synthèses commerciales, presse sectorielle…" },
 
   { section:1, key:"dg_docs_produits",
-    q:"Quels documents produisez-vous vous-m√™me ? D√©posez un mod√®le si vous l'avez sous la main, ou d√©crivez simplement ce que vous produisez.",
+    q:"Quels documents produisez-vous vous-même ? Déposez un modèle si vous l'avez sous la main, ou décrivez simplement ce que vous produisez.",
     isUploadPhase:true },
 
   { section:1, key:"dg_info_remontee",
-    q:"Comment vos √©quipes vous remontent-elles l'information ?",
-    placeholder:"Ex : r√©unions hebdomadaires, rapports √©crits, tableaux partag√©s, messagerie directe, oralement en comit√©‚Ä¶" },
+    q:"Comment vos équipes vous remontent-elles l'information ?",
+    placeholder:"Ex : réunions hebdomadaires, rapports écrits, tableaux partagés, messagerie directe, oralement en comité…" },
 
   { section:1, key:"dg_decision_manque",
     q:"Quelle information vous manque souvent au moment de trancher ?",
-    placeholder:"Ex : une vision consolid√©e en temps r√©el sur tous les sites ¬∑ l'√©tat exact du carnet de commandes ¬∑ la tr√©sorerie √† date‚Ä¶" },
+    placeholder:"Ex : une vision consolidée en temps réel sur tous les sites · l'état exact du carnet de commandes · la trésorerie à date…" },
 
   { section:1, key:"dg_charge_mentale",
-    q:"Qu'est-ce qui vous prend le plus de temps et d'attention dans votre semaine, en dehors des r√©unions ?",
-    placeholder:"Ex : relire et synth√©tiser les rapports des directions ¬∑ pr√©parer les points de comit√© ¬∑ suivre des indicateurs √©parpill√©s‚Ä¶" },
+    q:"Qu'est-ce qui vous prend le plus de temps et d'attention dans votre semaine, en dehors des réunions ?",
+    placeholder:"Ex : relire et synthétiser les rapports des directions · préparer les points de comité · suivre des indicateurs éparpillés…" },
 
   { section:2, key:"dg_assistant_vision",
-    q:"Si vous aviez une baguette magique, qu'est-ce que votre assistant id√©al ferait pour vous ?",
-    placeholder:"Ex : qu'il me pr√©pare chaque matin une synth√®se des activit√©s de la veille ¬∑ qu'il m'alerte d√®s qu'un indicateur d√©croche ¬∑ qu'il r√©dige mes comptes rendus de comit√©‚Ä¶" },
+    q:"Si vous aviez une baguette magique, qu'est-ce que votre assistant idéal ferait pour vous ?",
+    placeholder:"Ex : qu'il me prépare chaque matin une synthèse des activités de la veille · qu'il m'alerte dès qu'un indicateur décroche · qu'il rédige mes comptes rendus de comité…" },
 ];
 
-const SECTIONS_DIRIGEANT = ["Introduction","Votre activit√©","Votre assistant","Cl√¥ture"];
+const SECTIONS_DIRIGEANT = ["Introduction","Votre activité","Votre assistant","Clôture"];
 const TRANSITIONS_DIRIGEANT = {
-  1:"Tr√®s bien.\n\nParlons maintenant de votre quotidien.",
-  2:"Tr√®s bien.\n\nUne derni√®re question, la plus importante.",
+  1:"Très bien.\n\nParlons maintenant de votre quotidien.",
+  2:"Très bien.\n\nUne dernière question, la plus importante.",
 };
 
-/* ¬∑¬∑ IT / DSI ¬∑¬∑ */
+/* ·· IT / DSI ·· */
 const STEPS_IT = [
   { section:0, key:"identity_check",
-    q:"Avant de d√©marrer, juste pour confirmer : vous √™tes bien le responsable informatique ou technique chez " + USER.company + (USER.firstName ? ", " + FULL_NAME : "") + " ?",
-    choices:["Oui, c'est correct","Il y a quelque chose √† corriger","Vous ne vous adressez pas √† la bonne personne"] },
+    q:"Avant de démarrer, juste pour confirmer : vous êtes bien le responsable informatique ou technique chez " + USER.company + (USER.firstName ? ", " + FULL_NAME : "") + " ?",
+    choices:["Oui, c'est correct","Il y a quelque chose à corriger","Vous ne vous adressez pas à la bonne personne"] },
   { section:0, key:"profil_correction",
     q:"Qu'est-ce que je devrais rectifier ?",
-    placeholder:"Ex : je suis prestataire externe, pas salari√© / mon titre est Administrateur Syst√®me‚Ä¶",
-    skipIf:(a)=>a.identity_check!=="Il y a quelque chose √† corriger" },
+    placeholder:"Ex : je suis prestataire externe, pas salarié / mon titre est Administrateur Système…",
+    skipIf:(a)=>a.identity_check!=="Il y a quelque chose à corriger" },
 
   { section:1, key:"it_data_sources",
-    q:"En dehors de votre logiciel comptable, o√π vivent les donn√©es de l'entreprise aujourd'hui ?",
-    placeholder:"Ex : fichiers Excel par d√©partement, Google Drive, logiciel de gestion locative, registres papier‚Ä¶" },
+    q:"En dehors de votre logiciel comptable, où vivent les données de l'entreprise aujourd'hui ?",
+    placeholder:"Ex : fichiers Excel par département, Google Drive, logiciel de gestion locative, registres papier…" },
 
   { section:1, key:"it_data_structure",
-    q:"Ces donn√©es sont-elles structur√©es ou plut√¥t libres ?",
-    choices:["Majoritairement structur√©es","Mixte","Majoritairement non structur√©es","Je ne sais pas"] },
+    q:"Ces données sont-elles structurées ou plutôt libres ?",
+    choices:["Majoritairement structurées","Mixte","Majoritairement non structurées","Je ne sais pas"] },
 
   { section:1, key:"it_data_history",
-    q:"Sur combien d'ann√©es avez-vous des donn√©es √† reprendre ? Y a-t-il des archives papier √† num√©riser ?",
-    placeholder:"Ex : 5 ans de donn√©es Excel ¬∑ des registres papier depuis 2015 ¬∑ uniquement les 2 derni√®res ann√©es‚Ä¶" },
+    q:"Sur combien d'années avez-vous des données à reprendre ? Y a-t-il des archives papier à numériser ?",
+    placeholder:"Ex : 5 ans de données Excel · des registres papier depuis 2015 · uniquement les 2 dernières années…" },
 
   { section:1, key:"it_servers",
     q:"Avez-vous des serveurs sur site ?",
     choices:["Oui, serveurs sur site","Non, tout est en cloud","Hybride","Je ne sais pas"] },
 
   { section:1, key:"it_cross_dept",
-    q:"Y a-t-il des informations ou documents qui circulent entre plusieurs d√©partements aujourd'hui ? Comment √ßa se passe concr√®tement ?",
-    placeholder:"Ex : un contrat sign√© par le commercial est transmis √† la gestion locative puis √† la finance ¬∑ les bons de commande passent par achats avant validation direction‚Ä¶" },
+    q:"Y a-t-il des informations ou documents qui circulent entre plusieurs départements aujourd'hui ? Comment ça se passe concrètement ?",
+    placeholder:"Ex : un contrat signé par le commercial est transmis à la gestion locative puis à la finance · les bons de commande passent par achats avant validation direction…" },
 
   { section:1, key:"it_double_saisie",
-    q:"Y a-t-il des informations saisies plusieurs fois dans des endroits diff√©rents ?",
-    placeholder:"Ex : les donn√©es client ressaisies √† la fois dans Excel et dans le logiciel comptable ¬∑ les relev√©s de charges saisis manuellement chaque mois‚Ä¶" },
+    q:"Y a-t-il des informations saisies plusieurs fois dans des endroits différents ?",
+    placeholder:"Ex : les données client ressaisies à la fois dans Excel et dans le logiciel comptable · les relevés de charges saisis manuellement chaque mois…" },
 ];
 
-const SECTIONS_IT = ["Introduction","Votre infrastructure","Cl√¥ture"];
+const SECTIONS_IT = ["Introduction","Votre infrastructure","Clôture"];
 const TRANSITIONS_IT = {
-  1:"Tr√®s bien.\n\nPassons √† votre infrastructure.",
+  1:"Très bien.\n\nPassons à votre infrastructure.",
 };
 
-/* ¬∑¬∑ D√âPARTEMENT ¬∑¬∑ */
+/* ·· DÉPARTEMENT ·· */
 const STEPS_DEPARTEMENT = [
-  // ‚îÄ‚îÄ Section 0 ‚Äî Introduction ‚îÄ‚îÄ
+  // ── Section 0 — Introduction ──
   { section:0, key:"identity_check",
-    q:"Avant de d√©marrer, juste pour confirmer : vous √™tes bien responsable de d√©partement chez " + USER.company + (USER.firstName ? ", " + FULL_NAME : "") + " ?",
-    choices:["Oui, c'est correct","Il y a quelque chose √† corriger","Vous ne vous adressez pas √† la bonne personne"] },
+    q:"Avant de démarrer, juste pour confirmer : vous êtes bien responsable de département chez " + USER.company + (USER.firstName ? ", " + FULL_NAME : "") + " ?",
+    choices:["Oui, c'est correct","Il y a quelque chose à corriger","Vous ne vous adressez pas à la bonne personne"] },
   { section:0, key:"profil_correction",
     q:"Qu'est-ce que je devrais rectifier ?",
-    placeholder:"Ex : mon poste exact est Responsable Achats, je suis rattach√©e au site d'Oran‚Ä¶",
-    skipIf:(a)=>a.identity_check!=="Il y a quelque chose √† corriger" },
+    placeholder:"Ex : mon poste exact est Responsable Achats, je suis rattachée au site d'Oran…",
+    skipIf:(a)=>a.identity_check!=="Il y a quelque chose à corriger" },
   { section:0, key:"departement_nom",
-    q:"Quel est votre d√©partement ?",
-    choices:["RH / Paie","Finance / Comptabilit√©","Commercial / Ventes","Gestion locative","Marketing & √âv√©nements","Direction","Autre"],
+    q:"Quel est votre département ?",
+    choices:["RH / Paie","Finance / Comptabilité","Commercial / Ventes","Gestion locative","Marketing & Événements","Direction","Autre"],
     skipIf:(a)=>!!a.departement_nom },
 
-  // ‚îÄ‚îÄ Section 1 ‚Äî Documents re√ßus & produits ‚îÄ‚îÄ
+  // ── Section 1 — Documents reçus & produits ──
   { section:1, key:"docs_analyses",
-    q:"Quels documents ou rapports recevez-vous et analysez-vous r√©guli√®rement ?",
-    placeholder:"Ex : relev√©s bancaires, tableaux de bord re√ßus, rapports fournisseurs, synth√®ses de direction, contrats entrants‚Ä¶" },
+    q:"Quels documents ou rapports recevez-vous et analysez-vous régulièrement ?",
+    placeholder:"Ex : relevés bancaires, tableaux de bord reçus, rapports fournisseurs, synthèses de direction, contrats entrants…" },
   { section:1, key:"docs_produits_upload",
-    q:"Quels documents produisez-vous vous-m√™me ? D√©posez un mod√®le si vous l'avez sous la main, ou listez vos documents et leur fr√©quence.",
+    q:"Quels documents produisez-vous vous-même ? Déposez un modèle si vous l'avez sous la main, ou listez vos documents et leur fréquence.",
     isUploadPhase:true },
   { section:1, key:"docs_produits_destinataires",
-    q:"√Ä qui ces documents sont-ils g√©n√©ralement destin√©s ?",
-    placeholder:"Ex : rapport mensuel ‚Üí Direction g√©n√©rale ¬∑ relev√© de charges ‚Üí locataires ¬∑ synth√®se hebdo ‚Üí mon √©quipe‚Ä¶" },
+    q:"À qui ces documents sont-ils généralement destinés ?",
+    placeholder:"Ex : rapport mensuel → Direction générale · relevé de charges → locataires · synthèse hebdo → mon équipe…" },
   { section:1, key:"outils_utilises",
     q:"Quels outils utilisez-vous au quotidien ?",
     multiSelect:true,
-    choices:["Microsoft Office (Word, Excel, PowerPoint)","Google Workspace (Docs, Sheets, Drive)","Outlook / Gmail","WhatsApp / Teams / Slack","Logiciel m√©tier sp√©cifique","Autre"] },
+    choices:["Microsoft Office (Word, Excel, PowerPoint)","Google Workspace (Docs, Sheets, Drive)","Outlook / Gmail","WhatsApp / Teams / Slack","Logiciel métier spécifique","Autre"] },
 
-  // ‚îÄ‚îÄ Section 2 ‚Äî Sources & Charge ‚îÄ‚îÄ
+  // ── Section 2 — Sources & Charge ──
   { section:2, key:"sources_info",
-    q:"O√π allez-vous chercher l'information au quotidien ?",
-    placeholder:"Ex : fichiers Excel partag√©s, emails, r√©unions d'√©quipe, documents re√ßus par courrier, appels clients, registres‚Ä¶" },
+    q:"Où allez-vous chercher l'information au quotidien ?",
+    placeholder:"Ex : fichiers Excel partagés, emails, réunions d'équipe, documents reçus par courrier, appels clients, registres…" },
   { section:2, key:"charge_mentale",
-    q:"Qu'est-ce qui vous prend le plus de temps et d'√©nergie dans votre semaine ?",
-    placeholder:"Ex : la consolidation mensuelle me prend deux jours entiers ¬∑ les relances locataires sont √©puisantes √† g√©rer manuellement‚Ä¶" },
+    q:"Qu'est-ce qui vous prend le plus de temps et d'énergie dans votre semaine ?",
+    placeholder:"Ex : la consolidation mensuelle me prend deux jours entiers · les relances locataires sont épuisantes à gérer manuellement…" },
 
-  // ‚îÄ‚îÄ Section 3 ‚Äî Votre assistant ‚îÄ‚îÄ
+  // ── Section 3 — Votre assistant ──
   { section:3, key:"assistant_vision",
-    q:"Si vous aviez une baguette magique, qu'est-ce que votre assistant id√©al ferait pour vous ?",
-    placeholder:"Ex : qu'il pr√©pare mon rapport mensuel √† partir des donn√©es existantes ¬∑ qu'il r√©dige les relances ¬∑ qu'il synth√©tise les contrats entrants‚Ä¶" },
+    q:"Si vous aviez une baguette magique, qu'est-ce que votre assistant idéal ferait pour vous ?",
+    placeholder:"Ex : qu'il prépare mon rapport mensuel à partir des données existantes · qu'il rédige les relances · qu'il synthétise les contrats entrants…" },
 ];
 
-const SECTIONS_DEPARTEMENT = ["Introduction","Vos documents","Sources & Charge","Votre assistant","Cl√¥ture"];
+const SECTIONS_DEPARTEMENT = ["Introduction","Vos documents","Sources & Charge","Votre assistant","Clôture"];
 const TRANSITIONS_DEPARTEMENT = {
-  1:"Tr√®s bien.\n\nParlons maintenant de vos documents.",
-  2:"Not√©.\n\nVoyons maintenant d'o√π vient votre information.",
-  3:"Tr√®s bien.\n\nUne derni√®re question, la plus importante.",
+  1:"Très bien.\n\nParlons maintenant de vos documents.",
+  2:"Noté.\n\nVoyons maintenant d'où vient votre information.",
+  3:"Très bien.\n\nUne dernière question, la plus importante.",
 };
 
-/* ‚îÄ‚îÄ STATE GLOBAL ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ */
+/* ── STATE GLOBAL ────────────────────────────────────────────────── */
 let selectedRole  = null;
 let STEPS         = [];
 let SECTION_NAMES = [];
@@ -584,11 +584,11 @@ const state   = { files: [], firstFileMsgShown: false };
 let stepIndex   = -1;
 let fileCounter = 0;
 
-/* ‚îÄ‚îÄ GOOGLE APPS SCRIPT ‚Äî URL de sauvegarde Drive ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ */
-// Remplacer par l'URL de d√©ploiement Google Apps Script apr√®s setup
+/* ── GOOGLE APPS SCRIPT — URL de sauvegarde Drive ──────────────── */
+// Remplacer par l'URL de déploiement Google Apps Script après setup
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzv7lTkUL9cZsR7b1SMRpVYGNhK054SOt1rITPEfWeXk2DbFvELsJfL-vk61JnorooUjw/exec";
 
-/* ‚îÄ‚îÄ DOM ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ */
+/* ── DOM ─────────────────────────────────────────────────────────── */
 const $ = id => document.getElementById(id);
 const conv = $("conversation");
 function scrollToBottom(){ requestAnimationFrame(()=>window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"})); }
@@ -622,17 +622,17 @@ function showMultiSelect(step){
   const exclusives=step.exclusiveOptions||[];
   const selected=new Set(); let autreText="";
   const wrap=document.createElement("div"); wrap.className="ms-wrap"; wrap.id="multiselect";
-  const hint=document.createElement("div"); hint.className="ms-hint"; hint.textContent="Vous pouvez s√©lectionner plusieurs r√©ponses."; wrap.appendChild(hint);
+  const hint=document.createElement("div"); hint.className="ms-hint"; hint.textContent="Vous pouvez sélectionner plusieurs réponses."; wrap.appendChild(hint);
   const btnsWrap=document.createElement("div"); btnsWrap.className="ms-btns";
   const autreWrap=document.createElement("div"); autreWrap.className="ms-autre-wrap";
-  const autreInput=document.createElement("input"); autreInput.type="text"; autreInput.className="ms-autre-input"; autreInput.placeholder="Pr√©cisez‚Ä¶";
+  const autreInput=document.createElement("input"); autreInput.type="text"; autreInput.className="ms-autre-input"; autreInput.placeholder="Précisez…";
   autreInput.addEventListener("input",()=>{ autreText=autreInput.value; updateConfirm(); }); autreWrap.appendChild(autreInput);
   const footer=document.createElement("div"); footer.className="ms-footer";
   const countEl=document.createElement("span"); countEl.className="ms-count";
-  const confirmBtn=document.createElement("button"); confirmBtn.type="button"; confirmBtn.className="ms-confirm"; confirmBtn.textContent="Continuer ‚Üí"; confirmBtn.disabled=true;
+  const confirmBtn=document.createElement("button"); confirmBtn.type="button"; confirmBtn.className="ms-confirm"; confirmBtn.textContent="Continuer →"; confirmBtn.disabled=true;
   footer.appendChild(countEl); footer.appendChild(confirmBtn);
 
-  function updateConfirm(){ const n=selected.size+(autreText.trim()?1:0); countEl.textContent=n>0?n+" s√©lectionn√©"+(n>1?"s":""):""; confirmBtn.disabled=n===0; }
+  function updateConfirm(){ const n=selected.size+(autreText.trim()?1:0); countEl.textContent=n>0?n+" sélectionné"+(n>1?"s":""):""; confirmBtn.disabled=n===0; }
 
   function setBtn(opt,btn,on){ if(on){selected.add(opt);btn.classList.add("ms-selected");}else{selected.delete(opt);btn.classList.remove("ms-selected");} }
   function deselectAll(){ selected.clear(); btnsWrap.querySelectorAll(".ms-btn").forEach(b=>b.classList.remove("ms-selected")); autreWrap.classList.remove("visible"); autreInput.value=""; autreText=""; }
@@ -662,7 +662,7 @@ function removeMultiSelect(){ const m=$("multiselect"); if(m)m.remove(); }
 
 function sectionDivider(name){ const d=document.createElement("div"); d.className="section-divider"; d.textContent=name; conv.appendChild(d); }
 
-/* ‚îÄ‚îÄ PROGRESS ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ */
+/* ── PROGRESS ────────────────────────────────────────────────────── */
 function renderProgressSteps(){
   const ol=$("progress-steps"); ol.innerHTML="";
   SECTION_NAMES.forEach(name=>{ const li=document.createElement("li"); li.className="progress-step"; li.innerHTML='<span class="step-dot"></span><span class="step-label">'+name+'</span>'; ol.appendChild(li); });
@@ -671,29 +671,29 @@ function setProgress(si){
   document.querySelectorAll(".progress-step").forEach((el,i)=>{ el.classList.remove("is-current","is-past"); if(i<si)el.classList.add("is-past"); else if(i===si)el.classList.add("is-current"); });
   const pct=Math.max(0,Math.min(100,(si/(SECTION_NAMES.length-1))*100));
   $("progress-mobile-fill").style.width=pct+"%";
-  $("progress-mobile-label").textContent=(si+1)+" / "+SECTION_NAMES.length+" ‚Äî "+SECTION_NAMES[si];
+  $("progress-mobile-label").textContent=(si+1)+" / "+SECTION_NAMES.length+" — "+SECTION_NAMES[si];
 }
 
-/* ‚îÄ‚îÄ ERP SCORE (IT + D√©partement) ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ */
+/* ── ERP SCORE (IT + Département) ───────────────────────────────── */
 function computeErpScore(){
   if(!answers.erp_logiciel)return null;
-  if(answers.erp_logiciel==="Aucun syst√®me de gestion central"||answers.erp_logiciel==="Aucun logiciel de gestion")return "absent";
+  if(answers.erp_logiciel==="Aucun système de gestion central"||answers.erp_logiciel==="Aucun logiciel de gestion")return "absent";
   let s=0;
   if(answers.erp_hebergement==="En ligne / cloud (SaaS)"||answers.erp_hebergement==="Hybride (partiellement cloud)")s+=2;
   else if(answers.erp_hebergement==="Je ne sais pas")s+=1;
   if(answers.erp_api==="Oui, une API REST / SDK est disponible")s+=3;
   else if(answers.erp_api==="Oui, mais uniquement en lecture (ODBC / SQL)")s+=2;
   else if(answers.erp_api==="Je ne sais pas")s+=1;
-  if(answers.it_equipe==="Oui, une √©quipe interne d√©di√©e"||answers.it_equipe==="Oui, une personne en interne")s+=2;
-  else if(answers.it_equipe==="Non, on fait appel √† des prestataires")s+=1;
+  if(answers.it_equipe==="Oui, une équipe interne dédiée"||answers.it_equipe==="Oui, une personne en interne")s+=2;
+  else if(answers.it_equipe==="Non, on fait appel à des prestataires")s+=1;
   const connectables=["SAP","Odoo","Microsoft Dynamics"];
   if(connectables.some(e=>(answers.erp_logiciel||"").startsWith(e)))s+=1;
-  if(s>=5)return "√©lev√©"; if(s>=3)return "moyen"; return "faible";
+  if(s>=5)return "élevé"; if(s>=3)return "moyen"; return "faible";
 }
-function erpScoreBadgeClass(s){ return s==="√©lev√©"?"erp-score-high":s==="moyen"?"erp-score-medium":s==="faible"?"erp-score-low":"erp-score-absent"; }
-function erpScoreLabel(s){ return s==="√©lev√©"?"Connectabilit√© √©lev√©e":s==="moyen"?"Connectabilit√© moyenne":s==="faible"?"Connectabilit√© faible":"Pas de syst√®me central"; }
+function erpScoreBadgeClass(s){ return s==="élevé"?"erp-score-high":s==="moyen"?"erp-score-medium":s==="faible"?"erp-score-low":"erp-score-absent"; }
+function erpScoreLabel(s){ return s==="élevé"?"Connectabilité élevée":s==="moyen"?"Connectabilité moyenne":s==="faible"?"Connectabilité faible":"Pas de système central"; }
 
-/* ‚îÄ‚îÄ UPLOAD ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ */
+/* ── UPLOAD ─────────────────────────────────────────────────────── */
 function updateDocsCounter(){ const n=state.files.length; $("docs-counter-label").textContent=n===0?"0 document":n===1?"1 document":n+" documents"; }
 function refreshStickyAction(){
   const step=stepIndex>=0?STEPS[stepIndex]:null;
@@ -706,25 +706,25 @@ function refreshStickyAction(){
       $("sticky-action-label").textContent="Continuer sans document";
     } else if(allReady){
       $("sticky-action").hidden=false;
-      $("sticky-action-label").textContent="J'ai d√©pos√© tous mes documents";
+      $("sticky-action-label").textContent="J'ai déposé tous mes documents";
     } else {
       $("sticky-action").hidden=true;
     }
   } else {
     $("sticky-action").hidden=!allReady;
-    $("sticky-action-label").textContent="J'ai d√©pos√© tous mes documents";
+    $("sticky-action-label").textContent="J'ai déposé tous mes documents";
   }
 }
 function appendFileCard(file){
   const wrap=document.createElement("div"); wrap.className="file-card-block"; wrap.dataset.fileId=file.id;
   const row=document.createElement("div"); row.className="file-card-row";
-  row.innerHTML='<span class="file-check">‚úì</span><span class="file-name"></span>';
+  row.innerHTML='<span class="file-check">✓</span><span class="file-name"></span>';
   row.querySelector(".file-name").textContent=file.name; wrap.appendChild(row);
-  const prompt=document.createElement("div"); prompt.className="file-freq-prompt"; prompt.textContent="√Ä quelle fr√©quence produisez-vous ce document ?"; wrap.appendChild(prompt);
+  const prompt=document.createElement("div"); prompt.className="file-freq-prompt"; prompt.textContent="À quelle fréquence produisez-vous ce document ?"; wrap.appendChild(prompt);
   const opts=document.createElement("div"); opts.className="file-freq-options";
   FREQUENCIES.forEach(f=>{
     const btn=document.createElement("button"); btn.type="button"; btn.className="choice-btn choice-btn-freq"; btn.textContent=f;
-    btn.addEventListener("click",()=>{ const entry=state.files.find(x=>x.id===file.id); if(entry)entry.frequency=f; wrap.classList.add("file-card-locked"); prompt.textContent="Fr√©quence : "+f; opts.remove(); renderDrawerList(); refreshStickyAction(); });
+    btn.addEventListener("click",()=>{ const entry=state.files.find(x=>x.id===file.id); if(entry)entry.frequency=f; wrap.classList.add("file-card-locked"); prompt.textContent="Fréquence : "+f; opts.remove(); renderDrawerList(); refreshStickyAction(); });
     opts.appendChild(btn);
   });
   wrap.appendChild(opts); conv.appendChild(wrap); scrollToBottom();
@@ -736,7 +736,7 @@ async function handleUpload(file){
     state.firstFileMsgShown=true;
     const cta=document.getElementById("upload-cta"); if(cta)cta.remove();
     await sleep(600);
-    await bubbleStreaming("agent","Parfait, vous avez compris le principe. Continuez √† d√©poser vos documents, puis cliquez sur le bouton quand vous avez termin√©.");
+    await bubbleStreaming("agent","Parfait, vous avez compris le principe. Continuez à déposer vos documents, puis cliquez sur le bouton quand vous avez terminé.");
   }
 }
 function handleDeleteFile(id){
@@ -745,7 +745,7 @@ function handleDeleteFile(id){
   updateDocsCounter(); renderDrawerList(); refreshStickyAction();
 }
 
-/* ‚îÄ‚îÄ DRAWER ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ */
+/* ── DRAWER ─────────────────────────────────────────────────────── */
 function openDrawer(){$("drawer").setAttribute("aria-hidden","false");document.body.style.overflow="hidden";}
 function closeDrawer(){$("drawer").setAttribute("aria-hidden","true");document.body.style.overflow="";}
 function renderDrawerList(){
@@ -754,14 +754,14 @@ function renderDrawerList(){
   state.files.forEach(f=>{
     const li=document.createElement("li"); li.className="drawer-list-item";
     const tag=f.frequency?'<span class="file-freq-tag">'+f.frequency+'</span>':"";
-    li.innerHTML='<span class="file-check">‚úì</span><span class="file-name"></span>'+tag+'<button class="drawer-remove" aria-label="Retirer">√ó</button>';
+    li.innerHTML='<span class="file-check">✓</span><span class="file-name"></span>'+tag+'<button class="drawer-remove" aria-label="Retirer">×</button>';
     li.querySelector(".file-name").textContent=f.name;
     li.querySelector(".drawer-remove").addEventListener("click",()=>handleDeleteFile(f.id));
     list.appendChild(li);
   });
 }
 
-/* ‚îÄ‚îÄ FLOW ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ */
+/* ── FLOW ───────────────────────────────────────────────────────── */
 async function goToStep(index){
   stepIndex=index;
   if(index>=STEPS.length){showSummary();return;}
@@ -782,10 +782,10 @@ async function goToStep(index){
 
   if(step.isUploadPhase){
     $("composer").classList.remove("hidden"); $("composer").classList.add("attach-only"); refreshStickyAction();
-    const uploadInput=$("composer-input"); uploadInput.placeholder="Pas de fichier sous la main ? D√©crivez vos documents ici‚Ä¶"; uploadInput.value=""; uploadInput.style.height="auto"; autoSize();
+    const uploadInput=$("composer-input"); uploadInput.placeholder="Pas de fichier sous la main ? Décrivez vos documents ici…"; uploadInput.value=""; uploadInput.style.height="auto"; autoSize();
     const ctaWrap=document.createElement("div"); ctaWrap.className="upload-cta-wrap"; ctaWrap.id="upload-cta";
-    const btnDeposer=document.createElement("button"); btnDeposer.type="button"; btnDeposer.className="choice-btn upload-cta-btn"; btnDeposer.textContent="D√©poser un document";
-    const btnSkip=document.createElement("button"); btnSkip.type="button"; btnSkip.className="choice-btn upload-cta-skip"; btnSkip.textContent="Je n'ai pas de mod√®les";
+    const btnDeposer=document.createElement("button"); btnDeposer.type="button"; btnDeposer.className="choice-btn upload-cta-btn"; btnDeposer.textContent="Déposer un document";
+    const btnSkip=document.createElement("button"); btnSkip.type="button"; btnSkip.className="choice-btn upload-cta-skip"; btnSkip.textContent="Je n'ai pas de modèles";
     btnDeposer.addEventListener("click",()=>$("composer-attach").click());
     btnSkip.addEventListener("click",()=>{ ctaWrap.remove(); handleUploadPhaseComplete(); });
     ctaWrap.appendChild(btnDeposer); ctaWrap.appendChild(btnSkip);
@@ -796,7 +796,7 @@ async function goToStep(index){
   else if(step.choices){ showChoices(step.choices); $("composer").classList.add("hidden"); $("composer").classList.remove("attach-only"); }
   else{
     $("composer").classList.remove("hidden"); $("composer").classList.remove("attach-only");
-    const input=$("composer-input"); input.placeholder=step.placeholder||"Votre r√©ponse‚Ä¶"; input.value=""; input.style.height="auto";
+    const input=$("composer-input"); input.placeholder=step.placeholder||"Votre réponse…"; input.value=""; input.style.height="auto";
     $("composer-send").disabled=true; setTimeout(()=>input.focus(),100);
   }
 }
@@ -810,14 +810,14 @@ async function handleAnswer(text){
   const ctaWrap=document.getElementById("upload-cta"); if(ctaWrap)ctaWrap.remove();
   bubble("user",value);
   if(wasUpload){
-    const fileNote=state.files.length>0?" ("+state.files.length+" fichier(s) d√©pos√©(s))":"";
+    const fileNote=state.files.length>0?" ("+state.files.length+" fichier(s) déposé(s))":"";
     answers[step.key]="Description : "+value+fileNote;
   } else {
     answers[step.key]=value;
   }
-  if(step.key==="identity_check"&&value==="Vous ne vous adressez pas √† la bonne personne"){
+  if(step.key==="identity_check"&&value==="Vous ne vous adressez pas à la bonne personne"){
     await sleep(400); showTyping(); await sleep(900); hideTyping();
-    await bubbleStreaming("agent","Toutes mes excuses.\n\nMerci de pr√©venir votre r√©f√©rent Shortcut afin qu'on puisse renvoyer ce lien √† la bonne personne.\n\nBonne journ√©e.");
+    await bubbleStreaming("agent","Toutes mes excuses.\n\nMerci de prévenir votre référent Shortcut afin qu'on puisse renvoyer ce lien à la bonne personne.\n\nBonne journée.");
     stepIndex=STEPS.length; return;
   }
   await sleep(200); await goToStep(stepIndex+1);
@@ -827,28 +827,28 @@ async function handleUploadPhaseComplete(){
   if(stepIndex<0||!STEPS[stepIndex].isUploadPhase)return;
   $("sticky-action").hidden=true; $("composer").classList.add("hidden"); $("composer").classList.remove("attach-only");
   const hasFiles=state.files.length>0;
-  bubble("user",hasFiles?"J'ai d√©pos√© tous mes documents ("+state.files.length+").":"Je continue sans document.");
-  answers[STEPS[stepIndex].key]=hasFiles?state.files.length+" document(s) d√©pos√©(s)":"Aucun document d√©pos√©";
+  bubble("user",hasFiles?"J'ai déposé tous mes documents ("+state.files.length+").":"Je continue sans document.");
+  answers[STEPS[stepIndex].key]=hasFiles?state.files.length+" document(s) déposé(s)":"Aucun document déposé";
   await sleep(300); showTyping(); await sleep(700); hideTyping();
-  await bubbleStreaming("agent",hasFiles?"Merci. Tous vos documents sont bien enregistr√©s sur votre appareil.":"Pas de probl√®me, on continue.");
+  await bubbleStreaming("agent",hasFiles?"Merci. Tous vos documents sont bien enregistrés sur votre appareil.":"Pas de problème, on continue.");
   await sleep(300); await goToStep(stepIndex+1);
 }
 
-/* ‚îÄ‚îÄ EXPORT ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ */
-const ROLE_LABELS = { dirigeant:"Direction g√©n√©rale", it:"IT / DSI", departement:"Responsable d√©partement" };
+/* ── EXPORT ─────────────────────────────────────────────────────── */
+const ROLE_LABELS = { dirigeant:"Direction générale", it:"IT / DSI", departement:"Responsable département" };
 const SUMMARY_DEFS = {
   dirigeant:{
     sections:[
-      { title:"Votre activit√©",    keys:["dg_docs_analyses","dg_docs_produits","dg_info_remontee","dg_decision_manque","dg_charge_mentale"] },
+      { title:"Votre activité",    keys:["dg_docs_analyses","dg_docs_produits","dg_info_remontee","dg_decision_manque","dg_charge_mentale"] },
       { title:"Votre assistant",   keys:["dg_assistant_vision"] },
     ],
-    labels:{ dg_docs_analyses:"Documents analys√©s", dg_docs_produits:"Documents produits", dg_info_remontee:"Remont√©e d'information", dg_decision_manque:"Information manquante", dg_charge_mentale:"Charge mentale", dg_assistant_vision:"Assistant id√©al" },
+    labels:{ dg_docs_analyses:"Documents analysés", dg_docs_produits:"Documents produits", dg_info_remontee:"Remontée d'information", dg_decision_manque:"Information manquante", dg_charge_mentale:"Charge mentale", dg_assistant_vision:"Assistant idéal" },
   },
   it:{
     sections:[
-      { title:"√âcosyst√®me actuel", keys:["it_data_sources","it_data_structure","it_data_history","it_servers","it_cross_dept","it_double_saisie"] },
+      { title:"Écosystème actuel", keys:["it_data_sources","it_data_structure","it_data_history","it_servers","it_cross_dept","it_double_saisie"] },
     ],
-    labels:{ it_data_sources:"Sources de donn√©es", it_data_structure:"Structure des donn√©es", it_data_history:"Historique & archives", it_servers:"Serveurs", it_cross_dept:"Flux inter-d√©partements", it_double_saisie:"Double saisie" },
+    labels:{ it_data_sources:"Sources de données", it_data_structure:"Structure des données", it_data_history:"Historique & archives", it_servers:"Serveurs", it_cross_dept:"Flux inter-départements", it_double_saisie:"Double saisie" },
   },
   departement:{
     sections:[
@@ -856,7 +856,7 @@ const SUMMARY_DEFS = {
       { title:"Sources & Charge",keys:["sources_info","charge_mentale"] },
       { title:"Votre assistant", keys:["assistant_vision"] },
     ],
-    labels:{ departement_nom:"D√©partement", docs_analyses:"Documents analys√©s", docs_produits_upload:"Documents produits", docs_produits_destinataires:"Destinataires", outils_utilises:"Outils", sources_info:"Sources d'information", charge_mentale:"Charge mentale", assistant_vision:"Assistant id√©al" },
+    labels:{ departement_nom:"Département", docs_analyses:"Documents analysés", docs_produits_upload:"Documents produits", docs_produits_destinataires:"Destinataires", outils_utilises:"Outils", sources_info:"Sources d'information", charge_mentale:"Charge mentale", assistant_vision:"Assistant idéal" },
   },
 };
 
@@ -869,29 +869,29 @@ function formatSummaryText(){
   let txt="DIAGNOSTIC AGENT SHORTCUT\n";
   txt+="Profil : "+(ROLE_CONFIG[selectedRole]?.label||ROLE_LABELS[selectedRole]||selectedRole)+"\n";
   txt+="Date : "+d.toLocaleDateString("fr-FR",{day:"2-digit",month:"long",year:"numeric"})+"\n";
-  txt+="Personne : "+FULL_NAME+(USER.role?" ¬∑ "+USER.role:"")+"\n";
+  txt+="Personne : "+FULL_NAME+(USER.role?" · "+USER.role:"")+"\n";
   txt+="Entreprise : "+USER.company+"\n";
-  if(erpScore)txt+="Score connectabilit√© ERP : "+erpScoreLabel(erpScore)+"\n";
-  txt+="‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ\n\n";
+  if(erpScore)txt+="Score connectabilité ERP : "+erpScoreLabel(erpScore)+"\n";
+  txt+="──────────────────────────────────────\n\n";
   def.sections.forEach(sec=>{ let block=""; sec.keys.forEach(k=>{if(answers[k])block+="  "+(def.labels[k]||k)+" : "+answers[k]+"\n";}); if(block)txt+=sec.title+"\n"+block+"\n"; });
-  if(state.files.length>0){ txt+="DOCUMENTS ("+state.files.length+")\n"; state.files.forEach(f=>{txt+="  ‚Ä¢ "+f.name+" ‚Äî "+(f.frequency||"non pr√©cis√©e")+"\n";}); }
+  if(state.files.length>0){ txt+="DOCUMENTS ("+state.files.length+")\n"; state.files.forEach(f=>{txt+="  • "+f.name+" — "+(f.frequency||"non précisée")+"\n";}); }
   return txt;
 }
 
-/* ‚îÄ‚îÄ SUMMARY ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ */
+/* ── SUMMARY ────────────────────────────────────────────────────── */
 function showSummary(){
   $("composer").classList.add("hidden"); $("sticky-action").hidden=true;
-  const lastIdx=SECTION_NAMES.length-1; setProgress(lastIdx); sectionDivider("Cl√¥ture");
+  const lastIdx=SECTION_NAMES.length-1; setProgress(lastIdx); sectionDivider("Clôture");
   setTimeout(async()=>{
     showTyping(); await sleep(1200); hideTyping();
     const erpScore=computeErpScore();
     let closing;
     if(ROLE_CONFIG[selectedRole]?.flow==="it"){
-      closing="Merci "+FORMAL+".\n\nC'est parfait ‚Äî votre r√©f√©rent Shortcut dispose maintenant de toutes les informations n√©cessaires pour pr√©parer les prochaines √©tapes. Enregistrez vos r√©ponses ci-dessous, il y aura acc√®s imm√©diatement et reviendra vers vous tr√®s prochainement.";
+      closing="Merci "+FORMAL+".\n\nC'est parfait — votre référent Shortcut dispose maintenant de toutes les informations nécessaires pour préparer les prochaines étapes. Enregistrez vos réponses ci-dessous, il y aura accès immédiatement et reviendra vers vous très prochainement.";
     } else {
-      closing="Merci "+FORMAL+".\n\nVotre diagnostic est complet. Enregistrez-le ci-dessous : votre r√©f√©rent Shortcut y aura acc√®s imm√©diatement et reviendra vers vous pour planifier la configuration de votre assistant.";
-      if(erpScore==="faible")closing+="\n\nIl regardera aussi avec vous comment connecter votre syst√®me de gestion ‚Äî il existe une option qui s'int√®gre nativement d√®s le d√©part.";
-      else if(erpScore==="absent")closing+="\n\nIl pourra aussi vous pr√©senter une solution de gestion con√ßue pour fonctionner nativement avec vos agents.";
+      closing="Merci "+FORMAL+".\n\nVotre diagnostic est complet. Enregistrez-le ci-dessous : votre référent Shortcut y aura accès immédiatement et reviendra vers vous pour planifier la configuration de votre assistant.";
+      if(erpScore==="faible")closing+="\n\nIl regardera aussi avec vous comment connecter votre système de gestion — il existe une option qui s'intègre nativement dès le départ.";
+      else if(erpScore==="absent")closing+="\n\nIl pourra aussi vous présenter une solution de gestion conçue pour fonctionner nativement avec vos agents.";
     }
     await bubbleStreaming("agent",closing);
     await sleep(500);
@@ -899,7 +899,7 @@ function showSummary(){
     const def=SUMMARY_DEFS[ROLE_CONFIG[selectedRole]?.flow||selectedRole]; const card=document.createElement("div"); card.className="summary-card";
     const erpScore2=computeErpScore();
     const scoreBadge=erpScore2?'<span class="erp-score '+erpScoreBadgeClass(erpScore2)+'">'+erpScoreLabel(erpScore2)+"</span>":"";
-    let html='<div class="summary-title">R√©capitulatif ‚Äî '+(ROLE_CONFIG[selectedRole]?.label||ROLE_LABELS[selectedRole]||selectedRole)+'</div>';
+    let html='<div class="summary-title">Récapitulatif — '+(ROLE_CONFIG[selectedRole]?.label||ROLE_LABELS[selectedRole]||selectedRole)+'</div>';
     def.sections.forEach((sec,si)=>{
       const rows=sec.keys.map(k=>answers[k]?'<div class="summary-row"><span class="summary-key">'+(def.labels[k]||k)+'</span><span class="summary-val"></span></div>':"").join("");
       if(!rows)return;
@@ -909,19 +909,19 @@ function showSummary(){
     if(state.files.length>0){
       html+='<div class="summary-section"><div class="summary-section-title">Documents ('+state.files.length+')</div>'+state.files.map(()=>'<div class="summary-row"><span class="summary-key"></span><span class="summary-val"></span></div>').join("")+"</div>";
     }
-    html+='<div class="summary-actions"><button class="btn-primary" id="btn-save" type="button">Envoyer mes r√©ponses</button><span class="save-error" id="save-error">Une erreur est survenue. R√©essayez ou contactez contact@shortcut-formation.com</span></div>';
+    html+='<div class="summary-actions"><button class="btn-primary" id="btn-save" type="button">Envoyer mes réponses</button><span class="save-error" id="save-error">Une erreur est survenue. Réessayez ou contactez contact@shortcut-formation.com</span></div>';
     card.innerHTML=html; conv.appendChild(card);
 
     let ri=0; const rows=card.querySelectorAll(".summary-row");
     def.sections.forEach(sec=>{sec.keys.forEach(k=>{if(answers[k]){rows[ri].querySelector(".summary-val").textContent=answers[k];ri++;}});});
-    state.files.forEach(f=>{ if(rows[ri]){rows[ri].querySelector(".summary-key").textContent=f.name;rows[ri].querySelector(".summary-val").textContent=f.frequency||"Non pr√©cis√©e";ri++;} });
+    state.files.forEach(f=>{ if(rows[ri]){rows[ri].querySelector(".summary-key").textContent=f.name;rows[ri].querySelector(".summary-val").textContent=f.frequency||"Non précisée";ri++;} });
     scrollToBottom();
 
     $("btn-save").addEventListener("click",async()=>{
       const btn=$("btn-save");
       if(btn.disabled) return;
       btn.disabled=true; btn.classList.add("saving");
-      btn.innerHTML='<span class="btn-spinner"></span>Enregistrement‚Ä¶';
+      btn.innerHTML='<span class="btn-spinner"></span>Enregistrement…';
       try{
         // Encoder les fichiers en base64
         const filesData=await Promise.all(state.files.map(async f=>{
@@ -939,16 +939,16 @@ function showSummary(){
         const result=await resp.json();
         if(result.status==="ok"){
           btn.classList.remove("saving"); btn.classList.add("saved");
-          btn.innerHTML="‚úì Enregistr√©";
+          btn.innerHTML="✓ Enregistré";
           scrollToBottom();
           await sleep(600);
           showTyping(); await sleep(900); hideTyping();
-          await bubbleStreaming("agent","Tout est bien re√ßu ‚Äî merci "+FORMAL+".\n\nVotre r√©f√©rent Shortcut reviendra vers vous tr√®s prochainement. √Ä bient√¥t !");
+          await bubbleStreaming("agent","Tout est bien reçu — merci "+FORMAL+".\n\nVotre référent Shortcut reviendra vers vous très prochainement. À bientôt !");
           scrollToBottom();
         } else { throw new Error(result.message||"Erreur serveur"); }
       } catch(err){
         btn.disabled=false; btn.classList.remove("saving"); btn.classList.add("save-err");
-        btn.innerHTML="Envoyer mes r√©ponses";
+        btn.innerHTML="Envoyer mes réponses";
         const se=$("save-error"); if(se)se.classList.add("visible");
         setTimeout(()=>{ btn.classList.remove("save-err"); if(se)se.classList.remove("visible"); },4000);
       }
@@ -956,15 +956,15 @@ function showSummary(){
   },400);
 }
 
-/* ‚îÄ‚îÄ S√âLECTION DU R√îLE ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ */
+/* ── SÉLECTION DU RÔLE ──────────────────────────────────────────── */
 
-// Mapping poste ‚Üí flow d'interview + d√©partement pr√©-rempli
+// Mapping poste → flow d'interview + département pré-rempli
 const ROLE_CONFIG = {
   dg:         { flow:"dirigeant",   dept:null,                    label:"DG",                     badge:"role-badge-dirigeant", badgeColor:"#1a56db" },
   it:         { flow:"it",          dept:null,                    label:"IT Manager",              badge:"role-badge-it",        badgeColor:"#1fab58" },
-  finance:    { flow:"departement", dept:"Finance / Comptabilit√©",label:"Finance Manager",         badge:"role-badge-finance",   badgeColor:"#5B21B6" },
+  finance:    { flow:"departement", dept:"Finance / Comptabilité",label:"Finance Manager",         badge:"role-badge-finance",   badgeColor:"#5B21B6" },
   location:   { flow:"departement", dept:"Gestion locative",      label:"Location Manager",        badge:"role-badge-location",  badgeColor:"#F57C00" },
-  marketing:  { flow:"departement", dept:"Marketing & √âv√©nements",label:"Marketing Event Manager", badge:"role-badge-marketing", badgeColor:"#BE185D" },
+  marketing:  { flow:"departement", dept:"Marketing & Événements",label:"Marketing Event Manager", badge:"role-badge-marketing", badgeColor:"#BE185D" },
   commercial: { flow:"departement", dept:"Commercial / Ventes",   label:"Responsable commercial",  badge:"role-badge-commercial",badgeColor:"#0D9488" },
 };
 
@@ -977,7 +977,7 @@ async function selectRole(role){
   if(!nom){nomInput.classList.add("input-error");nomInput.addEventListener("animationend",()=>nomInput.classList.remove("input-error"),{once:true});hasError=true;}
   if(hasError){if(!prenom)prenomInput.focus();else nomInput.focus();return;}
 
-  // Lire la civilit√© s√©lectionn√©e
+  // Lire la civilité sélectionnée
   const civSelected=document.querySelector('.civility-btn.civility-selected');
   if(!civSelected){
     document.querySelectorAll('.civility-btn').forEach(b=>{b.classList.add('input-error');b.addEventListener('animationend',()=>b.classList.remove('input-error'),{once:true});});
@@ -992,7 +992,7 @@ async function selectRole(role){
   const cfg=ROLE_CONFIG[role];
   selectedRole=role;
 
-  // Pr√©-remplir le d√©partement si applicable (√©vite la question)
+  // Pré-remplir le département si applicable (évite la question)
   if(cfg.dept) answers.departement_nom=cfg.dept;
 
   // Choisir le flow d'interview
@@ -1000,26 +1000,26 @@ async function selectRole(role){
   else if(cfg.flow==="it"){     STEPS=STEPS_IT;           SECTION_NAMES=SECTIONS_IT;           TRANSITIONS=TRANSITIONS_IT; }
   else{                         STEPS=STEPS_DEPARTEMENT;  SECTION_NAMES=SECTIONS_DEPARTEMENT;  TRANSITIONS=TRANSITIONS_DEPARTEMENT; }
 
-  // Personnaliser la question d'identit√© avec le titre exact du poste
+  // Personnaliser la question d'identité avec le titre exact du poste
   const idStep=STEPS.find(s=>s.key==="identity_check");
   if(idStep){
-    idStep.q="Permettez-moi de m'assurer avant de commencer : vous √™tes bien "+cfg.label+" chez "+USER.company+", "+FULL_NAME+" ?";
+    idStep.q="Permettez-moi de m'assurer avant de commencer : vous êtes bien "+cfg.label+" chez "+USER.company+", "+FULL_NAME+" ?";
   }
 
   const greetings={
     dirigeant:  ["Bonjour "+FORMAL+".","Votre assistant se configure."],
-    it:         ["Bonjour "+FORMAL+".","Votre infrastructure se pr√©pare."],
+    it:         ["Bonjour "+FORMAL+".","Votre infrastructure se prépare."],
     departement:["Bonjour "+FORMAL+".","Votre assistant se configure."],
   };
   const introMsgs={
-    dirigeant:   "Nous allons d√©finir ensemble quels agents vous seront les plus utiles. Je vais vous poser quelques questions sur votre vision et vos priorit√©s. Comptez cinq minutes, √† votre rythme. Vos r√©ponses seront transmises directement √† votre r√©f√©rent Shortcut.",
-    it:          "Nous allons faire le point sur votre infrastructure et vos donn√©es pour pr√©parer les prochaines √©tapes. Vos r√©ponses seront transmises directement √† votre r√©f√©rent Shortcut.",
-    departement: "Nous allons configurer votre assistant ensemble. Je vais vous poser quelques questions sur votre quotidien chez "+USER.company+". Vos documents, vos outils, ce qui vous prend du temps. Comptez une dizaine de minutes. Vos r√©ponses seront transmises directement √† votre r√©f√©rent Shortcut.",
+    dirigeant:   "Nous allons définir ensemble quels agents vous seront les plus utiles. Je vais vous poser quelques questions sur votre vision et vos priorités. Comptez cinq minutes, à votre rythme. Vos réponses seront transmises directement à votre référent Shortcut.",
+    it:          "Nous allons faire le point sur votre infrastructure et vos données pour préparer les prochaines étapes. Vos réponses seront transmises directement à votre référent Shortcut.",
+    departement: "Nous allons configurer votre assistant ensemble. Je vais vous poser quelques questions sur votre quotidien chez "+USER.company+". Vos documents, vos outils, ce qui vous prend du temps. Comptez une dizaine de minutes. Vos réponses seront transmises directement à votre référent Shortcut.",
   };
 
   $("role-screen").classList.add("hidden");
 
-  // Badge r√¥le dans le header avec la couleur du poste
+  // Badge rôle dans le header avec la couleur du poste
   const badge=$("role-badge");
   badge.textContent=cfg.label;
   badge.style.cssText="background:"+cfg.badgeColor+"18;color:"+cfg.badgeColor+";font-family:var(--font-ui);font-size:var(--t-caption);font-weight:700;padding:3px 8px;border-radius:100px;letter-spacing:.05em;";
@@ -1042,7 +1042,7 @@ async function selectRole(role){
   $("start-btn").addEventListener("click",async()=>{ wrap.remove(); await goToStep(0); });
 }
 
-/* ‚îÄ‚îÄ COMPOSER EVENTS ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ */
+/* ── COMPOSER EVENTS ────────────────────────────────────────────── */
 const composerInput=$("composer-input"),composerSend=$("composer-send");
 function autoSize(){ composerInput.style.height="auto"; composerInput.style.height=Math.min(200,composerInput.scrollHeight)+"px"; composerSend.disabled=!composerInput.value.trim(); }
 composerInput.addEventListener("input",autoSize);
@@ -1058,19 +1058,19 @@ $("drawer-overlay").addEventListener("click",closeDrawer);
 $("drawer-close").addEventListener("click",closeDrawer);
 $("sticky-action-btn").addEventListener("click",handleUploadPhaseComplete);
 
-/* ‚îÄ‚îÄ INIT ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ */
+/* ── INIT ───────────────────────────────────────────────────────── */
 function init(){
   $("tenant-name").textContent=USER.company;
   if(params.get("prenom"))$("input-prenom").value=params.get("prenom");
   if(params.get("nom"))$("input-nom").value=params.get("nom");
-  // Civilit√© ‚Äî toggle
+  // Civilité — toggle
   document.querySelectorAll('.civility-btn').forEach(btn=>{
     btn.addEventListener('click',()=>{
       document.querySelectorAll('.civility-btn').forEach(b=>b.classList.remove('civility-selected'));
       btn.classList.add('civility-selected');
     });
   });
-  // Pr√©-s√©lection depuis URL param
+  // Pré-sélection depuis URL param
   if(params.get("civilite")){
     const val=params.get("civilite");
     document.querySelectorAll('.civility-btn').forEach(b=>{ if(b.dataset.value===val) b.classList.add('civility-selected'); });
