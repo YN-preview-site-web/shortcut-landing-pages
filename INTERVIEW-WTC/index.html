@@ -454,11 +454,13 @@ const STEPS_DIRIGEANT = [
 
   { section:1, key:"dg_docs_analyses",
     q:"Quels documents ou rapports analysez-vous régulièrement ?",
-    placeholder:"Ex : bilans financiers mensuels, rapports d'activité par site, synthèses commerciales, presse sectorielle…" },
+    multiSelect:true,
+    choices:["Tableau de bord financier","Rapport d'activité par site","Situation de trésorerie","Rapport RH (effectifs, absentéisme)","Synthèse commerciale","Veille sectorielle / presse","Autre"] },
 
   { section:1, key:"dg_docs_produits",
     q:"Quels documents produisez-vous vous-même ?",
-    placeholder:"Ex : compte-rendu de comité (hebdomadaire), note de synthèse mensuelle, rapport d'activité trimestriel…" },
+    multiSelect:true,
+    choices:["Compte-rendu de comité de direction","Note de synthèse / arbitrage","Présentation actionnaires / board","Communication interne","Rapport annuel","Autre"] },
 
   { section:1, key:"dg_info_remontee",
     q:"Comment vos équipes vous remontent-elles l'information ?",
@@ -541,10 +543,22 @@ const STEPS_DEPARTEMENT = [
   // ── Section 1 — Documents reçus & produits ──
   { section:1, key:"docs_analyses",
     q:"Quels documents ou rapports recevez-vous et analysez-vous régulièrement ?",
-    placeholder:"Ex : relevés bancaires, tableaux de bord reçus, rapports fournisseurs, synthèses de direction, contrats entrants…" },
+    multiSelect:true,
+    choicesByRole:{
+      finance:["Grand livre / journaux comptables","Relevés bancaires","Factures fournisseurs","Déclarations fiscales (TVA, IS)","Rapports de dépenses","Tableau de bord de trésorerie","Autre"],
+      location:["Contrats de bail","Relevés de charges","Tableau de bord des impayés","Rapports d'interventions techniques","États des lieux","Autre"],
+      marketing:["Rapports de performance campagnes","Données d'inscription événements","Enquêtes de satisfaction","Budget marketing","Analyse concurrentielle","Autre"],
+      commercial:["Tableau de bord des ventes","Pipeline CRM","Rapports de performance par commercial","Contrats clients","Bons de commande","Autre"]
+    } },
   { section:1, key:"docs_produits_upload",
     q:"Quels documents produisez-vous vous-même ?",
-    placeholder:"Ex : tableau de bord mensuel, compte-rendu de réunion, synthèse de ventes…" },
+    multiSelect:true,
+    choicesByRole:{
+      finance:["Bilan et compte de résultat","Situation de trésorerie hebdomadaire","Déclarations fiscales","Tableau de bord budgétaire","Rapport de clôture mensuelle","Prévisions budgétaires","Autre"],
+      location:["Quittances de loyer","Relevé de charges","Courriers de relance","Compte-rendu de gérance","Rapport d'état des lieux","Convocations assemblée générale","Autre"],
+      marketing:["Brief événement / rétro-planning","Supports de communication","Rapport post-événement","Newsletter / emailing","Tableau de bord campagnes","Dossier de presse","Autre"],
+      commercial:["Devis / propositions commerciales","Compte-rendu de visite client","Rapport hebdomadaire des ventes","Plan d'action commercial","Contrats / avenants","Autre"]
+    } },
   { section:1, key:"docs_produits_destinataires",
     q:"À qui ces documents sont-ils généralement destinés ?",
     placeholder:"Ex : rapport mensuel → Direction générale · relevé de charges → locataires · synthèse hebdo → mon équipe…" },
@@ -620,6 +634,7 @@ function removeChoices(){ const c=$("choices"); if(c)c.remove(); }
 function showMultiSelect(step){
   removeMultiSelect();
   const exclusives=step.exclusiveOptions||[];
+  const choices=step.choicesByRole?(step.choicesByRole[selectedRole]||step.choices||[]):step.choices;
   const selected=new Set(); let autreText="";
   const wrap=document.createElement("div"); wrap.className="ms-wrap"; wrap.id="multiselect";
   const hint=document.createElement("div"); hint.className="ms-hint"; hint.textContent="Vous pouvez sélectionner plusieurs réponses."; wrap.appendChild(hint);
@@ -637,7 +652,7 @@ function showMultiSelect(step){
   function setBtn(opt,btn,on){ if(on){selected.add(opt);btn.classList.add("ms-selected");}else{selected.delete(opt);btn.classList.remove("ms-selected");} }
   function deselectAll(){ selected.clear(); btnsWrap.querySelectorAll(".ms-btn").forEach(b=>b.classList.remove("ms-selected")); autreWrap.classList.remove("visible"); autreInput.value=""; autreText=""; }
 
-  step.choices.forEach(opt=>{
+  choices.forEach(opt=>{
     const btn=document.createElement("button"); btn.type="button"; btn.className="choice-btn ms-btn";
     if(exclusives.includes(opt))btn.classList.add("ms-exclusive");
     btn.textContent=opt; btn.dataset.opt=opt;
