@@ -464,7 +464,8 @@ const STEPS_DIRIGEANT = [
 
   { section:1, key:"dg_info_remontee",
     q:"Comment vos équipes vous remontent-elles l'information ?",
-    placeholder:"Ex : réunions hebdomadaires, rapports écrits, tableaux partagés, messagerie directe, oralement en comité…" },
+    multiSelect:true,
+    choices:["Réunions hebdomadaires","Rapports écrits","Tableaux partagés (Drive / SharePoint)","Messagerie (Teams, WhatsApp)","Oralement","Points de comité formels","Autre"] },
 
   { section:1, key:"dg_decision_manque",
     q:"Quelle information vous manque souvent au moment de trancher ?",
@@ -472,7 +473,8 @@ const STEPS_DIRIGEANT = [
 
   { section:1, key:"dg_charge_mentale",
     q:"Qu'est-ce qui vous prend le plus de temps et d'attention dans votre semaine, en dehors des réunions ?",
-    placeholder:"Ex : relire et synthétiser les rapports des directions · préparer les points de comité · suivre des indicateurs éparpillés…" },
+    multiSelect:true,
+    choices:["Relire et synthétiser des rapports","Préparer les points de comité","Suivre des indicateurs éparpillés","Relancer des équipes pour avoir des données","Gérer les urgences opérationnelles","Autre"] },
 
   { section:2, key:"dg_assistant_vision",
     q:"Si vous aviez une baguette magique, qu'est-ce que votre assistant idéal ferait pour vous ?",
@@ -497,7 +499,8 @@ const STEPS_IT = [
 
   { section:1, key:"it_data_sources",
     q:"En dehors de votre logiciel comptable, où vivent les données de l'entreprise aujourd'hui ?",
-    placeholder:"Ex : fichiers Excel par département, Google Drive, logiciel de gestion locative, registres papier…" },
+    multiSelect:true,
+    choices:["Fichiers Excel / Google Sheets","Google Drive / SharePoint","Logiciel métier spécifique","Base de données SQL","Emails / Outlook","Serveur de fichiers local","Papier / archives physiques","Autre"] },
 
   { section:1, key:"it_data_structure",
     q:"Ces données sont-elles structurées ou plutôt libres ?",
@@ -561,7 +564,8 @@ const STEPS_DEPARTEMENT = [
     } },
   { section:1, key:"docs_produits_destinataires",
     q:"À qui ces documents sont-ils généralement destinés ?",
-    placeholder:"Ex : rapport mensuel → Direction générale · relevé de charges → locataires · synthèse hebdo → mon équipe…" },
+    multiSelect:true,
+    choices:["Direction générale","Mon équipe","Autres départements","Clients / locataires / propriétaires","Prestataires externes","Autre"] },
   { section:1, key:"outils_utilises",
     q:"Quels outils utilisez-vous au quotidien ?",
     multiSelect:true,
@@ -570,10 +574,17 @@ const STEPS_DEPARTEMENT = [
   // ── Section 2 — Sources & Charge ──
   { section:2, key:"sources_info",
     q:"Où allez-vous chercher l'information au quotidien ?",
-    placeholder:"Ex : fichiers Excel partagés, emails, réunions d'équipe, documents reçus par courrier, appels clients, registres…" },
+    multiSelect:true,
+    choices:["Emails","Réunions d'équipe","Fichiers partagés (Drive / SharePoint)","Logiciel métier","Messagerie (Teams, WhatsApp)","Collègues / appels","Documents papier","Autre"] },
   { section:2, key:"charge_mentale",
     q:"Qu'est-ce qui vous prend le plus de temps et d'énergie dans votre semaine ?",
-    placeholder:"Ex : la consolidation mensuelle me prend deux jours entiers · les relances locataires sont épuisantes à gérer manuellement…" },
+    multiSelect:true,
+    choicesByRole:{
+      finance:["Consolidation manuelle des données","Relances fournisseurs","Préparation des déclarations fiscales","Rapprochements bancaires","Autre"],
+      location:["Gestion des relances impayés","Suivi des interventions","Rédaction des courriers locataires","Mise à jour des dossiers","Autre"],
+      marketing:["Coordination des prestataires","Reporting campagnes","Logistique des événements","Production de contenus","Autre"],
+      commercial:["Saisie dans le CRM","Préparation des devis","Relances clients","Reporting hebdomadaire","Autre"]
+    } },
 
   // ── Section 3 — Votre assistant ──
   { section:3, key:"assistant_vision",
