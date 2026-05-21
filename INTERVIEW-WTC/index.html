@@ -56,7 +56,7 @@
     /* ── SÉLECTEUR DE RÔLE ── */
     .role-screen{animation:fade-up var(--t-slow) ease-out;}
     .role-screen-eyebrow{font-family:var(--font-ui);font-size:var(--t-caption);font-weight:700;color:var(--primary);letter-spacing:.18em;text-transform:uppercase;margin-bottom:var(--s-8);}
-    .role-screen-title{font-family:var(--font-heading);font-size:var(--t-subtitle);font-weight:600;color:var(--navy);letter-spacing:-.02em;line-height:var(--lh-title);margin-bottom:var(--s-8);}
+    .role-screen-welcome{font-family:var(--font-ui);font-size:var(--t-body);color:var(--text-muted);margin-bottom:var(--s-8);}
     .role-screen-sub{font-size:var(--t-body);color:var(--text-secondary);margin-bottom:var(--s-34);}
     .role-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-21);}
     .role-card{appearance:none;background:var(--white);border:1.5px solid var(--border);border-radius:var(--r-lg);padding:var(--s-21);cursor:pointer;text-align:left;transition:all var(--t-slow);display:flex;flex-direction:column;gap:var(--s-13);}
@@ -281,8 +281,8 @@
     <!-- SÉLECTEUR DE RÔLE -->
     <div class="role-screen" id="role-screen">
       <div class="role-screen-eyebrow">Diagnostic agent · Shortcut</div>
-      <h1 class="role-screen-title">Qui êtes-vous ?</h1>
-      <p class="role-screen-sub">Faisons connaissance avant de commencer.<br>Indiquez votre nom et sélectionnez votre poste.</p>
+      <p class="role-screen-welcome">Bienvenue chez Shortcut.</p>
+      <p class="role-screen-sub">Bonjour ! Faisons connaissance avant de commencer.<br>Indiquez votre nom et sélectionnez votre poste.</p>
 
       <div class="role-civility-wrap">
         <div class="role-name-label">Vous êtes</div>
@@ -295,11 +295,11 @@
       <div class="role-name-wrap">
         <div class="role-name-group">
           <label class="role-name-label" for="input-prenom">Prénom</label>
-          <input class="role-name-input" id="input-prenom" type="text" placeholder="Ex : Karim" autocomplete="given-name">
+          <input class="role-name-input" id="input-prenom" type="text" autocomplete="given-name">
         </div>
         <div class="role-name-group">
           <label class="role-name-label" for="input-nom">Nom</label>
-          <input class="role-name-input" id="input-nom" type="text" placeholder="Ex : Benali" autocomplete="family-name">
+          <input class="role-name-input" id="input-nom" type="text" autocomplete="family-name">
         </div>
       </div>
 
