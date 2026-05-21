@@ -922,19 +922,35 @@ function showSummary(){
       if(btn.disabled) return;
       btn.disabled=true; btn.classList.add("saving");
       btn.innerHTML='<span class="btn-spinner"></span>Enregistrement…';
+
+      // Encodage base64 rapide via FileReader (natif navigateur, non bloquant)
+      function blobToBase64(blob){
+        return new Promise((res,rej)=>{
+          const r=new FileReader();
+          r.onload=()=>res(r.result.split(",")[1]);
+          r.onerror=rej;
+          r.readAsDataURL(blob);
+        });
+      }
+
+      let filesData=[];
       try{
-        // Encoder les fichiers en base64
-        const filesData=await Promise.all(state.files.map(async f=>{
-          const ab=await f.blob.arrayBuffer();
-          const bytes=new Uint8Array(ab); let bin="";
-          bytes.forEach(b=>bin+=String.fromCharCode(b));
-          return{name:f.name,mimeType:f.blob.type||"application/octet-stream",content:btoa(bin),frequency:f.frequency||null};
-        }));
-        const payload={
-          meta:{date:new Date().toISOString(),role:ROLE_CONFIG[selectedRole]?.label||selectedRole,lastName:USER.lastName,firstName:USER.firstName,company:USER.company},
-          answers,
-          files:filesData
-        };
+        filesData=await Promise.all(state.files.map(async f=>({
+          name:f.name,
+          mimeType:f.blob.type||"application/octet-stream",
+          content:await blobToBase64(f.blob),
+          frequency:f.frequency||null
+        })));
+      }catch(_){}
+
+      const payload={
+        meta:{date:new Date().toISOString(),role:ROLE_CONFIG[selectedRole]?.label||selectedRole,lastName:USER.lastName,firstName:USER.firstName,company:USER.company},
+        answers,
+        files:filesData
+      };
+
+      btn.innerHTML='<span class="btn-spinner"></span>Envoi en cours… Merci de ne pas fermer cette page.';
+      try{
         const resp=await fetch(APPS_SCRIPT_URL,{method:"POST",body:JSON.stringify(payload),redirect:"follow"});
         const result=await resp.json();
         if(result.status==="ok"){
